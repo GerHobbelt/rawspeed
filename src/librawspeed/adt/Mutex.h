@@ -55,7 +55,7 @@ public:
   void Unlock() RELEASE() { omp_unset_lock(&mutex); }
 
   // Try to acquire the mutex.  Returns true on success, and false on failure.
-  bool TryLock() TRY_ACQUIRE(true) { return omp_test_lock(&mutex); }
+  bool TryLock() TRY_ACQUIRE(true) { return !!omp_test_lock(&mutex); }
 
   // For negative capabilities.
   const Mutex& operator!() const { return *this; }
