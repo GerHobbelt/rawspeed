@@ -44,20 +44,35 @@ using pugi::xml_parse_result;
 namespace rawspeed {
 
 #ifdef HAVE_PUGIXML
-CameraMetaData::CameraMetaData(const char* docname) {
+CameraMetaData::CameraMetaData(const char* docname_or_direct_content) {
   xml_document doc;
 
-  if (xml_parse_result result =
+	// check if this is direct XML content or simply a document file path:
+	// this is an easy check as XML always contains <> characters, while these
+	// are illegal for file paths on any system.
+  bool is_xml_content = (strpbrk(docname_or_direct_content, "<>") != nullptr);
+  const char* docname;
+  xml_parse_result result;
+  if (is_xml_content) {
+    docname = "";
+    result = doc.load_string(docname_or_direct_content);
+  } else {
+    docname = docname_or_direct_content;
+    result =
 #if defined(__unix__) || defined(__APPLE__)
-          doc.load_file(docname)
+        doc.load_file(docname)
 #else
-          doc.load_file(pugi::as_wide(docname).c_str())
+        doc.load_file(pugi::as_wide(docname).c_str())
 #endif
-          ;
-      !result) {
-    ThrowCME("XML Document \"%s\" could not be parsed successfully. Error was: "
+        ;
+  }
+  if (!result) {
+    ThrowCME("Camera definitions parse error: XML Document %s%s%scould not be parsed successfully. Error was: "
              "%s in %s",
-             docname, result.description(),
+             (is_xml_content ? "" : "\""),
+             docname,
+             (is_xml_content ? "" : "\" "),
+						 result.description(),
              doc.child("node").attribute("attr").value());
   }
 
@@ -115,7 +130,7 @@ const Camera* CameraMetaData::getCamera(const std::string& make,
 bool CameraMetaData::hasCamera(const std::string& make,
                                const std::string& model,
                                const std::string& mode) const {
-  return getCamera(make, model, mode);
+  return !!getCamera(make, model, mode);
 }
 
 const Camera* RAWSPEED_READONLY
