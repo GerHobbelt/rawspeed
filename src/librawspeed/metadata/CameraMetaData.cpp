@@ -44,16 +44,18 @@ using pugi::xml_parse_result;
 namespace rawspeed {
 
 #ifdef HAVE_PUGIXML
-CameraMetaData::CameraMetaData(const char* docname_or_direct_content) {
+CameraMetaData::CameraMetaData(const char* docname_or_direct_content, bool is_file) {
   xml_document doc;
 
+#if 0
 	// check if this is direct XML content or simply a document file path:
 	// this is an easy check as XML always contains <> characters, while these
 	// are illegal for file paths on any system.
-  bool is_xml_content = (strpbrk(docname_or_direct_content, "<>") != nullptr);
-  const char* docname;
+  bool is_file = (strpbrk(docname_or_direct_content, "<>") == nullptr);
+#endif
+	const char* docname;
   xml_parse_result result;
-  if (is_xml_content) {
+  if (!is_file) {
     docname = "";
     result = doc.load_string(docname_or_direct_content);
   } else {
@@ -69,9 +71,9 @@ CameraMetaData::CameraMetaData(const char* docname_or_direct_content) {
   if (!result) {
     ThrowCME("Camera definitions parse error: XML Document %s%s%scould not be parsed successfully. Error was: "
              "%s in %s",
-             (is_xml_content ? "" : "\""),
+             (is_file ? "" : "\""),
              docname,
-             (is_xml_content ? "" : "\" "),
+             (is_file ? "" : "\" "),
 						 result.description(),
              doc.child("node").attribute("attr").value());
   }
