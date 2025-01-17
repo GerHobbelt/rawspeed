@@ -4304,8 +4304,23 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON Z50_2" supported="unknown-no-samples">
+	<Camera make="NIKON CORPORATION" model="NIKON Z50_2" mode="14bit-compressed">
 		<ID make="Nikon" model="Z50_2">Nikon Z 50 2</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="1008" white="15892"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11640 -4829 -1079</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5107 13006 2325</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-972 1711 7380</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON Z fc" mode="14bit-compressed">
 		<ID make="Nikon" model="Z fc">Nikon Z fc</ID>
@@ -13882,8 +13897,23 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="SONY" model="ILCE-1M2" supported="unknown-no-samples">
+	<Camera make="SONY" model="ILCE-1M2">
 		<ID make="Sony" model="ILCE-1M2">Sony ILCE-1M2</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="-8" height="0"/>
+		<Sensor black="512" white="16383"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">8161 -2947 -739</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4811 12668 2389</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-437 1229 6524</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="SONY" model="ILCE-7">
 		<ID make="Sony" model="ILCE-7">Sony ILCE-7</ID>
