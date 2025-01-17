@@ -15205,7 +15205,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-938" height="-4"/>
 		<Sensor black="65" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15223,7 +15222,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-938" height="-4"/>
 		<Sensor black="65" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15241,7 +15239,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-938" height="-4"/>
 		<Sensor black="65" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15259,7 +15256,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-938" height="-4"/>
 		<Sensor black="65" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15277,7 +15273,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-192" height="-4"/>
 		<Sensor black="64" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15295,7 +15290,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-192" height="-4"/>
 		<Sensor black="64" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15313,7 +15307,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="4" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15331,7 +15324,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="4" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15349,7 +15341,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="4" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15367,7 +15358,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="4" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15388,7 +15378,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -15406,7 +15395,6 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="0" width="-146" height="-6"/>
 		<Sensor black="0" white="0"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
