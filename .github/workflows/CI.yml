@@ -160,7 +160,6 @@ jobs:
           - { msystem: MINGW64,    arch: x86_64,  family: GNU,  CC: gcc,   CXX: g++ }
           - { msystem: MINGW32,    arch: i686,    family: GNU,  CC: gcc,   CXX: g++ }
           - { msystem: CLANG64,    arch: x86_64,  family: LLVM, CC: clang, CXX: clang++ }
-          - { msystem: CLANG32,    arch: i686,    family: LLVM, CC: clang, CXX: clang++ }
           - { msystem: UCRT64,     arch: x86_64,  family: GNU,  CC: gcc,   CXX: g++ }
         flavor: [ ReleaseWithAsserts, Release ]
     uses: ./.github/workflows/CI-windows-msys2.yml
