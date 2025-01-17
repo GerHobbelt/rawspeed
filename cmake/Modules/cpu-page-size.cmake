@@ -2,6 +2,12 @@ if(DEFINED RAWSPEED_PAGESIZE)
   return()
 endif()
 
+if(CMAKE_CROSSCOMPILING)
+  message(STATUS "Performing cross-compile build, using hardcoded cacheline size value.")
+  set(RAWSPEED_PAGESIZE 4096)
+  return()
+endif()
+
 message(STATUS "Trying to query CPU page size")
 
 if(BINARY_PACKAGE_BUILD)

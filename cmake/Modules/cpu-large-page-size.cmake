@@ -2,6 +2,11 @@ if(NOT DEFINED RAWSPEED_PAGESIZE)
   message(FATAL_ERROR "Should first run CPU page size detection")
 endif()
 
+if(CMAKE_CROSSCOMPILING)
+  set(RAWSPEED_LARGEPAGESIZE 4096)
+  return()
+endif()
+
 if(DEFINED RAWSPEED_LARGEPAGESIZE)
   return()
 endif()

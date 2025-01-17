@@ -24,7 +24,7 @@
 #endif
 
 #include "io/FileIOException.h"
-#include <Windows.h>
+#include <windows.h>
 #include <functional>
 #include <io.h>
 #include <tchar.h>

@@ -2,6 +2,11 @@ if(DEFINED RAWSPEED_CACHELINESIZE)
   return()
 endif()
 
+if(CMAKE_CROSSCOMPILING)
+  set(RAWSPEED_CACHELINESIZE 64)
+  return()
+endif()
+
 message(STATUS "Trying to query CPU L1d cache line size")
 
 if(BINARY_PACKAGE_BUILD)

@@ -33,7 +33,7 @@ namespace rawspeed {
 // These methods can be implemented to use any internal mutex implementation.
 #ifdef HAVE_OPENMP
 
-class CAPABILITY("mutex") Mutex final {
+class CAPABILITY("mutex") alignas(8) Mutex final {
   omp_lock_t mutex;
 
 public:

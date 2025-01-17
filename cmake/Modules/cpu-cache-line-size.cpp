@@ -61,7 +61,7 @@ static std::optional<int64_t> get_cachelinesize_from_sysctlbyname() {
 #include <cassert>
 #include <vector>
 //
-#include <Windows.h>
+#include <windows.h>
 static std::optional<int64_t>
 get_cachelinesize_from_GetLogicalProcessorInformation() {
   DWORD buffer_size = 0;

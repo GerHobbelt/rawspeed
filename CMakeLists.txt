@@ -199,7 +199,7 @@ if(BUILD_BENCHMARKING)
   add_custom_target(benchmarks ALL)
 endif()
 
-rawspeed_add_library(rawspeed STATIC)
+rawspeed_add_library(rawspeed SHARED)
 
 # If LTO is enabled, we must advertise that by adding proper LTO link flags
 # to the (only externally visible/usable) rawspeed library.
