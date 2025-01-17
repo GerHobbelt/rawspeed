@@ -298,6 +298,8 @@ void RafDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
 
   assert(cam != nullptr);
 
+  mRaw->cfa = cam->cfa;
+
   applyCorrections(cam);
 
   // at least the (bayer sensor) X100 comes with a tag like this:
@@ -342,7 +344,7 @@ void RafDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
   }
 
   mRaw->blackAreas = cam->blackAreas;
-  mRaw->cfa = cam->cfa;
+
   if (!cam->color_matrix.empty())
     mRaw->metadata.colorMatrix = cam->color_matrix;
   mRaw->metadata.canonical_make = cam->canonical_make;
