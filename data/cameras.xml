@@ -7357,6 +7357,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="OM Digital Solutions" model="OM-3" supported="unknown-no-samples">
+		<ID make="OM System" model="OM-3">OM Digital Solutions OM-3</ID>
+	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-5">
 		<ID make="OM System" model="OM-5">OM Digital Solutions OM-5</ID>
 		<Crop x="0" y="0" width="-30" height="0"/>
@@ -11005,6 +11008,9 @@
 		<ID make="Panasonic" model="DC-S5">Panasonic DC-S5</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="509" white="16380"/>
+		<Aliases>
+			<Alias>DC-S5D</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">9744 -3905 -779</ColorMatrixRow>
@@ -11017,6 +11023,9 @@
 		<ID make="Panasonic" model="DC-S5">Panasonic DC-S5</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="509" white="16380"/>
+		<Aliases>
+			<Alias>DC-S5D</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">9744 -3905 -779</ColorMatrixRow>
@@ -11024,9 +11033,6 @@
 				<ColorMatrixRow plane="2">-798 1630 5827</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
-	</Camera>
-	<Camera make="Panasonic" model="DC-S5D" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DC-S5D">Panasonic DC-S5D</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5M2" supported="no">
 		<ID make="Panasonic" model="DC-S5M2">Panasonic DC-S5M2</ID>
@@ -16854,7 +16860,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Minolta Co., Ltd." model="DiMAGE 5" supported="no-samples">
+	<Camera make="Minolta Co., Ltd." model="DiMAGE 5">
 		<ID make="Minolta" model="DiMAGE 5">Minolta DiMAGE 5</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -18062,6 +18068,9 @@
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA SL3" mode="dng">
 		<ID make="Leica" model="SL3">LEICA SL3</ID>
+	</Camera>
+	<Camera make="LEICA CAMERA AG" model="LEICA SL3-S" mode="dng">
+		<ID make="Leica" model="SL3-S">LEICA SL3-S</ID>
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA CL" mode="dng">
 		<ID make="Leica" model="CL">LEICA CL</ID>
