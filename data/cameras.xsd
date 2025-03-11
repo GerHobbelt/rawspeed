@@ -469,6 +469,7 @@
       <xs:enumeration value="SAMSUNG"/>
       <xs:enumeration value="SEIKO EPSON CORP."/>
       <xs:enumeration value="SIGMA"/>
+      <xs:enumeration value="Sigma"/>
       <xs:enumeration value="SONY"/>
       <xs:enumeration value="ST Micro"/>
       <xs:enumeration value="Samsung"/>

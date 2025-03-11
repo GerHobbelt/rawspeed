@@ -18224,6 +18224,9 @@
 	<Camera make="Nikon" model="LS-5000" mode="dng">
 		<ID make="Nikon" model="LS-5000">Nikon LS-5000</ID>
 	</Camera>
+	<Camera make="Sigma" model="Sigma BF" mode="dng">
+		<ID make="Sigma" model="BF">Sigma BF</ID>
+	</Camera>
 	<Camera make="SIGMA" model="SIGMA DP1" mode="dng" supported="no-samples">
 		<ID make="Sigma" model="DP1">Sigma DP1</ID>
 	</Camera>
