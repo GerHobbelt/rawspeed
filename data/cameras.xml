@@ -11564,6 +11564,12 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Panasonic" model="DC-G97" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-G97">Panasonic DC-G97</ID>
+	</Camera>
+	<Camera make="Panasonic" model="DC-G99M2" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-G99M2">Panasonic DC-G99M2</ID>
+	</Camera>
 	<Camera make="Panasonic" model="DC-GF9">
 		<ID make="Panasonic" model="DC-GF9">Panasonic DC-GF9</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
@@ -13787,6 +13793,9 @@
 		</CFA>
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="512" white="16300"/>
+		<Aliases>
+			<Alias>ILCE-6100A</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">7657 -2847 -607</ColorMatrixRow>
@@ -13915,9 +13924,9 @@
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8161 -2947 -739</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4811 12668 2389</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-437 1229 6524</ColorMatrixRow>
+				<ColorMatrixRow plane="0">10279 -3899 -1462</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-7108 16980 -168</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-168 544 6116</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
