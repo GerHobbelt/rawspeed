@@ -11064,6 +11064,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Panasonic" model="DC-S1RM2" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-S1RM2">Panasonic DC-S1RM2</ID>
+	</Camera>
 	<Camera make="Panasonic" model="DC-S9" supported="unknown-no-samples">
 		<ID make="Panasonic" model="DC-S9">Panasonic DC-S9</ID>
 	</Camera>
@@ -11741,7 +11744,9 @@
 		<Aliases>
 			<Alias>DC-TZ95</Alias>
 			<Alias>DC-TZ95D</Alias>
+			<Alias>DC-TZ99</Alias>
 			<Alias>DC-ZS80</Alias>
+			<Alias>DC-ZS99</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -11758,7 +11763,9 @@
 		<Aliases>
 			<Alias>DC-TZ95</Alias>
 			<Alias>DC-TZ95D</Alias>
+			<Alias>DC-TZ99</Alias>
 			<Alias>DC-ZS80</Alias>
+			<Alias>DC-ZS99</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -13832,6 +13839,9 @@
 		</CFA>
 		<Crop x="0" y="0" width="-22" height="0"/>
 		<Sensor black="512" white="16383"/>
+		<Aliases>
+			<Alias>ILCE-6400A</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">7657 -2847 -607</ColorMatrixRow>
