@@ -146,6 +146,7 @@ jobs:
             eatmydata apt install clang-format-${{ inputs.compiler-version }} clang-tidy-${{ inputs.compiler-version }}
 
             eatmydata apt install curl gpg
+            mkdir -p /etc/apt/sources.list.d
             echo 'deb https://ftp.gwdg.de//pub/opensuse/repositories/graphics%3A/darktable%3A/master/Debian_Unstable/ /' | tee /etc/apt/sources.list.d/rawspeed.list
             curl -fsSL https://download.opensuse.org/repositories/graphics:darktable:master/Debian_Unstable/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/graphics_darktable_master.gpg > /dev/null
             apt update
@@ -499,7 +500,7 @@ jobs:
           . "$PWD/codechecker/venv/bin/activate"
           export PATH="$PWD/codechecker/build/CodeChecker/bin:$PATH"
           set +e
-          CodeChecker check --logfile "${BUILD_DIR}/compile_commands.json" --analyzers clangsa --jobs "$(nproc --all)" --file "${SRC_DIR}/*" --disable deadcode.DeadStores --disable alpha.unix.Stream -o "${BUILD_DIR}/codechecker_results"
+          CodeChecker check --logfile "${BUILD_DIR}/compile_commands.json" --analyzers clangsa --jobs "$(nproc --all)" --file "${SRC_DIR}/*" --disable deadcode.DeadStores -o "${BUILD_DIR}/codechecker_results"
           bugs=$?
           CodeChecker parse -e sarif "${BUILD_DIR}/codechecker_results" -o "${GITHUB_WORKSPACE}/codechecker_report.json"
           CodeChecker parse -e html "${BUILD_DIR}/codechecker_results" -o "${GITHUB_WORKSPACE}/codechecker_report"
@@ -537,7 +538,7 @@ jobs:
           . "$PWD/codechecker/venv/bin/activate"
           export PATH="$PWD/codechecker/build/CodeChecker/bin:$PATH"
           set +e
-          CodeChecker check --ctu --ctu-reanalyze-on-failure --logfile "${BUILD_DIR}/compile_commands.json" --analyzers clangsa --jobs "$(nproc --all)" --file "${SRC_DIR}/*" --disable deadcode.DeadStores --disable alpha.unix.Stream -o "${BUILD_DIR}/codechecker_ctu_results"
+          CodeChecker check --ctu --ctu-reanalyze-on-failure --logfile "${BUILD_DIR}/compile_commands.json" --analyzers clangsa --jobs "$(nproc --all)" --file "${SRC_DIR}/*" --disable deadcode.DeadStores -o "${BUILD_DIR}/codechecker_ctu_results"
           bugs=$?
           CodeChecker parse -e sarif "${BUILD_DIR}/codechecker_ctu_results" -o "${GITHUB_WORKSPACE}/codechecker_ctu_report.json"
           CodeChecker parse -e html "${BUILD_DIR}/codechecker_ctu_results" -o "${GITHUB_WORKSPACE}/codechecker_ctu_report"

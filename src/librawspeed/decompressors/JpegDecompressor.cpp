@@ -165,7 +165,7 @@ void JpegDecompressor::decode(uint32_t offX,
   const Array2DRef<uint16_t> out(mRaw->getU16DataAsUncroppedArray2DRef());
   for (int row = 0; row < copy_h; row++) {
     for (int col = 0; col < dinfo.output_components * copy_w; col++)
-      out(row + offY, dinfo.output_components * offX + col) = tmp(row, col);
+      out(row + offY, (dinfo.output_components * offX) + col) = tmp(row, col);
   }
 }
 

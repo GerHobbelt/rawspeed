@@ -31,6 +31,8 @@ using std::unique_ptr;
 
 namespace rawspeed_test {
 
+namespace {
+
 #ifdef HAVE_PUGIXML
 
 static const std::string camfile(RAWSPEED_SOURCE_DIR "/data/cameras.xml");
@@ -82,5 +84,7 @@ TEST(CameraMetaDataTest, PrefixSearch) {
 }
 
 #endif
+
+} // namespace
 
 } // namespace rawspeed_test

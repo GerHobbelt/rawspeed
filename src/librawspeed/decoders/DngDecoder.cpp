@@ -237,7 +237,7 @@ void DngDecoder::parseCFA(const TiffIFD* raw) const {
 
   for (int y = 0; y < cfaSize.y; y++) {
     for (int x = 0; x < cfaSize.x; x++) {
-      uint32_t c1 = cPat->getByte(x + y * cfaSize.x);
+      uint32_t c1 = cPat->getByte(x + (y * cfaSize.x));
 
       auto c2 = getDNGCFAPatternAsCFAColor(c1);
       if (!c2)
@@ -674,10 +674,12 @@ void DngDecoder::parseWhiteBalance() const {
 
         // Convert from XYZ to camera reference values first
         for (uint32_t i = 0; i < 3; i++) {
-          float c =
-              float(mRaw->metadata.colorMatrix[i * 3 + 0]) * as_shot_white[0] +
-              float(mRaw->metadata.colorMatrix[i * 3 + 1]) * as_shot_white[1] +
-              float(mRaw->metadata.colorMatrix[i * 3 + 2]) * as_shot_white[2];
+          float c = (float(mRaw->metadata.colorMatrix[(i * 3) + 0]) *
+                     as_shot_white[0]) +
+                    (float(mRaw->metadata.colorMatrix[(i * 3) + 1]) *
+                     as_shot_white[1]) +
+                    (float(mRaw->metadata.colorMatrix[(i * 3) + 2]) *
+                     as_shot_white[2]);
           mRaw->metadata.wbCoeffs[i] = (c > 0.0F) ? (1.0F / c) : 0.0F;
         }
       }
@@ -770,8 +772,8 @@ bool DngDecoder::decodeMaskedAreas(const TiffIFD* raw) const {
   const iPoint2D top = mRaw->getCropOffset();
 
   for (uint32_t i = 0; i < nrects; i++) {
-    iPoint2D topleft(rects[i * 4UL + 1UL], rects[i * 4UL]);
-    iPoint2D bottomright(rects[i * 4UL + 3UL], rects[i * 4UL + 2UL]);
+    iPoint2D topleft(rects[(i * 4UL) + 1UL], rects[i * 4UL]);
+    iPoint2D bottomright(rects[(i * 4UL) + 3UL], rects[(i * 4UL) + 2UL]);
 
     if (!(fullImage.isPointInsideInclusive(topleft) &&
           fullImage.isPointInsideInclusive(bottomright) &&
@@ -805,8 +807,9 @@ bool DngDecoder::decodeBlackLevels(const TiffIFD* raw) const {
       // Let's only allow somewhat unambiguous case of 1x1 repeat dimensions.
       if (blackdim != iPoint2D(1, 1))
         return false;
-    } else
+    } else {
       return false;
+    }
   }
 
   if (!blackdim.hasPositiveArea())
@@ -837,7 +840,7 @@ bool DngDecoder::decodeBlackLevels(const TiffIFD* raw) const {
     auto blackLevelSeparate1D = *mRaw->blackLevelSeparate->getAsArray1DRef();
     for (int y = 0; y < 2; y++) {
       for (int x = 0; x < 2; x++)
-        blackLevelSeparate1D(y * 2 + x) = implicit_cast<int>(value);
+        blackLevelSeparate1D((y * 2) + x) = implicit_cast<int>(value);
     }
   } else {
     mRaw->blackLevelSeparate =
@@ -845,14 +848,14 @@ bool DngDecoder::decodeBlackLevels(const TiffIFD* raw) const {
     auto blackLevelSeparate1D = *mRaw->blackLevelSeparate->getAsArray1DRef();
     for (int y = 0; y < 2; y++) {
       for (int x = 0; x < 2; x++) {
-        float value = black_entry->getFloat(y * blackdim.x + x);
+        float value = black_entry->getFloat((y * blackdim.x) + x);
 
         if (static_cast<double>(value) <
                 std::numeric_limits<BlackType>::min() ||
             static_cast<double>(value) > std::numeric_limits<BlackType>::max())
           ThrowRDE("Error decoding black level");
 
-        blackLevelSeparate1D(y * 2 + x) = implicit_cast<int>(value);
+        blackLevelSeparate1D((y * 2) + x) = implicit_cast<int>(value);
       }
     }
   }

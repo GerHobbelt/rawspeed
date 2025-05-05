@@ -447,7 +447,7 @@ void IiqDecoder::PhaseOneFlatField(ByteStream data, IiqCorr corr) const {
     }
     if (y == 0)
       continue;
-    for (int rend = head[1] + y * head[5], row = rend - head[5];
+    for (int rend = head[1] + (y * head[5]), row = rend - head[5];
          row < mRaw->dim.y && row < rend && row < (head[1] + head[3] - head[5]);
          row++) {
       for (int x = 1; x < wide; x++) {
@@ -456,7 +456,7 @@ void IiqDecoder::PhaseOneFlatField(ByteStream data, IiqCorr corr) const {
           mult[c] = mrow(x - 1, c);
           mult[c + 1] = (mrow(x, c) - mult[c]) / head[4];
         }
-        for (int cend = head[0] + x * head[4], col = cend - head[4];
+        for (int cend = head[0] + (x * head[4]), col = cend - head[4];
              col < mRaw->dim.x && col < cend &&
              col < head[0] + head[2] - head[4];
              col++) {
@@ -570,7 +570,7 @@ void IiqDecoder::correctBadColumn(const uint16_t col) const {
       uint32_t horiz = img(row, col - 2) + img(row, col + 2);
       // But this is not just averaging, we bias towards the horizontal pixels.
       img(row, col) = implicit_cast<uint16_t>(
-          std::lround(diags * 0.0732233 + horiz * 0.3535534));
+          std::lround((diags * 0.0732233) + (horiz * 0.3535534)));
     }
   }
 }

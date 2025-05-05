@@ -139,8 +139,9 @@ RawImage MosDecoder::decodeRawInternal() {
     ThrowRDE("Leaf LJpeg not yet supported");
     // LJpegPlain l(mFile, mRaw);
     // l.startDecoder(off, mFile.getSize()-off, 0, 0);
-  } else
+  } else {
     ThrowRDE("Unsupported compression: %d", compression);
+  }
 
   return mRaw;
 }

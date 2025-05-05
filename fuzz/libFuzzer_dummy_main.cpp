@@ -25,6 +25,7 @@
 #include "io/Buffer.h"
 #include "io/FileIOException.h"
 #include "io/FileReader.h"
+#include <algorithm>
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
@@ -80,8 +81,7 @@ int main(int argc_, char** argv_) {
 #ifdef HAVE_OPENMP
   const auto corpusCount = argv.size() - 1;
   auto chunkSize = (corpusCount / (10 * omp_get_num_threads()));
-  if (chunkSize <= 1)
-    chunkSize = 1;
+  chunkSize = std::max(chunkSize, 1);
 #pragma omp parallel for default(none) firstprivate(argv, chunkSize)           \
     schedule(dynamic, chunkSize)
 #endif

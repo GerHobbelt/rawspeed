@@ -81,23 +81,13 @@ using std::setw;
 
 namespace rawspeed::rstest {
 
-std::string img_hash(const rawspeed::RawImage& r);
-
-void writePPM(const rawspeed::RawImage& raw, const std::string& fn);
-void writePFM(const rawspeed::RawImage& raw, const std::string& fn);
-
-md5::MD5Hasher::state_type imgDataHash(const rawspeed::RawImage& raw);
-
-void writeImage(const rawspeed::RawImage& raw, const std::string& fn);
+namespace {
 
 struct options final {
   bool create;
   bool force;
   bool dump;
 };
-
-int64_t process(const std::string& filename,
-                const rawspeed::CameraMetaData* metadata, const options& o);
 
 class RstestHashMismatch final : public rawspeed::RawspeedException {
   void anchor() const override;
@@ -153,8 +143,6 @@ md5::MD5Hasher::state_type imgDataHash(const RawImage& raw) {
 #pragma GCC diagnostic ignored "-Wframe-larger-than="
 #pragma GCC diagnostic ignored "-Wstack-usage="
 
-namespace {
-
 void __attribute__((format(printf, 2, 3)))
 APPEND(ostringstream* oss, const char* format, ...) {
   std::array<char, 1024> line;
@@ -166,8 +154,6 @@ APPEND(ostringstream* oss, const char* format, ...) {
 
   *oss << line.data();
 }
-
-} // namespace
 
 std::string img_hash(const RawImage& r, bool noSamples) {
   ostringstream oss;
@@ -461,8 +447,6 @@ int64_t process(const std::string& filename, const CameraMetaData* metadata,
 }
 
 #pragma GCC diagnostic pop
-
-namespace {
 
 int results(const map<std::string, std::string, std::less<>>& failedTests,
             const options& o) {

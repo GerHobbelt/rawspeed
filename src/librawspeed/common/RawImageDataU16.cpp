@@ -277,9 +277,9 @@ void RawImageDataU16::scaleValues_SSE2(int start_y, int end_y) {
   for (int y = start_y; y < end_y; y++) {
     __m128i sserandom;
     if (mDitherScale) {
-      sserandom =
-          _mm_set_epi32(dim.x * 1676 + y * 18000, dim.x * 2342 + y * 34311,
-                        dim.x * 4272 + y * 12123, dim.x * 1234 + y * 23464);
+      sserandom = _mm_set_epi32(
+          (dim.x * 1676) + (y * 18000), (dim.x * 2342) + (y * 34311),
+          (dim.x * 4272) + (y * 12123), (dim.x * 1234) + (y * 23464));
     } else {
       sserandom = _mm_setzero_si128();
     }
@@ -372,7 +372,7 @@ void RawImageDataU16::scaleValues_plain(int start_y, int end_y) {
     sub[i] = blackLevelSeparate1D(v);
   }
   for (int y = start_y; y < end_y; y++) {
-    int v = dim.x + y * 36969;
+    int v = dim.x + (y * 36969);
     for (int x = 0; x < gw; x++) {
       int rand;
       if (mDitherScale) {
@@ -496,8 +496,8 @@ void RawImageDataU16::doLookup(int start_y, int end_y) {
         uint32_t v = (uncropped_dim.x + y * 13) ^ 0x45694584;
         for (int x = 0; x < gw; x++) {
           uint16_t p = img(y, x);
-          uint32_t base = t(2 * p + 0);
-          uint32_t delta = t(2 * p + 1);
+          uint32_t base = t((2 * p) + 0);
+          uint32_t delta = t((2 * p) + 1);
           v = 15700 * (v & 65535) + (v >> 16);
           uint32_t pix = base + ((delta * (v & 2047) + 1024) >> 12);
           img(y, x) = clampBits(pix, 16);

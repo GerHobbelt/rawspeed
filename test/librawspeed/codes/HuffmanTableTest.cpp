@@ -47,6 +47,8 @@ using rawspeed::PrefixCodeDecoder;
 
 namespace rawspeed_test {
 
+namespace {
+
 auto genHTFull =
     [](std::initializer_list<uint8_t>&& nCodesPerLength,
        std::initializer_list<uint8_t>&& codeValues) -> PrefixCodeDecoder<> {
@@ -130,5 +132,7 @@ TEST(PrefixCodeDecoderTest, decodeDifferenceBadCodeTest) {
   ASSERT_EQ(ht.decodeDifference(p), -1);
   ASSERT_THROW(ht.decodeDifference(p), rawspeed::RawDecoderException);
 }
+
+} // namespace
 
 } // namespace rawspeed_test

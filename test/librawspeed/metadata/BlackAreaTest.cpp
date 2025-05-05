@@ -29,6 +29,8 @@ using std::unique_ptr;
 
 namespace rawspeed_test {
 
+namespace {
+
 class BlackAreaTest
     : public ::testing::TestWithParam<std::tuple<int, int, bool>> {
 protected:
@@ -202,5 +204,7 @@ TEST_P(BlackAreaTest, AssignmentGetters) {
     checkHelper(Area, *AreaOrig);
   });
 }
+
+} // namespace
 
 } // namespace rawspeed_test

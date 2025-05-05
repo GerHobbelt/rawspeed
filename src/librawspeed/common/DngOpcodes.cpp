@@ -398,8 +398,9 @@ protected:
     for (int y = 0; y < numAffected.y; ++y) {
       for (int x = 0; x < numAffected.x; ++x) {
         for (auto p = 0U; p < planes; ++p) {
-          T& pixel = img(ROI.getTop() + rowPitch * y,
-                         firstPlane + (ROI.getLeft() + colPitch * x) * cpp + p);
+          T& pixel =
+              img(ROI.getTop() + (rowPitch * y),
+                  firstPlane + ((ROI.getLeft() + colPitch * x) * cpp) + p);
           pixel = op(x, y, pixel);
         }
       }

@@ -31,7 +31,7 @@ jobs:
         os: [ linux ]
         compiler:
           - { distro: "debian:trixie-slim",   family: GNU,  version: 14, CC: gcc-14,   CXX: g++-14 }
-          - { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
+          - { distro: "debian:trixie-slim",   family: LLVM, version: 19, CC: clang-19, CXX: clang++-19 }
         flavor: [ ReleaseWithAsserts, Release ]
     uses: ./.github/workflows/CI-linux.yml
     with:
@@ -55,6 +55,7 @@ jobs:
         compiler:
           - { distro: "debian:trixie-slim",   family: GNU,  version: 13, CC: gcc-13,   CXX: g++-13 }
           - { distro: "debian:bookworm-slim", family: GNU,  version: 12, CC: gcc-12,   CXX: g++-12 }
+          - { distro: "debian:trixie-slim",   family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
           - { distro: "debian:trixie-slim",   family: LLVM, version: 17, CC: clang-17, CXX: clang++-17 }
           - { distro: "debian:bookworm-slim", family: LLVM, version: 16, CC: clang-16, CXX: clang++-16 }
         flavor: [ ReleaseWithAsserts, Release ]
@@ -76,16 +77,16 @@ jobs:
       matrix:
         include:
           - os: linux
-            compiler: { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18, CLANG_TIDY: clang-tidy-18 }
+            compiler: { distro: "debian:trixie-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18, CLANG_TIDY: clang-tidy-18 } # FIXME: should be LLVM19-based.
             flavor: ClangTidy
           - os: linux
-            compiler: { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
+            compiler: { distro: "debian:trixie-slim", family: LLVM, version: 19, CC: clang-19, CXX: clang++-19 }
             flavor: ClangStaticAnalysis
           - os: linux
-            compiler: { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
+            compiler: { distro: "debian:trixie-slim", family: LLVM, version: 19, CC: clang-19, CXX: clang++-19 }
             flavor: ClangCTUStaticAnalysis
           - os: linux
-            compiler: { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
+            compiler: { distro: "debian:trixie-slim", family: LLVM, version: 19, CC: clang-19, CXX: clang++-19 }
             flavor: CodeQLAnalysis
     uses: ./.github/workflows/CI-linux.yml
     with:
@@ -128,7 +129,7 @@ jobs:
       matrix:
         include:
           - os: linux
-            compiler: { distro: "debian:unstable-slim", family: LLVM, version: 18, CC: clang-18, CXX: clang++-18 }
+            compiler: { distro: "debian:trixie-slim", family: LLVM, version: 19, CC: clang-19, CXX: clang++-19 }
             flavor: SonarCloudStaticAnalysis
     uses: ./.github/workflows/CI-linux.yml
     with:
@@ -200,8 +201,25 @@ jobs:
       fail-fast: false
       matrix:
         compiler:
-          - { os: macos-14, family: XCode, version: 15.2, deployment_target: 13.5, CC: cc, CXX: c++ } # AArch64, LLVM16, native
+          - { os: macos-15, family: XCode, version: 16.3, deployment_target: 15.2, CC: cc, CXX: c++ } # AArch64, LLVM19, native
           - { os: macos-13, family: XCode, version: 15.2, deployment_target: 13.5, CC: cc, CXX: c++ } # x86_64,  LLVM16, native
+        flavor: [ ReleaseWithAsserts, Release ]
+    uses: ./.github/workflows/CI-macOS.yml
+    with:
+      os: ${{ matrix.compiler.os }}
+      os-deployment_target: ${{ matrix.compiler.deployment_target }}
+      compiler-family: ${{ matrix.compiler.family }}
+      compiler-version: ${{ matrix.compiler.version }}
+      compiler-CC: ${{ matrix.compiler.CC }}
+      compiler-CXX: ${{ matrix.compiler.CXX }}
+      flavor: ${{ matrix.flavor }}
+  macOS-legacy:
+    needs: [ cache-rpuu, macOS-fast ]
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { os: macos-14, family: XCode, version: 16.2, deployment_target: 14.5, CC: cc, CXX: c++ } # AArch64, LLVM17, native
         flavor: [ ReleaseWithAsserts, Release ]
     uses: ./.github/workflows/CI-macOS.yml
     with:
@@ -218,7 +236,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - compiler: { os: macos-14, family: XCode, version: 15.2, deployment_target: 13.5, CC: cc, CXX: c++ } # LLVM16, native
+          - compiler: { os: macos-15, family: XCode, version: 16.3, deployment_target: 15.2, CC: cc, CXX: c++ } # AArch64, LLVM19, native
             flavor: Coverage
     uses: ./.github/workflows/CI-macOS.yml
     with:

@@ -113,16 +113,17 @@ template <int version> void Cr2sRawInterpolator::interpolate_422_row(int row) {
     MCUTy MCU;
     for (int YIdx = 0; YIdx < PixelsPerMCU; ++YIdx)
       YCbCr::LoadY(&MCU[YIdx], input_[row].getCrop(
-                                   InputComponentsPerMCU * MCUIdx + YIdx, 1));
-    YCbCr::LoadCbCr(&MCU[0], input_[row].getCrop(
-                                 InputComponentsPerMCU * MCUIdx + YsPerMCU, 2));
+                                   (InputComponentsPerMCU * MCUIdx) + YIdx, 1));
+    YCbCr::LoadCbCr(
+        &MCU[0],
+        input_[row].getCrop((InputComponentsPerMCU * MCUIdx) + YsPerMCU, 2));
     return MCU;
   };
   auto StoreMCU = [this, out, row](const MCUTy& MCU, int MCUIdx) {
     for (int Pixel = 0; Pixel < PixelsPerMCU; ++Pixel) {
       YUV_TO_RGB<version>(MCU[Pixel],
-                          out[row].getCrop(OutputComponentsPerMCU * MCUIdx +
-                                               ComponentsPerPixel * Pixel,
+                          out[row].getCrop((OutputComponentsPerMCU * MCUIdx) +
+                                               (ComponentsPerPixel * Pixel),
                                            3));
     }
   };
@@ -214,14 +215,14 @@ template <int version> void Cr2sRawInterpolator::interpolate_420_row(int row) {
     for (int MCURow = 0; MCURow < Y_S_F; ++MCURow) {
       for (int MCUCol = 0; MCUCol < X_S_F; ++MCUCol) {
         YCbCr::LoadY(&MCU[MCURow][MCUCol],
-                     input_[Row].getCrop(InputComponentsPerMCU * MCUIdx +
-                                             X_S_F * MCURow + MCUCol,
+                     input_[Row].getCrop((InputComponentsPerMCU * MCUIdx) +
+                                             (X_S_F * MCURow) + MCUCol,
                                          1));
       }
     }
     YCbCr::LoadCbCr(
         &MCU[0][0],
-        input_[Row].getCrop(InputComponentsPerMCU * MCUIdx + YsPerMCU, 2));
+        input_[Row].getCrop((InputComponentsPerMCU * MCUIdx) + YsPerMCU, 2));
     return MCU;
   };
   auto StoreMCU = [ this, out ](const MCUTy& MCU, int MCUIdx, int Row)
@@ -229,9 +230,9 @@ template <int version> void Cr2sRawInterpolator::interpolate_420_row(int row) {
     for (int MCURow = 0; MCURow < Y_S_F; ++MCURow) {
       for (int MCUCol = 0; MCUCol < X_S_F; ++MCUCol) {
         YUV_TO_RGB<version>(MCU[MCURow][MCUCol],
-                            out[2 * Row + MCURow].getCrop(
+                            out[(2 * Row) + MCURow].getCrop(
                                 ((OutputComponentsPerMCU * MCUIdx) / Y_S_F) +
-                                    ComponentsPerPixel * MCUCol,
+                                    (ComponentsPerPixel * MCUCol),
                                 3));
       }
     }
@@ -369,14 +370,14 @@ template <int version> void Cr2sRawInterpolator::interpolate_420() {
     for (int MCURow = 0; MCURow < Y_S_F; ++MCURow) {
       for (int MCUCol = 0; MCUCol < X_S_F; ++MCUCol) {
         YCbCr::LoadY(&MCU[MCURow][MCUCol],
-                     input_[Row].getCrop(InputComponentsPerMCU * MCUIdx +
-                                             X_S_F * MCURow + MCUCol,
+                     input_[Row].getCrop((InputComponentsPerMCU * MCUIdx) +
+                                             (X_S_F * MCURow) + MCUCol,
                                          1));
       }
     }
     YCbCr::LoadCbCr(
         &MCU[0][0],
-        input_[Row].getCrop(InputComponentsPerMCU * MCUIdx + YsPerMCU, 2));
+        input_[Row].getCrop((InputComponentsPerMCU * MCUIdx) + YsPerMCU, 2));
     return MCU;
   };
   auto StoreMCU = [ this, out ](const MCUTy& MCU, int MCUIdx, int Row)
@@ -384,9 +385,9 @@ template <int version> void Cr2sRawInterpolator::interpolate_420() {
     for (int MCURow = 0; MCURow < Y_S_F; ++MCURow) {
       for (int MCUCol = 0; MCUCol < X_S_F; ++MCUCol) {
         YUV_TO_RGB<version>(MCU[MCURow][MCUCol],
-                            out[2 * Row + MCURow].getCrop(
+                            out[(2 * Row) + MCURow].getCrop(
                                 ((OutputComponentsPerMCU * MCUIdx) / Y_S_F) +
-                                    ComponentsPerPixel * MCUCol,
+                                    (ComponentsPerPixel * MCUCol),
                                 3));
       }
     }
@@ -537,8 +538,9 @@ void Cr2sRawInterpolator::interpolate(int version) {
     default:
       __builtin_unreachable();
     }
-  } else
+  } else {
     ThrowRDE("Unknown subsampling: (%i; %i)", subSampling.x, subSampling.y);
+  }
 }
 
 } // namespace rawspeed

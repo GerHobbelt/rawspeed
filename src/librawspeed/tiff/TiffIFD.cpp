@@ -127,7 +127,7 @@ TiffIFD::TiffIFD(TiffIFD* parent_, NORangesSet<Buffer>* ifds, DataBuffer data,
   // 2 bytes for entry count
   // each entry is 12 bytes
   // 4-byte offset to the next IFD at the end
-  const auto IFDFullSize = 2 + 4 + 12 * numEntries;
+  const auto IFDFullSize = 2 + 4 + (12 * numEntries);
   if (const Buffer IFDBuf(data.getSubView(offset, IFDFullSize));
       !ifds->insert(IFDBuf))
     ThrowTPE("Two IFD's overlap. Raw corrupt!");

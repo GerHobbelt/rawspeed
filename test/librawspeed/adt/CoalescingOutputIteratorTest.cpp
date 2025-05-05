@@ -36,19 +36,19 @@
 namespace rawspeed {
 
 template <typename T>
-bool operator==(const Array1DRef<T> a, const Array1DRef<T> b) {
+static bool operator==(const Array1DRef<T> a, const Array1DRef<T> b) {
   return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin());
 }
 
 template <typename T>
   requires std::same_as<T, std::byte>
-inline ::std::ostream& operator<<(::std::ostream& os, const T& b) {
+static inline ::std::ostream& operator<<(::std::ostream& os, const T& b) {
   os << std::to_integer<uint8_t>(b);
   return os;
 }
 
 template <typename T>
-::std::ostream& operator<<(::std::ostream& os, const Array1DRef<T>& r) {
+static ::std::ostream& operator<<(::std::ostream& os, const Array1DRef<T>& r) {
   os << "{";
   for (int i = 0; i != r.size(); ++i) {
     if (i != 0)
@@ -139,7 +139,6 @@ using CoalescedPairTypes =
 INSTANTIATE_TYPED_TEST_SUITE_P(CoalescedTo, CoalescingOutputIteratorTest,
                                CoalescedPairTypes);
 } // namespace
-
 } // namespace rawpeed_test
 
 } // namespace rawspeed

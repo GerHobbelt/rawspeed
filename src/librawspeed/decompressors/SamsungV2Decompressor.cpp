@@ -54,6 +54,9 @@ enum struct SamsungV2Decompressor::OptFlags : uint8_t {
   ALL = SKIP | MV | QP,
 };
 
+namespace {
+
+[[maybe_unused]]
 constexpr SamsungV2Decompressor::OptFlags
 operator|(SamsungV2Decompressor::OptFlags lhs,
           SamsungV2Decompressor::OptFlags rhs) {
@@ -73,6 +76,8 @@ constexpr bool operator&(SamsungV2Decompressor::OptFlags lhs,
              static_cast<
                  std::underlying_type_t<SamsungV2Decompressor::OptFlags>>(rhs));
 }
+
+} // namespace
 
 inline __attribute__((always_inline)) int16_t
 SamsungV2Decompressor::getDiff(BitStreamerMSB32& pump, uint32_t len) {
@@ -220,8 +225,9 @@ SamsungV2Decompressor::prepareBaselineValues(BitStreamerMSB32& pump, int row,
     // the next
     if (doAverage) {
       baseline[i] = (img(refRow, refCol) + img(refRow, refCol + 2) + 1) >> 1;
-    } else
+    } else {
       baseline[i] = img(refRow, refCol);
+    }
   }
 
   return baseline;
@@ -304,7 +310,7 @@ SamsungV2Decompressor::decodeDifferences(BitStreamerMSB32& pump, int row) {
   // And finally widen and scale the differences.
   std::array<int, 16> scaled;
   for (int i = 0; i < 16; i++) {
-    int scaledDiff = int(shuffled[i]) * (scale * 2 + 1) + scale;
+    int scaledDiff = (int(shuffled[i]) * (scale * 2 + 1)) + scale;
     scaled[i] = scaledDiff;
   }
 

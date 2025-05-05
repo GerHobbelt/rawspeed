@@ -364,8 +364,8 @@ void UncompressedDecompressor::decode12BitRawUnpackedLeftAligned() {
 
   for (int row = 0; row < static_cast<int>(h); row++) {
     for (int col = 0; col < static_cast<int>(w); ++col) {
-      uint32_t g1 = in(row, 2 * col + 0);
-      uint32_t g2 = in(row, 2 * col + 1);
+      uint32_t g1 = in(row, (2 * col) + 0);
+      uint32_t g2 = in(row, (2 * col) + 1);
 
       uint16_t pix;
       if constexpr (e == Endianness::little)

@@ -198,7 +198,7 @@ VC5Decompressor::BandData VC5Decompressor::Wavelet::reconstructPass(
     int odd = convolution(SegmentTy::mul_odd);
 
     dst(2 * row, col) = static_cast<int16_t>(even);
-    dst(2 * row + 1, col) = static_cast<int16_t>(odd);
+    dst((2 * row) + 1, col) = static_cast<int16_t>(odd);
   };
 
 #pragma GCC diagnostic push
@@ -256,7 +256,7 @@ VC5Decompressor::BandData VC5Decompressor::Wavelet::combineLowHighPass(
       odd = clampBits(odd, 14);
     }
     dst(row, 2 * col) = static_cast<int16_t>(even);
-    dst(row, 2 * col + 1) = static_cast<int16_t>(odd);
+    dst(row, (2 * col) + 1) = static_cast<int16_t>(odd);
   };
 
   // Horizontal reconstruction
@@ -906,8 +906,8 @@ void VC5Decompressor::combineFinalLowpassBandsImpl() const noexcept {
       int bg = lowbands2(row, col) - mid;
       int gd = lowbands3(row, col) - mid;
 
-      int r = gs + 2 * rg;
-      int b = gs + 2 * bg;
+      int r = gs + (2 * rg);
+      int b = gs + (2 * bg);
       int g1 = gs + gd;
       int g2 = gs - gd;
 
@@ -922,7 +922,7 @@ void VC5Decompressor::combineFinalLowpassBandsImpl() const noexcept {
       const Array2DRef<const int> pat(patData.data(), 2, 2);
       for (int patRow = 0; patRow < pat.height(); ++patRow) {
         for (int patCol = 0; patCol < pat.width(); ++patCol) {
-          out(2 * row + patRow, 2 * col + patCol) =
+          out((2 * row) + patRow, (2 * col) + patCol) =
               static_cast<uint16_t>(pat(patRow, patCol));
         }
       }

@@ -31,7 +31,7 @@
 
 namespace rawspeed::identify {
 
-std::string find_cameras_xml(const char* argv0);
+namespace {
 
 std::string find_cameras_xml(const char* argv0) {
   struct stat statbuf;
@@ -97,6 +97,8 @@ std::string find_cameras_xml(const char* argv0) {
 
   return found_camfile;
 }
+
+} // namespace
 
 } // namespace rawspeed::identify
 

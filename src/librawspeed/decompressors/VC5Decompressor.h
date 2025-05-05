@@ -115,7 +115,7 @@ class VC5Decompressor final : public AbstractDecompressor {
   static constexpr int numHighPassBands = 3;
   static constexpr int numLowPassBands = 1;
   static constexpr int numSubbands =
-      numLowPassBands + numHighPassBands * numWaveletLevels;
+      numLowPassBands + (numHighPassBands * numWaveletLevels);
 
   struct {
     uint16_t iChannel = 0; // 0'th channel is the default

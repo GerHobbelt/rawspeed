@@ -41,13 +41,15 @@ using std::make_tuple;
 
 namespace rawspeed {
 
-::std::ostream& operator<<(::std::ostream& os, const iPoint2D p) {
+static ::std::ostream& operator<<(::std::ostream& os, const iPoint2D p) {
   return os << "(" << p.x << ", " << p.y << ")";
 }
 
 } // namespace rawspeed
 
 namespace rawspeed_test {
+
+namespace {
 
 TEST(SplineStaticTest, DefaultIsUshort16) {
   static_assert(std::is_same<Spline<>::value_type, uint16_t>::value,
@@ -239,7 +241,7 @@ TEST_P(DoubleIdentityTest, ValuesAreLinearlyInterpolated) {
 TEST_P(DoubleIdentityTest, SegmentCoeffients) { CheckSegments(); }
 
 template <typename T> T lerp(T v0, T v1, T t) {
-  return (1.0 - t) * v0 + t * v1;
+  return ((1.0 - t) * v0) + (t * v1);
 }
 
 template <typename T = int>
@@ -547,5 +549,7 @@ static const referenceType sinPiRefValues[] = {
 INSTANTIATE_TEST_SUITE_P(SinPi, SinPiRefTest,
                          ::testing::ValuesIn(sinPiRefValues));
 TEST_P(SinPiRefTest, NearlyMatchesReference) { check(); }
+
+} // namespace
 
 } // namespace rawspeed_test

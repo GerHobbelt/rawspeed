@@ -28,6 +28,8 @@ using rawspeed::ParseChecksumFileContent;
 
 namespace rawspeed_test {
 
+namespace {
+
 TEST(ParseChecksumFileContentTest, Empty) {
   const auto Content = ParseChecksumFileContent({}, {});
   ASSERT_TRUE(Content.empty());
@@ -75,5 +77,7 @@ TEST(ParseChecksumFileContentTest, TheTest) {
   ASSERT_EQ(Content.front().RelFileName, "file");
   ASSERT_EQ(Content.front().FullFileName, "dir/file");
 }
+
+} // namespace
 
 } // namespace rawspeed_test

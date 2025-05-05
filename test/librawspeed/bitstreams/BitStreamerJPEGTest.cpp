@@ -37,6 +37,8 @@ using rawspeed::Endianness;
 
 namespace rawspeed_test {
 
+namespace {
+
 struct InvOnesTag;
 struct OnesTag;
 struct SaturatedTag;
@@ -99,5 +101,7 @@ TEST(BitStreamerJPEGTest, 0xFF0xXXIsTheEndTest) {
       ASSERT_EQ(p.getBits(1), 0);
   }
 }
+
+} // namespace
 
 } // namespace rawspeed_test

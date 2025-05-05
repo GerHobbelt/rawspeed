@@ -136,8 +136,9 @@ public:
               diff = extractHighBits(c, code_l + diff_l,
                                      /*effectiveBitwidth=*/LookupDepth);
               diff &= ((1 << diff_l) - 1);
-            } else
+            } else {
               diff = LUTUnsignedEntryTy(-32768);
+            }
             decodeLookup[c] |= static_cast<LUTEntryTy>(
                 static_cast<LUTUnsignedEntryTy>(Base::extend(diff, diff_l))
                 << PayloadShift);

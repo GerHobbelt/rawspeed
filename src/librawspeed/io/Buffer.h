@@ -107,7 +107,7 @@ public:
   [[nodiscard]] T get(bool inNativeByteOrder, size_type offset,
                       size_type index = 0) const {
     const Buffer buf =
-        getSubView(offset + index * static_cast<size_type>(sizeof(T)),
+        getSubView(offset + (index * static_cast<size_type>(sizeof(T))),
                    static_cast<size_type>(sizeof(T)));
     return getByteSwapped<T>(buf.begin(), !inNativeByteOrder);
   }

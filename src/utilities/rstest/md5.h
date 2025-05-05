@@ -168,10 +168,11 @@ public:
           else if constexpr (std::is_same_v<T, CoalescingBuffer>) {
             invariant(arg.block_length == N);
             return {{arg.block.data(), arg.block_length}};
-          } else if constexpr (std::is_same_v<T, NoBuffer>)
+          } else if constexpr (std::is_same_v<T, NoBuffer>) {
             __builtin_unreachable();
-          else
+          } else {
             static_assert(always_false_v<T>, "non-exhaustive visitor!");
+          }
         },
         state);
   }

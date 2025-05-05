@@ -27,6 +27,8 @@ using rawspeed::Cpuid;
 
 namespace rawspeed_test {
 
+namespace {
+
 // do not care about WITH_SSE2 here.
 TEST(CpuidDeathTest, SSE2Test) {
 #if defined(__SSE2__)
@@ -45,5 +47,7 @@ TEST(CpuidDeathTest, SSE2Test) {
       ::testing::ExitedWithCode(0), "");
 #endif
 }
+
+} // namespace
 
 } // namespace rawspeed_test

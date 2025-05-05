@@ -35,7 +35,7 @@ using rawspeed::ColorFilterArray;
 
 namespace rawspeed {
 
-::std::ostream& operator<<(::std::ostream& os, const BayerPhase p) {
+static ::std::ostream& operator<<(::std::ostream& os, const BayerPhase p) {
   switch (p) {
   case BayerPhase::RGGB:
     return os << "RGGB";
@@ -52,6 +52,8 @@ namespace rawspeed {
 } // namespace rawspeed
 
 namespace rawspeed_test {
+
+namespace {
 
 auto AllKnownCFAColors =
     ::testing::Values(CFAColor::RED, CFAColor::GREEN, CFAColor::BLUE,
@@ -222,5 +224,7 @@ TEST_P(BayerPhaseShifTest, applyStablePhaseShiftTest) {
             rawspeed::applyStablePhaseShift(
                 ExpectedBayerStablePhaseShifts.at(src), src, tgt));
 }
+
+} // namespace
 
 } // namespace rawspeed_test

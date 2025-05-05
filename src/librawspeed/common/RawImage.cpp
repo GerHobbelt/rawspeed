@@ -223,7 +223,8 @@ void RawImageData::transferBadPixelsToMap() {
     assert(pos_x < static_cast<uint16_t>(uncropped_dim.x));
     assert(pos_y < static_cast<uint16_t>(uncropped_dim.y));
 
-    mBadPixelMap[mBadPixelMapPitch * pos_y + (pos_x >> 3)] |= 1 << (pos_x & 7);
+    mBadPixelMap[(mBadPixelMapPitch * pos_y) + (pos_x >> 3)] |= 1
+                                                                << (pos_x & 7);
   }
   mBadPixelPositions.clear();
 }
@@ -315,7 +316,7 @@ void RawImageData::fixBadPixelsThread(int start_y, int end_y) {
           if (1 != ((block(i) >> j) & 1))
             continue;
 
-          fixBadPixel(x * 32 + i * 8 + j, y, 0);
+          fixBadPixel((x * 32) + (i * 8) + j, y, 0);
         }
       }
     }

@@ -41,6 +41,8 @@ using std::setw;
 
 namespace rawspeed_test {
 
+namespace {
+
 TEST(EndiannessTest, getHostEndiannessTests) {
 #if defined(__BYTE_ORDER__)
   ASSERT_EQ(getHostEndiannessRuntime(), getHostEndianness());
@@ -75,6 +77,7 @@ done;
 #define setupHex setfill('0') << setw(2 * sizeof(T)) << std::hex
 
 template <typename T>
+[[maybe_unused]]
 ::std::ostream& operator<<(::std::ostream& os, const intPair<T>& p) {
   ::testing::Message msg;
   msg << "(0x" << setupHex << p.first << ", 0x" << setupHex << p.second << ")";
@@ -365,5 +368,7 @@ TEST_P(doubleTest, getNOP) {
     ASSERT_PRED_FORMAT2(HexEquals{}, getBEt(&in), in);
   }
 }
+
+} // namespace
 
 } // namespace rawspeed_test

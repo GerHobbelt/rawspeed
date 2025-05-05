@@ -156,8 +156,9 @@ OlympusDecompressorImpl::getPred(const Array2DRef<uint16_t> out, int row,
         pred = left + upMinusNw;
       else
         pred = (left + up) >> 1;
-    } else
+    } else {
       pred = std::abs(leftMinusNw) > std::abs(upMinusNw) ? left : up;
+    }
   }
 
   return pred;
@@ -170,7 +171,7 @@ OlympusDecompressorImpl::decompressGroup(
   const Array2DRef<uint16_t> out(mRaw->getU16DataAsUncroppedArray2DRef());
 
   for (int c = 0; c != 2; ++c) {
-    const int col = 2 * group + c;
+    const int col = (2 * group) + c;
     OlympusDifferenceDecoder& carry = acarry[c];
 
     int diff = carry.getDiff(bits);

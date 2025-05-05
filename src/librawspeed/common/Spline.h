@@ -85,7 +85,7 @@ private:
     mu[0] = z[0] = 0;
 
     for (int i = 1; i < num_segments; i++) {
-      const double l = 2 * (xCp[i + 1] - xCp[i - 1]) - (h[i - 1] * mu[i - 1]);
+      const double l = (2 * (xCp[i + 1] - xCp[i - 1])) - (h[i - 1] * mu[i - 1]);
       mu[i] = h[i] / l;
       z[i] = (alpha[i] - h[i - 1] * z[i - 1]) / l;
     }
@@ -162,7 +162,8 @@ public:
         double diff_2 = diff * diff;
         double diff_3 = diff * diff * diff;
 
-        double interpolated = s.a + s.b * diff + s.c * diff_2 + s.d * diff_3;
+        double interpolated =
+            s.a + (s.b * diff) + (s.c * diff_2) + (s.d * diff_3);
 
         if constexpr (!std::is_floating_point_v<value_type>) {
           interpolated = std::max(

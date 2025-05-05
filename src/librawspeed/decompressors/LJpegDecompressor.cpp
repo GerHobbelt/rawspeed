@@ -206,7 +206,7 @@ void LJpegDecompressor::decodeRowN(
                              .getAsArray2DRef();
     for (int MCURow = 0; MCURow != MCUSize.y; ++MCURow) {
       for (int MCUСol = 0; MCUСol != MCUSize.x; ++MCUСol) {
-        int c = MCUSize.x * MCURow + MCUСol;
+        int c = (MCUSize.x * MCURow) + MCUСol;
         int prediction = pred(MCURow, MCUСol);
         int diff = (static_cast<const PrefixCodeDecoder<>&>(ht[c]))
                        .decodeDifference(bs);
@@ -229,7 +229,7 @@ void LJpegDecompressor::decodeRowN(
     // We may end up needing just part of last N_COMP pixels.
     for (int MCURow = 0; MCURow != MCUSize.y; ++MCURow) {
       for (int MCUСol = 0; MCUСol != MCUSize.x; ++MCUСol) {
-        int c = MCUSize.x * MCURow + MCUСol;
+        int c = (MCUSize.x * MCURow) + MCUСol;
         int prediction = pred(MCURow, MCUСol);
         int diff = (static_cast<const PrefixCodeDecoder<>&>(ht[c]))
                        .decodeDifference(bs);

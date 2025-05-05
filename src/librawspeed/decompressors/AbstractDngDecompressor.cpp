@@ -233,8 +233,9 @@ void AbstractDngDecompressor::decompressThread() const noexcept {
 #pragma message "JPEG is not present! Lossy JPEG DNG will not be supported!"
     mRaw->setError("jpeg support is disabled.");
 #endif
-  } else
+  } else {
     mRaw->setError("AbstractDngDecompressor: Unknown compression");
+  }
 }
 
 void AbstractDngDecompressor::decompress() const {

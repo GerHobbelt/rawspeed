@@ -47,6 +47,8 @@ using std::vector;
 
 namespace rawspeed_test {
 
+namespace {
+
 using RoundDownType = std::tuple<uint64_t, uint64_t, uint64_t>;
 class RoundDownTest : public ::testing::TestWithParam<RoundDownType> {
 protected:
@@ -285,7 +287,7 @@ protected:
   virtual void SetUp() {
     dstPitch = std::get<0>(GetParam());
     srcPitch = std::get<1>(GetParam());
-    rowSize = min(min(std::get<2>(GetParam()), srcPitch), dstPitch);
+    rowSize = min({std::get<2>(GetParam()), srcPitch, dstPitch});
     height = std::get<3>(GetParam());
 
     assert(srcPitch * height < numeric_limits<uint8_t>::max());
@@ -329,5 +331,7 @@ TEST_P(CopyPixelsTest, CopyPixelsTest) {
   copy();
   compare();
 }
+
+} // namespace
 
 } // namespace rawspeed_test

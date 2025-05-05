@@ -198,7 +198,7 @@ void OrfDecoder::decodeUncompressedInterleaved(ByteStream s, uint32_t w,
     BitStreamerMSB bs(oddLinesInput);
     for (int i = 0; i != numOddLines; ++i) {
       for (unsigned col = 0; col != w; ++col) {
-        int row = 1 + 2 * i;
+        int row = 1 + (2 * i);
         out(row, col) = implicit_cast<uint16_t>(bs.getBits(12));
       }
     }
@@ -288,7 +288,7 @@ void OrfDecoder::parseCFA() const {
 
   for (int y = 0; y < cfaSize.y; y++) {
     for (int x = 0; x < cfaSize.x; x++) {
-      uint8_t c1 = CFA->getByte(4 + x + y * cfaSize.x);
+      uint8_t c1 = CFA->getByte(4 + x + (y * cfaSize.x));
       CFAColor c2 = int2enum(c1);
       mRaw->cfa.setColorAt(iPoint2D(x, y), c2);
     }

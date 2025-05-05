@@ -35,6 +35,8 @@ using std::unique_ptr;
 
 namespace rawspeed_test {
 
+namespace {
+
 std::vector<int> ISOList(6);
 
 class CameraSensorInfoTestDumb
@@ -316,6 +318,8 @@ TEST_P(CameraSensorInfoTest, isIsoWithin) {
       ASSERT_FALSE(Info.isIsoWithin(data.Iso));
   });
 }
+
+} // namespace
 
 } // namespace rawspeed_test
 

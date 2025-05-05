@@ -30,13 +30,13 @@
 namespace rawspeed {
 
 template <typename T>
-bool operator==(const rawspeed::Array1DRef<T> a,
-                const rawspeed::Array1DRef<T> b) {
+static bool operator==(const rawspeed::Array1DRef<T> a,
+                       const rawspeed::Array1DRef<T> b) {
   return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin());
 }
 
 template <typename T>
-::std::ostream& operator<<(::std::ostream& os, const Array1DRef<T>& r) {
+static ::std::ostream& operator<<(::std::ostream& os, const Array1DRef<T>& r) {
   os << "{";
   for (int i = 0; i != r.size(); ++i) {
     if (i != 0)

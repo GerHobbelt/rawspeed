@@ -107,7 +107,7 @@ inline void decodeFPDeltaRow(Array1DRef<const unsigned char> src,
   for (int col = 0; col < out.size(); ++col) {
     std::array<unsigned char, storage_bytes> bytes;
     for (int c = 0; c != bytesps; ++c)
-      bytes[c] = src(col + c * realTileWidth);
+      bytes[c] = src(col + (c * realTileWidth));
 
     auto tmp = getBE<storage_type>(bytes.data());
     tmp >>= CHAR_BIT * StorageType<T>::padding_bytes;

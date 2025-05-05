@@ -46,6 +46,8 @@ using std::unique_ptr;
 
 namespace rawspeed_test {
 
+namespace {
+
 static const char* msg = "my very Smart error Message #1 !";
 
 #define FMT "%s"
@@ -203,5 +205,7 @@ TYPED_TEST(ExceptionsTest, ThrowHelperTestMessage) {
     ASSERT_THAT(ex.what(), testing::HasSubstr(msg));
   }
 }
+
+} // namespace
 
 } // namespace rawspeed_test

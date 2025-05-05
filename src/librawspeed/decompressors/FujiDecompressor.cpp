@@ -352,13 +352,13 @@ void fuji_compressed_block::copy_line(const FujiStrip& strip, int cur_line,
   for (MCUIdx.x = 0; MCUIdx.x != NumMCUs.x; ++MCUIdx.x) {
     for (MCUIdx.y = 0; MCUIdx.y != NumMCUs.y; ++MCUIdx.y) {
       const auto out =
-          CroppedArray2DRef(img, strip.offsetX() + MCU<Tag>.x * MCUIdx.x,
-                            strip.offsetY(cur_line) + MCU<Tag>.y * MCUIdx.y,
+          CroppedArray2DRef(img, strip.offsetX() + (MCU<Tag>.x * MCUIdx.x),
+                            strip.offsetY(cur_line) + (MCU<Tag>.y * MCUIdx.y),
                             MCU<Tag>.x, MCU<Tag>.y);
       for (int MCURow = 0; MCURow != MCU<Tag>.y; ++MCURow) {
         for (int MCUCol = 0; MCUCol != MCU<Tag>.x; ++MCUCol) {
-          int imgRow = MCU<Tag>.y * MCUIdx.y + MCURow;
-          int imgCol = MCU<Tag>.x * MCUIdx.x + MCUCol;
+          int imgRow = (MCU<Tag>.y * MCUIdx.y) + MCURow;
+          int imgCol = (MCU<Tag>.x * MCUIdx.x) + MCUCol;
 
           int row;
 
@@ -504,17 +504,17 @@ fuji_compressed_block::fuji_decode_sample(int grad, int interp_val,
 __attribute__((always_inline)) inline int
 fuji_compressed_block::fuji_quant_gradient(int v1, int v2) const {
   const auto& ci = common_info;
-  return 9 * ci.qTableLookup(ci.q_point[4] + v1) +
+  return (9 * ci.qTableLookup(ci.q_point[4] + v1)) +
          ci.qTableLookup(ci.q_point[4] + v2);
 }
 
 __attribute__((always_inline)) inline std::pair<int, int>
 fuji_compressed_block::fuji_decode_interpolation_even_inner(xt_lines c,
                                                             int col) const {
-  int Rb = lines(c - 1, 1 + 2 * (col + 0) + 0);
-  int Rc = lines(c - 1, 1 + 2 * (col - 1) + 1);
-  int Rd = lines(c - 1, 1 + 2 * (col + 0) + 1);
-  int Rf = lines(c - 2, 1 + 2 * (col + 0) + 0);
+  int Rb = lines(c - 1, 1 + (2 * (col + 0)) + 0);
+  int Rc = lines(c - 1, 1 + (2 * (col - 1)) + 1);
+  int Rd = lines(c - 1, 1 + (2 * (col + 0)) + 1);
+  int Rf = lines(c - 2, 1 + (2 * (col + 0)) + 0);
 
   int diffRcRb = std::abs(Rc - Rb);
   int diffRfRb = std::abs(Rf - Rb);
@@ -545,11 +545,11 @@ fuji_compressed_block::fuji_decode_interpolation_even_inner(xt_lines c,
 __attribute__((always_inline)) inline std::pair<int, int>
 fuji_compressed_block::fuji_decode_interpolation_odd_inner(xt_lines c,
                                                            int col) const {
-  int Ra = lines(c + 0, 1 + 2 * (col + 0) + 0);
-  int Rb = lines(c - 1, 1 + 2 * (col + 0) + 1);
-  int Rc = lines(c - 1, 1 + 2 * (col + 0) + 0);
-  int Rd = lines(c - 1, 1 + 2 * (col + 1) + 0);
-  int Rg = lines(c + 0, 1 + 2 * (col + 1) + 0);
+  int Ra = lines(c + 0, 1 + (2 * (col + 0)) + 0);
+  int Rb = lines(c - 1, 1 + (2 * (col + 0)) + 1);
+  int Rc = lines(c - 1, 1 + (2 * (col + 0)) + 0);
+  int Rd = lines(c - 1, 1 + (2 * (col + 1)) + 0);
+  int Rg = lines(c + 0, 1 + (2 * (col + 1)) + 0);
 
   int interp_val = (Ra + Rg);
   if (auto [min, max] = std::minmax(Rc, Rd); Rb < min || Rb > max) {
@@ -624,7 +624,7 @@ fuji_compressed_block::fuji_decode_block(T func_even,
         for (int comp = 0; comp != 2; comp++) {
           int& col = pos[comp].even;
           int sample = func_even(c[comp], col, grad_even[grad], row, i, comp);
-          lines(c[comp], 1 + 2 * col + 0) = implicit_cast<uint16_t>(sample);
+          lines(c[comp], 1 + (2 * col) + 0) = implicit_cast<uint16_t>(sample);
           ++col;
         }
       }
@@ -633,7 +633,7 @@ fuji_compressed_block::fuji_decode_block(T func_even,
         for (int comp = 0; comp != 2; comp++) {
           int& col = pos[comp].odd;
           int sample = fuji_decode_sample_odd(c[comp], col, grad_odd[grad]);
-          lines(c[comp], 1 + 2 * col + 1) = implicit_cast<uint16_t>(sample);
+          lines(c[comp], 1 + (2 * col) + 1) = implicit_cast<uint16_t>(sample);
           ++col;
         }
       }
@@ -875,8 +875,9 @@ FujiDecompressor::FujiDecompressor(RawImage img, ByteStream input_)
     if (p != BayerPhase::RGGB)
       ThrowRDE("Unexpected Bayer phase: %i. Please file a bug!",
                static_cast<int>(*p));
-  } else
+  } else {
     ThrowRDE("Unexpected CFA size");
+  }
 
   // read block sizes
   std::vector<uint32_t> block_sizes;

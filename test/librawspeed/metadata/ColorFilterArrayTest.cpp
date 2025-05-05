@@ -34,13 +34,15 @@ using std::string;
 
 namespace rawspeed {
 
-::std::ostream& operator<<(::std::ostream& os, const CFAColor c) {
+static ::std::ostream& operator<<(::std::ostream& os, const CFAColor c) {
   return os << ColorFilterArray::colorToString(c);
 }
 
 } // namespace rawspeed
 
 namespace rawspeed_test {
+
+namespace {
 
 using Bayer2x2 = std::tuple<CFAColor, CFAColor, CFAColor, CFAColor>;
 
@@ -332,5 +334,6 @@ TEST_P(ColorFilterArrayShiftTest, shiftEqualityTest) {
     ASSERT_EQ(f, ColorFilterArray::shiftDcrawFilter(fo, x, y));
   });
 }
+} // namespace
 
 } // namespace rawspeed_test

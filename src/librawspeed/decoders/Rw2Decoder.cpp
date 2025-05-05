@@ -273,7 +273,7 @@ void Rw2Decoder::decodeMetaDataInternal(const CameraMetaData* meta) {
     auto blackLevelSeparate1D = *mRaw->blackLevelSeparate->getAsArray1DRef();
     for (int i = 0; i < 2; i++) {
       for (int j = 0; j < 2; j++) {
-        const int k = i + 2 * j;
+        const int k = i + (2 * j);
         const CFAColor c = mRaw->cfa.getColorAt(i, j);
         switch (c) {
         case CFAColor::RED:
@@ -321,16 +321,16 @@ std::string Rw2Decoder::guessMode() const {
 
   ratio = static_cast<float>(mRaw->dim.x) / static_cast<float>(mRaw->dim.y);
 
-  float min_diff = fabs(ratio - 16.0F / 9.0F);
+  float min_diff = fabs(ratio - (16.0F / 9.0F));
   std::string closest_match = "16:9";
 
-  float t = fabs(ratio - 3.0F / 2.0F);
+  float t = fabs(ratio - (3.0F / 2.0F));
   if (t < min_diff) {
     closest_match = "3:2";
     min_diff = t;
   }
 
-  t = fabs(ratio - 4.0F / 3.0F);
+  t = fabs(ratio - (4.0F / 3.0F));
   if (t < min_diff) {
     closest_match = "4:3";
     min_diff = t;

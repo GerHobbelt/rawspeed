@@ -39,7 +39,10 @@ template <typename T>
 
 namespace rawspeed_test {
 
+namespace {
+
 template <typename T>
+[[maybe_unused]]
 ::testing::AssertionResult RangeContains(const char* range_expr,
                                          const char* pos_expr,
                                          const Range<T>& r, const T& pos) {
@@ -55,6 +58,7 @@ template <typename T>
 }
 
 template <typename T>
+[[maybe_unused]]
 ::testing::AssertionResult RangeDoesntContain(const char* range_expr,
                                               const char* pos_expr,
                                               const Range<T>& r, const T& pos) {
@@ -70,6 +74,7 @@ template <typename T>
 }
 
 template <typename T>
+[[maybe_unused]]
 ::testing::AssertionResult RangesOverlap(const char* m_expr, const char* n_expr,
                                          const T& lhs, const T& rhs) {
   if (!RangesOverlap(lhs, lhs) || !RangesOverlap(rhs, rhs))
@@ -84,6 +89,7 @@ template <typename T>
 }
 
 template <typename T>
+[[maybe_unused]]
 ::testing::AssertionResult RangesDontOverlap(const char* m_expr,
                                              const char* n_expr, const T& lhs,
                                              const T& rhs) {
@@ -138,5 +144,7 @@ static const std::set<twoRangesType> AllOverlapped{
     std::make_tuple(2, 2, 2, 0), std::make_tuple(2, 2, 2, 1),
     std::make_tuple(2, 2, 2, 2),
 };
+
+} // namespace
 
 } // namespace rawspeed_test

@@ -118,7 +118,7 @@ void PhaseOneDecompressor::decompressStrip(const PhaseOneStrip& strip) const {
 
         invariant((col == 0 && j > 0) || col != 0);
         if (j > 0)
-          i = length[2 * (j - 1) + pump.getBitsNoFill(1)];
+          i = length[(2 * (j - 1)) + pump.getBitsNoFill(1)];
       }
     }
 

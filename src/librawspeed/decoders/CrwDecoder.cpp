@@ -130,8 +130,8 @@ void CrwDecoder::checkSupportInternal(const CameraMetaData* meta) {
       data[0]->getEntry(CiffTag::MAKEMODEL)->getStrings();
   if (makemodel.size() < 2)
     ThrowRDE("wrong number of strings for make/model");
-  std::string make = makemodel[0];
-  std::string model = makemodel[1];
+  const std::string& make = makemodel[0];
+  const std::string& model = makemodel[1];
 
   this->checkCameraSupported(meta, make, model, "");
 }
@@ -164,8 +164,8 @@ void CrwDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
       data[0]->getEntry(CiffTag::MAKEMODEL)->getStrings();
   if (makemodel.size() < 2)
     ThrowRDE("wrong number of strings for make/model");
-  std::string make = makemodel[0];
-  std::string model = makemodel[1];
+  const std::string& make = makemodel[0];
+  const std::string& model = makemodel[1];
   std::string mode;
 
   if (mRootIFD->hasEntryRecursive(CiffTag::SHOTINFO)) {
@@ -245,7 +245,8 @@ void CrwDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
       /* CANON EOS D60, CANON EOS 10D, CANON EOS 300D */
       if (wb_index > 9)
         ThrowRDE("Invalid white balance index");
-      int wb_offset = 1 + (std::string_view("0134567028")[wb_index] - '0') * 4;
+      int wb_offset =
+          1 + ((std::string_view("0134567028")[wb_index] - '0') * 4);
       mRaw->metadata.wbCoeffs[0] = wb_data->getU16(wb_offset + 0);
       mRaw->metadata.wbCoeffs[1] = wb_data->getU16(wb_offset + 1);
       mRaw->metadata.wbCoeffs[2] = wb_data->getU16(wb_offset + 3);

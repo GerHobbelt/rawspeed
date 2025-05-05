@@ -37,13 +37,15 @@ using std::tuple;
 
 namespace rawspeed {
 
-::std::ostream& operator<<(::std::ostream& os, const iPoint2D p) {
+static ::std::ostream& operator<<(::std::ostream& os, const iPoint2D p) {
   return os << "(" << p.x << ", " << p.y << ")";
 }
 
 } // namespace rawspeed
 
 namespace rawspeed_test {
+
+namespace {
 
 static constexpr iPoint2D::area_type maxVal =
     numeric_limits<iPoint2D::value_type>::max();
@@ -818,5 +820,7 @@ TEST_P(SmallestTest, GetSmallestTest) {
     ASSERT_EQ(c.getSmallest(c), c);
   });
 }
+
+} // namespace
 
 } // namespace rawspeed_test

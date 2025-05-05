@@ -31,6 +31,8 @@ using rawspeed::Range;
 
 namespace rawspeed_test {
 
+namespace {
+
 TEST_P(TwoRangesTest, NORangesSetDataSelfTest) {
   {
     NORangesSet<Range<int>> s;
@@ -116,5 +118,7 @@ TEST_P(ThreeRangesTest, NORangesSetDataTest) {
   res = s.insert(r2);
   ASSERT_EQ(res, !RangesOverlap(r0, r2) && !RangesOverlap(r1, r2));
 }
+
+} // namespace
 
 } // namespace rawspeed_test

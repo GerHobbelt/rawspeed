@@ -37,6 +37,8 @@ using std::vector;
 
 namespace rawspeed_test {
 
+namespace {
+
 using powerOfTwoType = std::tuple<int, bool>;
 class PowerOfTwoTest : public ::testing::TestWithParam<powerOfTwoType> {
 protected:
@@ -122,5 +124,7 @@ TEST(ClampBitsUnsignedDeathTest, NoNopClamps) {
       "bitwidth<T>\\(\\) > nBits");
 #endif
 }
+
+} // namespace
 
 } // namespace rawspeed_test

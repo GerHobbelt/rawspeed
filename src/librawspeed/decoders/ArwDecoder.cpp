@@ -85,7 +85,7 @@ RawImage ArwDecoder::decodeSRF() {
 
   // Replicate the dcraw contortions to get the "decryption" key
   uint8_t offset = mFile[key_off];
-  const Buffer keyData = mFile.getSubView(key_off + 4 * offset, 4);
+  const Buffer keyData = mFile.getSubView(key_off + (4 * offset), 4);
   uint32_t key = getU32BE(keyData.begin());
 
   static const size_t head_size = 40;
@@ -253,8 +253,9 @@ RawImage ArwDecoder::decodeRawInternal() {
     mRaw->createData();
     a.decompress(input);
     mShiftDownScaleForExif = 2;
-  } else
+  } else {
     DecodeARW2(input, width, height, bitPerPixel);
+  }
 
   if (bitPerPixel == 12)
     mShiftDownScaleForExif = 2;
@@ -534,7 +535,7 @@ void ArwDecoder::SonyDecrypt(Array1DRef<const uint8_t> ibuf,
 
   // Initialize the decryption pad from the key
   for (int p = 0; p < 4; p++)
-    pad[p] = key = uint32_t(key * 48828125UL + 1UL);
+    pad[p] = key = uint32_t((key * 48828125UL) + 1UL);
   pad[3] = pad[3] << 1 | (pad[0] ^ pad[2]) >> 31;
   for (int p = 4; p < 127; p++)
     pad[p] = (pad[p - 4] ^ pad[p - 2]) << 1 | (pad[p - 3] ^ pad[p - 1]) >> 31;

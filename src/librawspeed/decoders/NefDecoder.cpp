@@ -559,7 +559,7 @@ void NefDecoder::parseWhiteBalance() const {
 
         std::array<uint8_t, 14 + 8> buf;
         for (unsigned char& i : buf) {
-          cj = uint8_t(cj + ci * ck); // modulo arithmetics.
+          cj = uint8_t(cj + (ci * ck)); // modulo arithmetics.
           i = bs.getByte() ^ cj;
           ck++;
         }
@@ -745,46 +745,46 @@ void NefDecoder::DecodeNikonSNef(ByteStream input) const {
 
       mRaw->setWithLookUp(
           clampBits(static_cast<int>(implicit_cast<double>(y1) +
-                                     1.370705 * implicit_cast<double>(cr)),
+                                     (1.370705 * implicit_cast<double>(cr))),
                     12),
           tmpch, &random);
       out(row, col) = clampBits((inv_wb_r * tmp + (1 << 9)) >> 10, 15);
 
       mRaw->setWithLookUp(
           clampBits(static_cast<int>(implicit_cast<double>(y1) -
-                                     0.337633 * implicit_cast<double>(cb) -
-                                     0.698001 * implicit_cast<double>(cr)),
+                                     (0.337633 * implicit_cast<double>(cb)) -
+                                     (0.698001 * implicit_cast<double>(cr))),
                     12),
           reinterpret_cast<std::byte*>(&out(row, col + 1)), &random);
 
       mRaw->setWithLookUp(
           clampBits(
               static_cast<int>(implicit_cast<double>(y1) +
-                               1.732446 // NOLINT(modernize-use-std-numbers)
-                                   * implicit_cast<double>(cb)),
+                               (1.732446 // NOLINT(modernize-use-std-numbers)
+                                * implicit_cast<double>(cb))),
               12),
           tmpch, &random);
       out(row, col + 2) = clampBits((inv_wb_b * tmp + (1 << 9)) >> 10, 15);
 
       mRaw->setWithLookUp(
           clampBits(static_cast<int>(implicit_cast<double>(y2) +
-                                     1.370705 * implicit_cast<double>(cr2)),
+                                     (1.370705 * implicit_cast<double>(cr2))),
                     12),
           tmpch, &random);
       out(row, col + 3) = clampBits((inv_wb_r * tmp + (1 << 9)) >> 10, 15);
 
       mRaw->setWithLookUp(
           clampBits(static_cast<int>(implicit_cast<double>(y2) -
-                                     0.337633 * implicit_cast<double>(cb2) -
-                                     0.698001 * implicit_cast<double>(cr2)),
+                                     (0.337633 * implicit_cast<double>(cb2)) -
+                                     (0.698001 * implicit_cast<double>(cr2))),
                     12),
           reinterpret_cast<std::byte*>(&out(row, col + 4)), &random);
 
       mRaw->setWithLookUp(
           clampBits(
               static_cast<int>(implicit_cast<double>(y2) +
-                               1.732446 // NOLINT(modernize-use-std-numbers)
-                                   * implicit_cast<double>(cb2)),
+                               (1.732446 // NOLINT(modernize-use-std-numbers)
+                                * implicit_cast<double>(cb2))),
               12),
           tmpch, &random);
       out(row, col + 5) = clampBits((inv_wb_b * tmp + (1 << 9)) >> 10, 15);
@@ -810,7 +810,7 @@ std::vector<uint16_t> NefDecoder::gammaCurve(double pwr, double ts, int imax) {
       if (std::abs(g[0]) > 0)
         bnd[(pow(g[2] / g[1], -g[0]) - 1) / g[0] - 1 / g[2] > -1] = g[2];
       else
-        bnd[g[2] / exp(1 - 1 / g[2]) < g[1]] = g[2];
+        bnd[g[2] / exp(1 - (1 / g[2])) < g[1]] = g[2];
     }
     g[3] = g[2] / g[1];
     if (std::abs(g[0]) > 0)

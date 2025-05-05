@@ -28,6 +28,8 @@ using rawspeed::BitStreamerMSB16;
 
 namespace rawspeed_test {
 
+namespace {
+
 struct InvOnesTag;
 struct OnesTag;
 
@@ -51,5 +53,7 @@ template <> uint32_t Pattern<BitStreamerMSB16, InvOnesTag>::data(int index) {
 
 INSTANTIATE_TYPED_TEST_SUITE_P(MSB16, BitStreamerTest,
                                Patterns<BitStreamerMSB16>);
+
+} // namespace
 
 } // namespace rawspeed_test

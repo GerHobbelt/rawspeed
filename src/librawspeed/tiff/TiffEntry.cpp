@@ -242,7 +242,7 @@ NotARational<uint32_t> TiffEntry::getRational(uint32_t index) const {
     return {getU32(index), 1};
 
   auto a = getU32(index * 2);
-  auto b = getU32(index * 2 + 1);
+  auto b = getU32((index * 2) + 1);
   return {a, b};
 }
 
@@ -256,7 +256,7 @@ NotARational<int32_t> TiffEntry::getSRational(uint32_t index) const {
     return {getI32(index), 1};
 
   auto a = getI32(index * 2);
-  auto b = getI32(index * 2 + 1);
+  auto b = getI32((index * 2) + 1);
   return {a, b};
 }
 

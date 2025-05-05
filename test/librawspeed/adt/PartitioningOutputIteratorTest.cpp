@@ -87,5 +87,4 @@ using PartitionedPairTypes =
 INSTANTIATE_TYPED_TEST_SUITE_P(PartitionedTo, PartitioningOutputIteratorTest,
                                PartitionedPairTypes);
 } // namespace
-
 } // namespace rawspeed::rawpeed_test

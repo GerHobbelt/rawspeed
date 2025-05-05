@@ -36,6 +36,7 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <vector>
 
 using std::vector;
 
@@ -77,7 +78,7 @@ CFAColor ColorFilterArray::getColorAt(int x, int y) const {
   x = (x % size.x + size.x) % size.x;
   y = (y % size.y + size.y) % size.y;
 
-  return cfa[x + static_cast<size_t>(y) * size.x];
+  return cfa[x + (static_cast<size_t>(y) * size.x)];
 }
 
 void ColorFilterArray::setCFA(iPoint2D in_size, ...) {
@@ -104,7 +105,7 @@ void ColorFilterArray::shiftRight(int n) {
   vector<CFAColor> tmp(implicit_cast<size_t>(size.area()));
   for (int y = 0; y < size.y; ++y) {
     for (int x = 0; x < size.x; ++x) {
-      tmp[x + static_cast<size_t>(y) * size.x] = getColorAt(x + n, y);
+      tmp[x + (static_cast<size_t>(y) * size.x)] = getColorAt(x + n, y);
     }
   }
   cfa = tmp;
@@ -122,7 +123,7 @@ void ColorFilterArray::shiftDown(int n) {
   vector<CFAColor> tmp(implicit_cast<size_t>(size.area()));
   for (int y = 0; y < size.y; ++y) {
     for (int x = 0; x < size.x; ++x) {
-      tmp[x + static_cast<size_t>(y) * size.x] = getColorAt(x, y + n);
+      tmp[x + (static_cast<size_t>(y) * size.x)] = getColorAt(x, y + n);
     }
   }
   cfa = tmp;
@@ -210,7 +211,7 @@ void ColorFilterArray::setColorAt(iPoint2D pos, CFAColor c) {
     ThrowRDE("position out of CFA pattern");
   if (pos.y >= size.y || pos.y < 0)
     ThrowRDE("position out of CFA pattern");
-  cfa[pos.x + static_cast<size_t>(pos.y) * size.x] = c;
+  cfa[pos.x + (static_cast<size_t>(pos.y) * size.x)] = c;
 }
 
 namespace {

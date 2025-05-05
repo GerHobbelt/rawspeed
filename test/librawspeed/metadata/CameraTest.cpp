@@ -29,6 +29,8 @@ using std::to_string;
 
 namespace rawspeed_test {
 
+namespace {
+
 TEST(CameraTest, HintsEmpty) {
   Hints hints;
   ASSERT_FALSE(hints.contains("something"));
@@ -154,5 +156,7 @@ TEST_P(BoolHintTest, HintsBool) {
   ASSERT_TRUE(hints.contains(key));
   ASSERT_FALSE(hints.get(key, true));
 }
+
+} // namespace
 
 } // namespace rawspeed_test

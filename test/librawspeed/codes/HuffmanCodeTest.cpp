@@ -42,6 +42,7 @@
 
 namespace rawspeed {
 struct BaselineCodeTag;
+
 } // namespace rawspeed
 
 using rawspeed::BaselineCodeTag;
@@ -53,27 +54,30 @@ namespace rawspeed {
 
 class RawDecoderException;
 
-bool operator!=(const HuffmanCode<BaselineCodeTag>& lhs,
-                const HuffmanCode<BaselineCodeTag>& rhs) {
+static bool operator!=(const HuffmanCode<BaselineCodeTag>& lhs,
+                       const HuffmanCode<BaselineCodeTag>& rhs) {
   return !(lhs == rhs);
 }
 
-::std::ostream& operator<<(::std::ostream& os,
-                           const HuffmanCode<BaselineCodeTag>::CodeSymbol s) {
+static ::std::ostream&
+operator<<(::std::ostream& os,
+           const HuffmanCode<BaselineCodeTag>::CodeSymbol s) {
   auto str = std::bitset<32>(s.code).to_string();
 
   str = str.substr(str.size() - s.code_len);
   return os << "0b" << str;
 }
 
-bool operator!=(const HuffmanCode<BaselineCodeTag>::CodeSymbol& lhs,
-                const HuffmanCode<BaselineCodeTag>::CodeSymbol& rhs) {
+static bool operator!=(const HuffmanCode<BaselineCodeTag>::CodeSymbol& lhs,
+                       const HuffmanCode<BaselineCodeTag>::CodeSymbol& rhs) {
   return !(lhs == rhs);
 }
 
 } // namespace rawspeed
 
 namespace rawspeed_test {
+
+namespace {
 
 TEST(HuffmanCodeCodeSymbolTest, Equality) {
 #define s HuffmanCode<BaselineCodeTag>::CodeSymbol
@@ -645,5 +649,7 @@ TEST_P(generateCodeSymbolsTest, generateCodeSymbolsTest) {
 
   ASSERT_EQ(hc.generateCodeSymbols(), expectedSymbols);
 }
+
+} // namespace
 
 } // namespace rawspeed_test

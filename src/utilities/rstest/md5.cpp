@@ -49,7 +49,7 @@ MD5Hasher::compress(state_type state,
 
   auto LOADSCHEDULE = [block, &schedule](int i) {
     for (int k = 3; k >= 0; k--)
-      schedule[i] |= uint32_t(block(4 * i + k)) << (8 * k);
+      schedule[i] |= uint32_t(block((4 * i) + k)) << (8 * k);
   };
 
   for (int i = 0; i < 16; i++)
@@ -175,7 +175,7 @@ MD5Hasher::state_type md5_hash(const uint8_t* message, size_t len) noexcept {
 }
 
 std::string hash_to_string(const MD5Hasher::state_type& hash) noexcept {
-  std::array<char, 2 * sizeof(hash) + 1> res;
+  std::array<char, (2 * sizeof(hash)) + 1> res;
   const Array1DRef<const std::byte> h =
       Array1DRef(hash.data(), implicit_cast<int>(hash.size()));
   for (int i = 0; i < static_cast<int>(sizeof(hash)); ++i)

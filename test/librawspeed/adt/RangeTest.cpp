@@ -27,6 +27,8 @@ using rawspeed::Range;
 
 namespace rawspeed_test {
 
+namespace {
+
 // check the basic - begin/end works
 
 TEST(RangeTest, BasicSignedRangeForTest) {
@@ -123,5 +125,7 @@ TEST_P(TwoRangesTest, OverlapDataTest) {
     ASSERT_PRED_FORMAT2(RangesDontOverlap, r0, r1);
   }
 }
+
+} // namespace
 
 } // namespace rawspeed_test
