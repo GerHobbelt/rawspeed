@@ -48,7 +48,6 @@ jobs:
         run: |
           set -xe
           brew update --quiet
-          brew tap Homebrew/bundle
           cd "${SRC_DIR}/.ci/"
           brew bundle cleanup --quiet --force
           brew autoremove --quiet

@@ -76,7 +76,7 @@ jobs:
           FLAVOR: ${{ inputs.flavor }}
         run: |
           set -xe
-          eatmydata apt install rsync zstd
+          eatmydata apt install ca-certificates wget zstd
       - name: Fetch raw.pixls.us masterset digest
         timeout-minutes: 1
         env:
@@ -85,7 +85,7 @@ jobs:
         run: |
           set -xe
           mkdir -p ${RPUU_DST}
-          rsync -vvrLcW --preallocate --delete --compress --compress-level=1 --stats --progress rsync://raw.pixls.us/data-unique/filelist.sha1 ${RPUU_DST}/
+          wget https://raw.pixls.us/data-unique/filelist.sha1 -O ${RPUU_DST}/filelist.sha1
           echo "rpuu-cache-key=raw.pixls.us-masterset-$(sha512sum ${RPUU_DST}/filelist.sha1 | awk '{print $1}')" >> $GITHUB_OUTPUT
       - name: Cache raw.pixls.us masterset
         timeout-minutes: 1
@@ -95,14 +95,15 @@ jobs:
           path: ${{ env.RPUU_DST }}
           key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}
           lookup-only: true
-      - name: Fetch/update raw.pixls.us masterset
+      - name: Fetch raw.pixls.us masterset
         timeout-minutes: 3
         if: steps.cache.outputs.cache-hit != 'true'
         env:
           RPUU_DST: ${{ env.RPUU_DST }}
         run: |
           set -xe
-          rsync -vvrLcW --preallocate --delete --compress --compress-level=1 --stats --progress rsync://raw.pixls.us/data-unique/ ${RPUU_DST}/
+          wget https://raw.pixls.us/data-unique/timestamp.txt -O ${RPUU_DST}/timestamp.txt
+          cut -c 43- ${RPUU_DST}/filelist.sha1 | awk '{ print "\"https://raw.pixls.us/data-unique/" $0 "\"" }' | xargs wget --no-show-progress --recursive --no-host-directories --cut-dirs=1 --directory-prefix=${RPUU_DST}
           cd ${RPUU_DST} && sha1sum -c --strict filelist.sha1
     outputs:
       rpuu-cache-key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}

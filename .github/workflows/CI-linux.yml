@@ -124,6 +124,7 @@ jobs:
                                     cmake \
                                     git \
                                     googletest \
+                                    binutils-gold \
                                     libjpeg-dev \
                                     libpugixml-dev \
                                     libxml2-utils \

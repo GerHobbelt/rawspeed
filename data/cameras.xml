@@ -1663,6 +1663,9 @@
 	<Camera make="Canon" model="Canon EOS R50" supported="no">
 		<ID make="Canon" model="EOS R50">Canon EOS R50</ID>
 	</Camera>
+	<Camera make="Canon" model="Canon EOS R50 V" supported="unknown-no-samples">
+		<ID make="Canon" model="EOS R50 V">Canon EOS R50 V</ID>
+	</Camera>
 	<Camera make="Canon" model="Canon EOS R100" supported="no">
 		<ID make="Canon" model="EOS R100">Canon EOS R100</ID>
 	</Camera>
@@ -2825,6 +2828,9 @@
 	<Camera make="Canon" model="Canon PowerShot SX70 HS" supported="no">
 		<ID make="Canon" model="PowerShot SX70 HS">Canon PowerShot SX70 HS</ID>
 	</Camera>
+	<Camera make="Canon" model="Canon PowerShot V1" supported="unknown-no-samples">
+		<ID make="Canon" model="PowerShot V1">Canon PowerShot V1</ID>
+	</Camera>
 	<Camera make="GoPro" model="FUSION" mode="dng">
 		<ID make="GoPro" model="FUSION">GoPro FUSION</ID>
 	</Camera>
@@ -3871,6 +3877,9 @@
 				<ColorMatrixRow plane="2">-1279 2215 7514</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="NIKON CORPORATION" model="NIKON Z5_2" supported="unknown-no-samples">
+		<ID make="Nikon" model="Z5_2">Nikon Z 5 2</ID>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON Z 6" mode="14bit-compressed">
 		<ID make="Nikon" model="Z 6">Nikon Z 6</ID>
@@ -7357,8 +7366,23 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="OM Digital Solutions" model="OM-3" supported="unknown-no-samples">
+	<Camera make="OM Digital Solutions" model="OM-3">
 		<ID make="OM System" model="OM-3">OM Digital Solutions OM-3</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="254" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">9090 -3591 -756</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3252 11396 2109</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-318 1059 5606</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-5">
 		<ID make="OM System" model="OM-5">OM Digital Solutions OM-5</ID>
@@ -12489,8 +12513,8 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="0" y="2" width="-8" height="-22"/>
-		<Sensor black="0" white="16383"/>
+		<Crop x="0" y="10" width="-52" height="-22"/>
+		<Sensor black="0" white="15600"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">8898 -2498 -994</ColorMatrixRow>
@@ -15482,6 +15506,9 @@
 				<ColorMatrixRow plane="2">-177 996 5715</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="FUJIFILM" model="GFX100RF" supported="unknown-no-samples">
+		<ID make="Fujifilm" model="GFX100RF">Fujifilm GFX100RF</ID>
 	</Camera>
 	<Camera make="FUJIFILM" model="X-Pro1">
 		<ID make="Fujifilm" model="X-Pro1">Fujifilm X-Pro1</ID>
