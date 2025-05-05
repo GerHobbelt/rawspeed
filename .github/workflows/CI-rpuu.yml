@@ -76,7 +76,7 @@ jobs:
           FLAVOR: ${{ inputs.flavor }}
         run: |
           set -xe
-          eatmydata apt install ca-certificates wget zstd
+          eatmydata apt install ca-certificates wget git git-lfs zstd
       - name: Fetch raw.pixls.us masterset digest
         timeout-minutes: 1
         env:
@@ -102,8 +102,11 @@ jobs:
           RPUU_DST: ${{ env.RPUU_DST }}
         run: |
           set -xe
-          wget https://raw.pixls.us/data-unique/timestamp.txt -O ${RPUU_DST}/timestamp.txt
-          cut -c 67- ${RPUU_DST}/filelist.sha256 | awk '{ print "\"https://raw.pixls.us/data-unique/" $0 "\"" }' | xargs wget --no-show-progress --recursive --no-host-directories --cut-dirs=1 --directory-prefix=${RPUU_DST}
-          cd ${RPUU_DST} && sha256sum -c --strict filelist.sha256
+          rm -rf ${RPUU_DST}
+          git clone https://raw.pixls.us/data-unique.git ${RPUU_DST}
+          cd ${RPUU_DST}
+          sha256sum -c --strict filelist.sha256
+          rm -rf *
+          # avoid doubling the cache size, undo with `git checkout`.
     outputs:
       rpuu-cache-key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}

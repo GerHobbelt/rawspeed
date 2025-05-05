@@ -146,6 +146,7 @@ jobs:
             eatmydata apt install clang-format-${{ inputs.compiler-version }} clang-tidy-${{ inputs.compiler-version }}
 
             eatmydata apt install curl gpg
+            mkdir /etc/apt/sources.list.d
             echo 'deb https://ftp.gwdg.de//pub/opensuse/repositories/graphics%3A/darktable%3A/master/Debian_Unstable/ /' | tee /etc/apt/sources.list.d/rawspeed.list
             curl -fsSL https://download.opensuse.org/repositories/graphics:darktable:master/Debian_Unstable/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/graphics_darktable_master.gpg > /dev/null
             apt update
@@ -179,6 +180,12 @@ jobs:
             ln -s /usr/bin/${{ inputs.compiler-CC  }} /usr/local/bin/x86_64-linux-gnu-gcc
             ln -s /usr/bin/${{ inputs.compiler-CXX }} /usr/local/bin/x86_64-linux-gnu-g++
           fi
+          if [ "$FLAVOR" = "WWW" ]; then
+            eatmydata apt install doxygen \
+                                  graphviz \
+                                  python3-sphinx \
+                                  python3-sphinx-rtd-theme;
+          fi
           ln -s /usr/bin/ld.gold /usr/bin/ld
       - name: Configure git
         timeout-minutes: 1
@@ -191,7 +198,7 @@ jobs:
         with:
           path: 'rawspeed'
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Cache raw.pixls.us masterset
+      - name: Get cache of raw.pixls.us masterset
         timeout-minutes: 1
         if: inputs.enable-sample-based-testing
         uses: actions/cache/restore@v4
@@ -199,6 +206,17 @@ jobs:
           path: ${{ env.RPUU_DST }}
           key: ${{ inputs.rpuu-cache-key }}
           fail-on-cache-miss: true
+      - name: Checkout raw.pixls.us masterset
+        if: inputs.enable-sample-based-testing
+        timeout-minutes: 1
+        env:
+          RPUU_DST: ${{ env.RPUU_DST }}
+        run: |
+          set -xe
+          eatmydata apt install git-lfs
+          cd ${RPUU_DST}
+          git checkout -f
+          git lfs dedup || /bin/true
       - name: Fetch/Checkout CodeChecker git repo (for clang static analysis)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' || inputs.flavor == 'ClangStaticAnalysis' || inputs.flavor == 'ClangCTUStaticAnalysis'
@@ -281,9 +299,14 @@ jobs:
           if [ "$FLAVOR" = "ClangTidy" ] || [ "$FLAVOR" = "ClangStaticAnalysis" ] || [ "$FLAVOR" = "ClangCTUStaticAnalysis" ] || [ "$FLAVOR" = "CodeQLAnalysis" ]; then
             export ECO="${ECO} -DRAWSPEED_ENABLE_WERROR=OFF"
           fi
+          if [ "$FLAVOR" = "WWW" ]; then
+            export ECO="${ECO} -DBUILD_DOCS=ON"
+          fi
           "${SRC_DIR}/.ci/ci-script.sh"
       - name: Build
+        id: build
         timeout-minutes: ${{ inputs.flavor != 'ClangTidy' && (inputs.flavor != 'CodeQLAnalysis' && 7 || 12) || 25 }}
+        if: inputs.flavor != 'WWW'
         env:
           SRC_DIR: ${{ github.workspace }}/rawspeed
           BUILD_DIR: ${{ github.workspace }}/rawspeed-build
@@ -293,8 +316,28 @@ jobs:
         run: |
           set -xe
           "${SRC_DIR}/.ci/ci-script.sh"
+      - name: Build docs
+        id: build-docs
+        timeout-minutes: 1
+        if: inputs.flavor == 'WWW'
+        env:
+          SRC_DIR: ${{ github.workspace }}/rawspeed
+          BUILD_DIR: ${{ github.workspace }}/rawspeed-build
+          INSTALL_PREFIX: ${{ github.workspace }}/rawspeed-install
+          FLAVOR: ${{ inputs.flavor }}
+          TARGET: WWW
+        run: |
+          set -xe
+          "${SRC_DIR}/.ci/ci-script.sh"
+      - name: Upload docs artifact
+        timeout-minutes: 1
+        if: inputs.flavor == 'WWW'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ github.workspace }}/rawspeed-build/docs/html
       - name: Test (unit tests)
         timeout-minutes: 1
+        if: inputs.flavor != 'WWW'
         env:
           SRC_DIR: ${{ github.workspace }}/rawspeed
           BUILD_DIR: ${{ github.workspace }}/rawspeed-build
@@ -321,6 +364,7 @@ jobs:
           mv "${BUILD_DIR}/gcov-reports-unittest" "${COVERAGE_REPORT_PREFIX}/unittests"
       - name: Test (benchmarks)
         timeout-minutes: 1
+        if: inputs.flavor != 'WWW'
         env:
           SRC_DIR: ${{ github.workspace }}/rawspeed
           BUILD_DIR: ${{ github.workspace }}/rawspeed-build
@@ -383,6 +427,7 @@ jobs:
           enableCrossOsArchive: true
       - name: Install
         timeout-minutes: 1
+        if: inputs.flavor != 'WWW'
         env:
           SRC_DIR: ${{ github.workspace }}/rawspeed
           BUILD_DIR: ${{ github.workspace }}/rawspeed-build
@@ -394,7 +439,7 @@ jobs:
           "${SRC_DIR}/.ci/ci-script.sh"
       - name: Perform clang-tidy static analysis
         timeout-minutes: 1
-        if: inputs.flavor == 'ClangTidy' && !cancelled()
+        if: inputs.flavor == 'ClangTidy' && !cancelled() && steps.build.conclusion != 'skipped'
         env:
           SRC_DIR: ${{ github.workspace }}/rawspeed
           BUILD_DIR: ${{ github.workspace }}/rawspeed-build
@@ -519,7 +564,7 @@ jobs:
           overwrite: true
       - name: Perform CodeQL static analysis
         timeout-minutes: 11
-        if: inputs.flavor == 'CodeQLAnalysis' && !cancelled()
+        if: inputs.flavor == 'CodeQLAnalysis' && !cancelled() && steps.build.conclusion != 'skipped'
         uses: github/codeql-action/analyze@v3
       - name: Perform SonarCloud static analysis
         timeout-minutes: 6

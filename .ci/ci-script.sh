@@ -20,7 +20,7 @@ case "$FLAVOR" in
   "Release")
     CMAKE_BUILD_TYPE="Release"
     ;;
-  "ReleaseWithAsserts" | "ClangTidy" | "ClangStaticAnalysis" | "ClangCTUStaticAnalysis" | "CodeQLAnalysis" | "SonarCloudStaticAnalysis")
+  "ReleaseWithAsserts" | "ClangTidy" | "ClangStaticAnalysis" | "ClangCTUStaticAnalysis" | "CodeQLAnalysis" | "SonarCloudStaticAnalysis" | "WWW")
     CMAKE_BUILD_TYPE="ReleaseWithAsserts"
     ;;
   "Coverage")
@@ -32,9 +32,6 @@ case "$FLAVOR" in
 esac
 
 case "$TARGET" in
-  "WWW")
-    ECO="${ECO} -DBUILD_DOCS=ON"
-    ;;
   *)
     ;;
 esac
