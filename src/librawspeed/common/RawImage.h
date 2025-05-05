@@ -291,8 +291,13 @@ RawImageData::getU16DataAsUncroppedArray2DRef() noexcept {
   assert(dataType == RawImageType::UINT16 &&
          "Attempting to access floating-point buffer as uint16_t.");
   assert(!data.empty() && "Data not yet allocated.");
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpragmas"
+#pragma GCC diagnostic ignored "-Wunknown-warning-option"
+#pragma GCC diagnostic ignored "-Wunsafe-buffer-usage"
   return {reinterpret_cast<uint16_t*>(data.data()), cpp * uncropped_dim.x,
           uncropped_dim.y, static_cast<int>(pitch / sizeof(uint16_t))};
+#pragma GCC diagnostic pop
 }
 
 inline CroppedArray2DRef<uint16_t>
@@ -306,8 +311,13 @@ RawImageData::getF32DataAsUncroppedArray2DRef() noexcept {
   assert(dataType == RawImageType::F32 &&
          "Attempting to access integer buffer as float.");
   assert(!data.empty() && "Data not yet allocated.");
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpragmas"
+#pragma GCC diagnostic ignored "-Wunknown-warning-option"
+#pragma GCC diagnostic ignored "-Wunsafe-buffer-usage"
   return {reinterpret_cast<float*>(data.data()), cpp * uncropped_dim.x,
           uncropped_dim.y, static_cast<int>(pitch / sizeof(float))};
+#pragma GCC diagnostic pop
 }
 
 inline CroppedArray2DRef<float>

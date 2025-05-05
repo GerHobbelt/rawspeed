@@ -19,6 +19,7 @@ set (CLANG_DISABLED_WARNING_FLAGS
   "switch-enum"
   "unused-parameter"
   "sign-conversion" # FIXME: should enable this.
+  "unsafe-buffer-usage-in-libc-call" # FIXME: should probably be enabled
 )
 
 # Yes, these have to be *re-enabled* after CLANG_DISABLED_WARNING_FLAGS.

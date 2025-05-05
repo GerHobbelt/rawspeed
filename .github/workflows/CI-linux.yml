@@ -146,7 +146,6 @@ jobs:
             eatmydata apt install clang-format-${{ inputs.compiler-version }} clang-tidy-${{ inputs.compiler-version }}
 
             eatmydata apt install curl gpg
-            mkdir /etc/apt/sources.list.d
             echo 'deb https://ftp.gwdg.de//pub/opensuse/repositories/graphics%3A/darktable%3A/master/Debian_Unstable/ /' | tee /etc/apt/sources.list.d/rawspeed.list
             curl -fsSL https://download.opensuse.org/repositories/graphics:darktable:master/Debian_Unstable/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/graphics_darktable_master.gpg > /dev/null
             apt update

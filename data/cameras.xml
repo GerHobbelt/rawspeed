@@ -2861,7 +2861,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D100" mode="12bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D100" mode="12bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D100">Nikon D100</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -2978,7 +2978,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D200" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D200" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D200">Nikon D200</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -3050,7 +3050,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D2Hs" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D2Hs" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D2Hs">Nikon D2Hs</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -3086,7 +3086,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D2X" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D2X" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D2X">Nikon D2X</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -3338,7 +3338,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D3X" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D3X" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D3X">Nikon D3X</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -3356,7 +3356,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D3X" mode="12bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D3X" mode="12bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D3X">Nikon D3X</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -3572,24 +3572,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D3300" mode="12bit-uncompressed">
-		<ID make="Nikon" model="D3300">Nikon D3300</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="8" y="8" width="-8" height="-8"/>
-		<Sensor black="150" white="3880"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">6988 -1384 -714</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5631 13410 2447</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1485 2204 7318</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D3400" mode="12bit-compressed">
 		<ID make="Nikon" model="D3400">Nikon D3400</ID>
 		<CFA width="2" height="2">
@@ -3734,7 +3716,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D5" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D5">Nikon D5</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -3752,7 +3734,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5" mode="12bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D5" mode="12bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D5">Nikon D5</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4025,7 +4007,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON Z6_3" mode="14bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON Z6_3" mode="14bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="Z6_3">Nikon Z 6 3</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4313,7 +4295,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON Z50_2" mode="14bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON Z50_2" mode="14bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="Z50_2">Nikon Z 50 2</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4523,43 +4505,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D40" mode="12bit-uncompressed">
-		<ID make="Nikon" model="D40">Nikon D40</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">BLUE</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">RED</Color>
-		</CFA>
-		<Crop x="0" y="0" width="3038" height="2014"/>
-		<Sensor black="0" white="3880"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">6992 -1668 -806</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-8138 15748 2543</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-874 850 7897</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D40X" mode="12bit-compressed">
-		<ID make="Nikon" model="D40X">Nikon D40X</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">BLUE</Color>
-			<Color x="0" y="1">RED</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
-		<Crop x="4" y="0" width="3896" height="2613"/>
-		<Sensor black="0" white="3880"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8819 -2543 -911</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-9025 16928 2151</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1329 1213 8449</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D40X" mode="12bit-uncompressed">
 		<ID make="Nikon" model="D40X">Nikon D40X</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -4685,24 +4631,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5000" mode="12bit-uncompressed">
-		<ID make="Nikon" model="D5000">Nikon D5000</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">BLUE</Color>
-			<Color x="0" y="1">RED</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
-		<Crop x="0" y="0" width="4310" height="2868"/>
-		<Sensor black="0" white="3767"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">7309 -1403 -519</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-8474 16008 2622</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-2433 2826 8064</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D5200" mode="14bit-compressed">
 		<ID make="Nikon" model="D5200">Nikon D5200</ID>
 		<CFA width="2" height="2">
@@ -4721,25 +4649,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5300" mode="12bit-compressed">
-		<ID make="Nikon" model="D5300">Nikon D5300</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="150" white="3972"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">6988 -1384 -714</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5631 13410 2447</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1485 2204 7318</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5300" mode="12bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D5300" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D5300">Nikon D5300</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4775,43 +4685,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5300" mode="14bit-uncompressed">
-		<ID make="Nikon" model="D5300">Nikon D5300</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="600" white="15892"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">6988 -1384 -714</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5631 13410 2447</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1485 2204 7318</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D5500" mode="12bit-compressed">
-		<ID make="Nikon" model="D5500">Nikon D5500</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="150" white="3972"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8821 -2938 -785</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4178 12142 2287</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-824 1651 6860</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5500" mode="12bit-uncompressed">
 		<ID make="Nikon" model="D5500">Nikon D5500</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4847,43 +4721,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5500" mode="14bit-uncompressed">
-		<ID make="Nikon" model="D5500">Nikon D5500</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="600" white="15892"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8821 -2938 -785</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4178 12142 2287</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-824 1651 6860</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D5600" mode="12bit-compressed">
-		<ID make="Nikon" model="D5600">Nikon D5600</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="150" white="3972"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8821 -2938 -785</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4178 12142 2287</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-824 1651 6860</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5600" mode="12bit-uncompressed">
 		<ID make="Nikon" model="D5600">Nikon D5600</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -4919,43 +4757,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D5600" mode="14bit-uncompressed">
-		<ID make="Nikon" model="D5600">Nikon D5600</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="600" white="15892"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8821 -2938 -785</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4178 12142 2287</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-824 1651 6860</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D60" mode="12bit-compressed">
-		<ID make="Nikon" model="D60">Nikon D60</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">BLUE</Color>
-			<Color x="0" y="1">RED</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
-		<Crop x="0" y="0" width="3900" height="2613"/>
-		<Sensor black="0" white="3880"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8736 -2458 -935</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-9075 16894 2251</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1354 1242 8263</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D60" mode="12bit-uncompressed">
 		<ID make="Nikon" model="D60">Nikon D60</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -5297,43 +5099,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D7200" mode="14bit-uncompressed" supported="no">
-		<ID make="Nikon" model="D7200">Nikon D7200</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="600" white="15892"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8322 -3112 -1047</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-6367 14342 2179</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-988 1638 6394</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D7200" mode="12bit-compressed">
-		<ID make="Nikon" model="D7200">Nikon D7200</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="150" white="3972"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8322 -3112 -1047</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-6367 14342 2179</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-988 1638 6394</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D7200" mode="12bit-uncompressed" supported="no">
 		<ID make="Nikon" model="D7200">Nikon D7200</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -5423,24 +5189,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D80" mode="12bit-uncompressed">
-		<ID make="Nikon" model="D80">Nikon D80</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">BLUE</Color>
-			<Color x="0" y="1">RED</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
-		<Crop x="0" y="0" width="3900" height="2611"/>
-		<Sensor black="0" white="3880"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8629 -2410 -883</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-9055 16940 2171</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1490 1363 8520</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D800" mode="7424x4924-14bit-uncompressed">
 		<ID make="Nikon" model="D800">Nikon D800</ID>
 		<CFA width="2" height="2">
@@ -5477,7 +5225,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D800" mode="14bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D800" mode="14bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D800">Nikon D800</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -5567,7 +5315,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="14bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="14bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D800E">Nikon D800E</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -5585,7 +5333,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="12bit-compressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="12bit-compressed" supported="no-samples">
 		<ID make="Nikon" model="D800E">Nikon D800E</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -5603,7 +5351,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="12bit-uncompressed">
+	<Camera make="NIKON CORPORATION" model="NIKON D800E" mode="12bit-uncompressed" supported="no-samples">
 		<ID make="Nikon" model="D800E">Nikon D800E</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -5882,24 +5630,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D90" mode="12bit-uncompressed">
-		<ID make="Nikon" model="D90">Nikon D90</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">BLUE</Color>
-			<Color x="0" y="1">RED</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
-		<Crop x="0" y="0" width="4310" height="2868"/>
-		<Sensor black="0" white="3767"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">7309 -1403 -519</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-8474 16008 2622</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-2434 2826 8064</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON 1 J1" mode="12bit-compressed" decoder_version="4">
 		<ID make="Nikon" model="1 J1">Nikon 1 J1</ID>
 		<CFA width="2" height="2">
@@ -5990,24 +5720,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON 1 J5" mode="12bit-uncompressed">
-		<ID make="Nikon" model="1 J5">Nikon 1 J5</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="200" white="3800"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">7520 -2518 -645</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-3844 12102 1945</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-913 2249 6835</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON 1 S1" mode="12bit-compressed" decoder_version="4">
 		<ID make="Nikon" model="1 S1">Nikon 1 S1</ID>
 		<CFA width="2" height="2">
@@ -6081,24 +5793,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON 1 V3" mode="12bit-compressed" decoder_version="4">
-		<ID make="Nikon" model="1 V3">Nikon 1 V3</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="200" white="4000"/>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">5958 -1559 -571</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4021 11453 2939</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-634 1548 5087</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON 1 V3" mode="12bit-uncompressed" decoder_version="4">
 		<ID make="Nikon" model="1 V3">Nikon 1 V3</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -6243,7 +5937,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON" model="COOLPIX P340" mode="12bit-compressed" decoder_version="5">
+	<Camera make="NIKON" model="COOLPIX P340" mode="12bit-compressed" decoder_version="5" supported="no-samples">
 		<ID make="Nikon" model="Coolpix P340">Nikon Coolpix P340</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -6321,7 +6015,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON" model="COOLPIX B700">
+	<Camera make="NIKON" model="COOLPIX B700" supported="no-samples">
 		<ID make="Nikon" model="COOLPIX B700">Nikon Coolpix B700</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -6507,6 +6201,9 @@
 		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="200" white="4095"/>
+		<Aliases>
+			<Alias>COOLPIX P1100</Alias>
+		</Aliases>
 		<Hints>
 			<Hint name="coolpixmangled" value=""/>
 		</Hints>
@@ -7378,7 +7075,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="OM Digital Solutions" model="OM-3">
+	<Camera make="OM Digital Solutions" model="OM-3" supported="no-samples">
 		<ID make="OM System" model="OM-3">OM Digital Solutions OM-3</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -11911,7 +11608,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX" model="PENTAX K100D">
+	<Camera make="PENTAX" model="PENTAX K100D" supported="no-samples">
 		<ID make="Pentax" model="K100D">Pentax K100D</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -11929,7 +11626,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX" model="PENTAX K110D">
+	<Camera make="PENTAX" model="PENTAX K110D" supported="no-samples">
 		<ID make="Pentax" model="K110D">Pentax K110D</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -12040,7 +11737,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX Corporation" model="PENTAX K20D">
+	<Camera make="PENTAX Corporation" model="PENTAX K20D" supported="no-samples">
 		<ID make="Pentax" model="K20D">Pentax K20D</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
@@ -12076,7 +11773,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX Corporation" model="PENTAX K200D">
+	<Camera make="PENTAX Corporation" model="PENTAX K200D" supported="no-samples">
 		<ID make="Pentax" model="K200D">Pentax K200D</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -12373,7 +12070,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX" model="PENTAX K-r" decoder_version="3">
+	<Camera make="PENTAX" model="PENTAX K-r" decoder_version="3" supported="no-samples">
 		<ID make="Pentax" model="K-r">PENTAX K-r</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
@@ -13958,7 +13655,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="SONY" model="ILCE-1M2">
+	<Camera make="SONY" model="ILCE-1M2" supported="no-samples">
 		<ID make="Sony" model="ILCE-1M2">Sony ILCE-1M2</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -14669,7 +14366,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Sinar Photography AG" model="Sinar Hy6/ Sinarback eXact" mode="dng" supported="no-samples">
+	<Camera make="Sinar Photography AG" model="Sinar Hy6/ Sinarback eXact" mode="dng">
 		<ID make="Sinar" model="Hy6">Sinar Hy6</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -16031,7 +15728,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="FUJIFILM" model="X-M5">
+	<Camera make="FUJIFILM" model="X-M5" supported="no-samples">
 		<ID make="Fujifilm" model="X-M5">Fujifilm X-M5</ID>
 		<CFA2 width="6" height="6">
 			<ColorRow y="0">GGRGGB</ColorRow>
@@ -16050,7 +15747,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="FUJIFILM" model="X-M5" mode="compressed">
+	<Camera make="FUJIFILM" model="X-M5" mode="compressed" supported="no-samples">
 		<ID make="Fujifilm" model="X-M5">Fujifilm X-M5</ID>
 		<CFA2 width="6" height="6">
 			<ColorRow y="0">GGRGGB</ColorRow>
@@ -16715,7 +16412,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="FUJIFILM" model="X-T50">
+	<Camera make="FUJIFILM" model="X-T50" supported="no-samples">
 		<ID make="Fujifilm" model="X-T50">Fujifilm X-T50</ID>
 		<CFA2 width="6" height="6">
 			<ColorRow y="0">GGRGGB</ColorRow>
@@ -16734,7 +16431,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="FUJIFILM" model="X-T50" mode="compressed">
+	<Camera make="FUJIFILM" model="X-T50" mode="compressed" supported="no-samples">
 		<ID make="Fujifilm" model="X-T50">Fujifilm X-T50</ID>
 		<CFA2 width="6" height="6">
 			<ColorRow y="0">GGRGGB</ColorRow>
@@ -16918,7 +16615,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Minolta Co., Ltd." model="DiMAGE 5">
+	<Camera make="Minolta Co., Ltd." model="DiMAGE 5" supported="no-samples">
 		<ID make="Minolta" model="DiMAGE 5">Minolta DiMAGE 5</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
@@ -18222,7 +17919,7 @@
 	<Camera make="OnePlus" model="One A0001" mode="dng">
 		<ID make="OnePlus" model="One">OnePlus One</ID>
 	</Camera>
-	<Camera make="SAMSUNG DIGITAL IMA" model="SAMSUNG GX20" mode="dng" supported="no-samples">
+	<Camera make="SAMSUNG DIGITAL IMA" model="SAMSUNG GX20" mode="dng">
 		<ID make="Samsung" model="GX20">Samsung GX20</ID>
 	</Camera>
 	<Camera make="samsung" model="SM-G920F" mode="dng">
@@ -18266,10 +17963,10 @@
 	<Camera make="Sigma" model="Sigma BF" mode="dng">
 		<ID make="Sigma" model="BF">Sigma BF</ID>
 	</Camera>
-	<Camera make="SIGMA" model="SIGMA DP1" mode="dng" supported="no-samples">
+	<Camera make="SIGMA" model="SIGMA DP1" mode="dng">
 		<ID make="Sigma" model="DP1">Sigma DP1</ID>
 	</Camera>
-	<Camera make="SIGMA" model="SIGMA DP1 Merrill" mode="dng" supported="no-samples">
+	<Camera make="SIGMA" model="SIGMA DP1 Merrill" mode="dng">
 		<ID make="Sigma" model="DP1 Merrill">Sigma DP1 Merrill</ID>
 	</Camera>
 	<Camera make="SIGMA" model="SIGMA fp" mode="dng">

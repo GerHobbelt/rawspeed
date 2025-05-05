@@ -39,6 +39,7 @@ set (GCC_DISABLED_WARNING_FLAGS
   "maybe-uninitialized"
   "stringop-overflow" # bogus warnings at least as of GCC13
   "array-bounds" # bogus warnings at least as of GCC13
+  "free-nonheap-object" # bogus warnings on armv6l/armv7l at least as of GCC14
 )
 
 set (GCC_NOERROR_WARNING_FLAGS
