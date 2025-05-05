@@ -15204,12 +15204,12 @@
 	<Camera make="FUJIFILM" model="FinePix X100">
 		<ID make="Fujifilm" model="FinePix X100">Fujifilm FinePix X100</ID>
 		<CFA width="2" height="2">
-			<Color x="0" y="0">BLUE</Color>
+			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
 			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">RED</Color>
+			<Color x="1" y="1">BLUE</Color>
 		</CFA>
-		<Crop x="73" y="1" width="-73" height="-1"/>
+		<Crop x="68" y="0" width="-70" height="0"/>
 		<Sensor black="254" white="4000"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
