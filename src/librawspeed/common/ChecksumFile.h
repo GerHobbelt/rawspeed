@@ -36,6 +36,6 @@ ParseChecksumFileContent(const std::string& ChecksumFileContent,
 
 std::vector<ChecksumFileEntry>
 ReadChecksumFile(const std::string& RootDir,
-                 const std::string& ChecksumFileBasename = "filelist.sha1");
+                 const std::string& ChecksumFileBasename = "filelist.sha256");
 
 } // namespace rawspeed

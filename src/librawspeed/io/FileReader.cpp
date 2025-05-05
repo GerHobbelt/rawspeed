@@ -60,8 +60,12 @@ FileReader::readFile() const {
   if (file == nullptr)
     ThrowFIE("Could not open file \"%s\".", fileName);
 
-  fseek(file.get(), 0, SEEK_END);
+  if (fseek(file.get(), 0, SEEK_END) == -1)
+    ThrowFIE("Could not rewind to the end of the file");
+
   const auto size = ftell(file.get());
+  if (size == -1)
+    ThrowFIE("Could not obtain the file size");
 
   if (size <= 0)
     ThrowFIE("File is 0 bytes.");
@@ -72,20 +76,21 @@ FileReader::readFile() const {
 
   fileSize = size;
 
-  fseek(file.get(), 0, SEEK_SET);
+  if (fseek(file.get(), 0, SEEK_SET) == -1)
+    ThrowFIE("Could not rewind to the beginning of the file");
 
   auto dest = std::make_unique<std::vector<
       uint8_t,
       DefaultInitAllocatorAdaptor<uint8_t, AlignedAllocator<uint8_t, 16>>>>(
       fileSize);
 
-  if (auto bytes_read = fread(dest->data(), 1, fileSize, file.get());
-      fileSize != bytes_read) {
-    ThrowFIE("Could not read file, %s.",
-             feof(file.get()) ? "reached end-of-file"
-                              : (ferror(file.get()) ? "file reading error"
-                                                    : "unknown problem"));
-  }
+  auto bytes_read = fread(dest->data(), 1, fileSize, file.get());
+  if (ferror(file.get()))
+    ThrowFIE("Could not read file, file reading error");
+  if (feof(file.get()))
+    ThrowFIE("Could not read file, reached end-of-file");
+  if (fileSize != bytes_read)
+    ThrowFIE("Could not read file, unknown problem");
 
 #else // __unix__
 

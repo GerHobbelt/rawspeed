@@ -53,6 +53,7 @@ endif()
 option(RAWSPEED_ENABLE_DEBUG_INFO "Whether to generate debug info or not." ON)
 
 option(RAWSPEED_ENABLE_WERROR "Stop and fail the build, if a compiler warning is triggered." ON)
+option(RAWSPEED_ENABLE_CLANG_TIDY_WERROR "Stop and fail the build, if a clang-tidy warning is triggered." ON)
 
 option(WITH_OPENMP "Enable OpenMP support." ON)
 if(WITH_OPENMP)
@@ -131,7 +132,7 @@ set(GOOGLEBENCHMARK_PATH "/usr/src/googlebenchmark" CACHE PATH
 
 set(LIB_FUZZING_ENGINE "OFF" CACHE STRING "Either OFF, or overrides the fuzzing engine library (e.g. libFuzzer) that needs to be linked with all fuzz targets.")
 
-set(RAWSPEED_REFERENCE_SAMPLE_ARCHIVE "~/raw-camera-samples/raw.pixls.us-unique" CACHE PATH "The location of the reference sample set to use. Should contain filelist.sha1 and timestamp.txt")
+set(RAWSPEED_REFERENCE_SAMPLE_ARCHIVE "~/raw-camera-samples/raw.pixls.us-unique" CACHE PATH "The location of the reference sample set to use. Should contain filelist.sha256 and timestamp.txt")
 
 set(RAWSPEED_PROFDATA_FILE "${PROJECT_BINARY_DIR}/rawspeed.profdata"
     CACHE FILEPATH "The location of the .profdata file")

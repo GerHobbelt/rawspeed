@@ -25,6 +25,7 @@
 #include "adt/Casts.h"
 #include "adt/DefaultInitAllocatorAdaptor.h"
 #include "adt/NotARational.h"
+#include "io/FileIOException.h"
 #include "md5.h"
 #include <array>
 #include <bit>
@@ -280,6 +281,8 @@ void writePPM(const RawImage& raw, const std::string& fn) {
 
   // Write PPM header
   fprintf(f.get(), "%s\n%d %d\n65535\n", format.c_str(), width, height);
+  if (ferror(f.get()))
+    ThrowFIE("Could not write file");
 
   width *= raw->getCpp();
 
@@ -291,6 +294,8 @@ void writePPM(const RawImage& raw, const std::string& fn) {
       img(y, x) = getU16BE(&img(y, x));
 
     fwrite(&img(y, 0), sizeof(decltype(img)::value_type), width, f.get());
+    if (ferror(f.get()))
+      ThrowFIE("Could not write file");
   }
 }
 
@@ -304,6 +309,8 @@ void writePFM(const RawImage& raw, const std::string& fn) {
 
   // Write PFM header. if scale < 0, it is little-endian, if >= 0 - big-endian
   int len = fprintf(f.get(), "%s\n%d %d\n-1.0", format.c_str(), width, height);
+  if (ferror(f.get()))
+    ThrowFIE("Could not write file");
 
   // make sure that data starts at aligned offset. for sse
   static const auto dataAlignment = 16;
@@ -323,6 +330,8 @@ void writePFM(const RawImage& raw, const std::string& fn) {
 
   // and actually write padding + new line
   len += fprintf(f.get(), "%0*i\n", padding, 0);
+  if (ferror(f.get()))
+    ThrowFIE("Could not write file");
   assert(paddedLen == len);
 
   // did we write a multiple of an alignment value?
@@ -343,6 +352,8 @@ void writePFM(const RawImage& raw, const std::string& fn) {
       img(row_in, x) = std::bit_cast<float>(getU32LE(&img(row_in, x)));
 
     fwrite(&img(row_in, 0), sizeof(decltype(img)::value_type), width, f.get());
+    if (ferror(f.get()))
+      ThrowFIE("Could not write file");
   }
 }
 

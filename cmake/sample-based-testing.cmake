@@ -1,26 +1,26 @@
 message(STATUS "Looking for sample set for sample-based testing")
 message(STATUS "Looking for sample set in ${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}")
 if(NOT (EXISTS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}"
-    AND EXISTS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha1"
+    AND EXISTS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha256"
     AND EXISTS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/timestamp.txt"))
   message(SEND_ERROR "Did not find sample set for sample-based testing! Either pass correct path in RAWSPEED_REFERENCE_SAMPLE_ARCHIVE, or disable RAWSPEED_ENABLE_SAMPLE_BASED_TESTING.")
 endif()
 
 message(STATUS "Found sample set in ${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}")
 
-file(STRINGS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha1" _REFERENCE_SAMPLES ENCODING UTF-8)
+file(STRINGS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha256" _REFERENCE_SAMPLES ENCODING UTF-8)
 
 set(REFERENCE_SAMPLES)
 set(REFERENCE_SAMPLE_HASHES)
 
 foreach(STR ${_REFERENCE_SAMPLES})
   # There are two schemes:
-  #   <40-char SHA1><space><space><filename>      <- read in text mode
-  #   <40-char SHA1><space><asterisk><filename>   <- read in binary mode
+  #   <64-char SHA256><space><space><filename>      <- read in text mode
+  #   <64-char SHA256><space><asterisk><filename>   <- read in binary mode
   # We ignore read mode, so it becomes:
-  #   <40-char SHA1><char><char><filename>
-  string(SUBSTRING "${STR}" 0 40 SAMPLEHASH)
-  string(SUBSTRING "${STR}" 42 -1 SAMPLENAME)
+  #   <64-char SHA256><char><char><filename>
+  string(SUBSTRING "${STR}" 0 64 SAMPLEHASH)
+  string(SUBSTRING "${STR}" 66 -1 SAMPLENAME)
   set(SAMPLENAME "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/${SAMPLENAME}")
 
   if(NOT EXISTS "${SAMPLENAME}")
@@ -28,10 +28,10 @@ foreach(STR ${_REFERENCE_SAMPLES})
   endif()
 
   # Check the hash.
-  file(SHA1 "${SAMPLENAME}" ACTUALSAMPLEHASH)
+  file(SHA256 "${SAMPLENAME}" ACTUALSAMPLEHASH)
   string(COMPARE EQUAL "${ACTUALSAMPLEHASH}" "${SAMPLEHASH}" DOHASHESMATCH)
   if(NOT "${DOHASHESMATCH}")
-    message(SEND_ERROR "SHA1 hash for sample \"${SAMPLENAME}\" mismatch!")
+    message(SEND_ERROR "SHA256 hash for sample \"${SAMPLENAME}\" mismatch!")
     message(SEND_ERROR "${ACTUALSAMPLEHASH} instead of ${SAMPLEHASH}")
   endif()
 

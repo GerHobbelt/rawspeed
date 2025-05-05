@@ -1,16 +1,16 @@
-file(STRINGS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha1" _REFERENCE_SAMPLES ENCODING UTF-8)
+file(STRINGS "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/filelist.sha256" _REFERENCE_SAMPLES ENCODING UTF-8)
 
 set(REFERENCE_SAMPLES)
 set(REFERENCE_SAMPLE_HASHES)
 
 foreach(STR ${_REFERENCE_SAMPLES})
   # There are two schemes:
-  #   <40-char SHA1><space><space><filename>      <- read in text mode
-  #   <40-char SHA1><space><asterisk><filename>   <- read in binary mode
+  #   <64-char SHA256><space><space><filename>      <- read in text mode
+  #   <64-char SHA256><space><asterisk><filename>   <- read in binary mode
   # We ignore read mode, so it becomes:
-  #   <40-char SHA1><char><char><filename>
-  string(SUBSTRING "${STR}" 0 40 SAMPLEHASH)
-  string(SUBSTRING "${STR}" 42 -1 SAMPLENAME)
+  #   <64-char SHA256><char><char><filename>
+  string(SUBSTRING "${STR}" 0 64 SAMPLEHASH)
+  string(SUBSTRING "${STR}" 66 -1 SAMPLENAME)
   set(FULLSAMPLENAME "${RAWSPEED_REFERENCE_SAMPLE_ARCHIVE}/${SAMPLENAME}")
 
   # We have already verified that the entry is valid.

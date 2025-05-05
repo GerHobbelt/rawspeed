@@ -222,7 +222,7 @@ int main(int argc_, char** argv_) {
 
   const auto threadsMin = threading ? 1 : threadsMax;
 
-  // Were we told to use the repo (i.e. filelist.sha1 in that directory)?
+  // Were we told to use the repo (i.e. filelist.sha256 in that directory)?
   int useChecksumFile = hasFlag("-r");
   std::vector<Entry> Worklist;
   if (useChecksumFile && useChecksumFile + 1 < argv.size()) {

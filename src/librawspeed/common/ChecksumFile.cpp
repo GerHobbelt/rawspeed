@@ -30,8 +30,8 @@ namespace rawspeed {
 
 namespace {
 
-// The length of the sha1 digest (160-bit, 40 hexadecimal chars).
-constexpr auto Sha1CheckSumLength = 40;
+// The length of the sha256 digest (256-bit, 64 hexadecimal chars).
+constexpr auto Sha256CheckSumLength = 64;
 // The separator after the digest and before filename.
 // Should be either "  " or " b".
 constexpr auto CheckSumSeparatorWidth = 2;
@@ -41,9 +41,10 @@ ChecksumFileEntry ParseChecksumFileLine(const std::string& Line,
   ChecksumFileEntry Entry;
 
   // We are just assuming that the checksum file is correct and valid.
-  // It is up to user to validate it first (via actually running `sha1sum -c`).
+  // It is up to user to validate it first (via actually running `sha256sum
+  // -c`).
 
-  static constexpr auto Offset = Sha1CheckSumLength + CheckSumSeparatorWidth;
+  static constexpr auto Offset = Sha256CheckSumLength + CheckSumSeparatorWidth;
 
   if (Line.size() <= Offset)
     ThrowRSE("Malformed checksum line: \"%s\"", Line.c_str());

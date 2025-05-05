@@ -15,17 +15,17 @@ What is considered a sample set
 Here and onwards, a sample set is just a directory with samples, and two special
 files. There should be a ``timestamp.txt`` containing an
 `Unix time <Unix_time_>`_ (presumably, of when the set was last updated).
-Most importantly, it **must** also contain ``filelist.sha1`` file in the
+Most importantly, it **must** also contain ``filelist.sha256`` file in the
 top-level directory, which is used as a digest to the contents of said sample
-set. Said file **must** be a valid sha1sum_ output, with format:
+set. Said file **must** be a valid sha256sum_ output, with format:
 
 ::
 
-  <40-char SHA1><space><asterisk><filename>
+  <64-char SHA256><space><asterisk><filename>
 
 .. _Unix_time: https://en.wikipedia.org/wiki/Unix_time
 
-.. _sha1sum: https://manpages.debian.org/unstable/coreutils/sha1sum.1.en.html
+.. _sha256sum: https://manpages.debian.org/unstable/coreutils/sha256sum.1.en.html
 
 Canonical Sample Set
 --------------------
@@ -92,6 +92,6 @@ Probably the easiest way to fetch it is via rsync_, for example:
    $ rsync -vvrLtW --preallocate --delete --compress --compress-level=1 --progress \
            rsync://raw.pixls.us/data-unique/ ~/raw-camera-samples/raw.pixls.us-unique/
    $ # it might be a good idea to verify consistency afterwards:
-   $ sha1sum -c --strict ~/raw-camera-samples/raw.pixls.us-unique/filelist.sha1
+   $ sha256sum -c --strict ~/raw-camera-samples/raw.pixls.us-unique/filelist.sha256
 
 .. _rsync: https://manpages.debian.org/unstable/rsync/rsync.1.en.html

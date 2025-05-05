@@ -85,8 +85,8 @@ jobs:
         run: |
           set -xe
           mkdir -p ${RPUU_DST}
-          wget https://raw.pixls.us/data-unique/filelist.sha1 -O ${RPUU_DST}/filelist.sha1
-          echo "rpuu-cache-key=raw.pixls.us-masterset-$(sha512sum ${RPUU_DST}/filelist.sha1 | awk '{print $1}')" >> $GITHUB_OUTPUT
+          wget https://raw.pixls.us/data-unique/filelist.sha256 -O ${RPUU_DST}/filelist.sha256
+          echo "rpuu-cache-key=raw.pixls.us-masterset-$(sha512sum ${RPUU_DST}/filelist.sha256 | awk '{print $1}')" >> $GITHUB_OUTPUT
       - name: Cache raw.pixls.us masterset
         timeout-minutes: 1
         id: cache
@@ -103,7 +103,7 @@ jobs:
         run: |
           set -xe
           wget https://raw.pixls.us/data-unique/timestamp.txt -O ${RPUU_DST}/timestamp.txt
-          cut -c 43- ${RPUU_DST}/filelist.sha1 | awk '{ print "\"https://raw.pixls.us/data-unique/" $0 "\"" }' | xargs wget --no-show-progress --recursive --no-host-directories --cut-dirs=1 --directory-prefix=${RPUU_DST}
-          cd ${RPUU_DST} && sha1sum -c --strict filelist.sha1
+          cut -c 67- ${RPUU_DST}/filelist.sha256 | awk '{ print "\"https://raw.pixls.us/data-unique/" $0 "\"" }' | xargs wget --no-show-progress --recursive --no-host-directories --cut-dirs=1 --directory-prefix=${RPUU_DST}
+          cd ${RPUU_DST} && sha256sum -c --strict filelist.sha256
     outputs:
       rpuu-cache-key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}

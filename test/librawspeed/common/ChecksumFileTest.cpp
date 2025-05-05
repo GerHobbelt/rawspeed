@@ -37,13 +37,13 @@ TEST(ParseChecksumFileContentTest, ShortLine) {
   auto gen = [](int len) {
     return ParseChecksumFileContent(std::string(len, ' '), {});
   };
-  EXPECT_THROW(gen(41), rawspeed::RawspeedException);
-  EXPECT_THROW(gen(42), rawspeed::RawspeedException);
-  EXPECT_NO_THROW(gen(43));
+  EXPECT_THROW(gen(65), rawspeed::RawspeedException);
+  EXPECT_THROW(gen(66), rawspeed::RawspeedException);
+  EXPECT_NO_THROW(gen(67));
 }
 
 TEST(ParseChecksumFileContentTest, Lines) {
-  const auto OneLine = std::string(43, ' ');
+  const auto OneLine = std::string(67, ' ');
 
   auto Content = ParseChecksumFileContent(OneLine, {});
   ASSERT_FALSE(Content.empty());
@@ -60,7 +60,8 @@ TEST(ParseChecksumFileContentTest, Lines) {
 }
 
 TEST(ParseChecksumFileContentTest, TheTest) {
-  const std::string testLine = "0000000000000000000000000000000000000000  file";
+  const std::string testLine =
+      "0000000000000000000000000000000000000000000000000000000000000000  file";
 
   auto Content = ParseChecksumFileContent(testLine, "");
   ASSERT_FALSE(Content.empty());
