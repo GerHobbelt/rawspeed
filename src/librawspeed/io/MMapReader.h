@@ -1,7 +1,7 @@
 /*
     RawSpeed - RAW file decoder.
 
-    Copyright (C) 2017 Roman Lebedev
+    Copyright (C) 2025 Roman Lebedev
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,19 +20,26 @@
 
 #pragma once
 
-#include "common/RawImage.h"
-#include "decompressors/AbstractDecompressor.h"
+#if !defined(_WIN32)
+
+#include "io/Buffer.h"
+#include <cstddef>
 
 namespace rawspeed {
 
-class ByteStream;
-
-class OlympusDecompressor final : public AbstractDecompressor {
-  RawImage mRaw;
+class MMapReader final {
+  int fd;
+  void* addr;
+  size_t length;
 
 public:
-  explicit OlympusDecompressor(RawImage img);
-  void decompress(const ByteStream& input) const;
+  MMapReader(const std::string& fname);
+
+  Buffer getAsBuffer() const;
+
+  ~MMapReader();
 };
 
 } // namespace rawspeed
+
+#endif // !defined(_WIN32)

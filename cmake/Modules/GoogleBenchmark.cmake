@@ -52,6 +52,12 @@ add_subdirectory(${GOOGLEBENCHMARK_SOURCE_DIR}
                  ${GOOGLEBENCHMARK_BINARY_DIR}
                  EXCLUDE_FROM_ALL)
 
+get_target_property(BENCHMARK_VERSION benchmark VERSION)
+
+if(BENCHMARK_VERSION VERSION_LESS 1.9.3)
+  message(SEND_ERROR "Google benchmark version ${BENCHMARK_VERSION} is older than required")
+endif()
+
 set_target_properties(benchmark PROPERTIES INTERFACE_SYSTEM_INCLUDE_DIRECTORIES $<TARGET_PROPERTY:benchmark,INTERFACE_INCLUDE_DIRECTORIES>)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS_SAVE}")

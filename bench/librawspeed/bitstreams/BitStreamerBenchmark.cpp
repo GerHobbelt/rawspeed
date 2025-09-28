@@ -143,6 +143,8 @@ template <typename PUMP> void registerPump(const char* pumpName) {
 #define REGISTER_PUMP(PUMP) registerPump<PUMP>(#PUMP)
 
 int main(int argc, char** argv) {
+  benchmark::MaybeReenterWithoutASLR(argc, argv);
+
   REGISTER_PUMP(BitStreamerLSB);
   REGISTER_PUMP(BitStreamerMSB);
   REGISTER_PUMP(BitStreamerMSB16);

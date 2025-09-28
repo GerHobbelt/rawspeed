@@ -53,6 +53,8 @@ private:
                                      uint32_t size) const;
   [[nodiscard]] bool decodeUncompressed(ByteStream s, uint32_t w, uint32_t h,
                                         uint32_t size) const;
+
+  [[nodiscard]] int getBitsPerPixel() const;
 };
 
 } // namespace rawspeed

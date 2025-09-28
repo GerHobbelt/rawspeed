@@ -31,9 +31,9 @@ env:
 
 jobs:
   windows-msys2:
-    name: ${{ inputs.msys2-msystem }}.${{ inputs.compiler-family }}.${{ inputs.flavor }}
     timeout-minutes: 16
     runs-on: ${{ inputs.os }}
+    name: ${{ inputs.os }}.${{ inputs.msys2-msystem }}.${{ inputs.compiler-family }}.${{ inputs.flavor }}
     defaults:
       run:
         shell: msys2 {0}

@@ -71,7 +71,7 @@ BitStreamerReplenisherBase<Tag>::establishClassInvariants() const noexcept {
 }
 
 template <typename Tag>
-struct BitStreamerForwardSequentialReplenisher final
+struct BitStreamerForwardSequentialReplenisher
     : public BitStreamerReplenisherBase<Tag> {
   using Base = BitStreamerReplenisherBase<Tag>;
   using Traits = BitStreamerTraits<Tag>;

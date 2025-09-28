@@ -26,6 +26,7 @@
 #include "adt/DefaultInitAllocatorAdaptor.h"
 #include "adt/NotARational.h"
 #include "io/FileIOException.h"
+#include "io/MMapReader.h"
 #include "md5.h"
 #include <array>
 #include <bit>
@@ -143,8 +144,8 @@ md5::MD5Hasher::state_type imgDataHash(const RawImage& raw) {
 #pragma GCC diagnostic ignored "-Wframe-larger-than="
 #pragma GCC diagnostic ignored "-Wstack-usage="
 
-void __attribute__((format(printf, 2, 3)))
-APPEND(ostringstream* oss, const char* format, ...) {
+void __attribute__((format(printf, 2, 3))) APPEND(ostringstream* oss,
+                                                  const char* format, ...) {
   std::array<char, 1024> line;
 
   va_list args;
@@ -383,6 +384,12 @@ int64_t process(const std::string& filename, const CameraMetaData* metadata,
   cout << left << setw(55) << filename << ": starting decoding ... " << '\n';
 #endif
 
+#if !defined(_WIN32) &&                                                        \
+    !(__has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__))
+  MMapReader reader(filename);
+
+  rawspeed::Buffer buf = reader.getAsBuffer();
+#else
   FileReader reader(filename.c_str());
 
   std::unique_ptr<std::vector<
@@ -391,6 +398,7 @@ int64_t process(const std::string& filename, const CameraMetaData* metadata,
       storage;
   rawspeed::Buffer buf;
   std::tie(storage, buf) = reader.readFile();
+#endif
 
   Timer t;
 

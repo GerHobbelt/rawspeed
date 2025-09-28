@@ -131,6 +131,23 @@ RawImage OrfDecoder::decodeRawInternal() {
     ThrowRDE("%u stripes, and not uncompressed. Unsupported.",
              raw->getEntry(TiffTag::STRIPOFFSETS)->count);
 
+  if (const int bitsPerPixel = getBitsPerPixel(); bitsPerPixel == 12) {
+    input.skipBytes(7);
+  } else if (bitsPerPixel == 14) {
+    input.skipBytes(8);
+  } else {
+    ThrowRDE("%i-bit images are not supported currently.", bitsPerPixel);
+  }
+
+  const OlympusDecompressor o(mRaw);
+  mRaw->createData();
+  o.decompress(input);
+
+  return mRaw;
+}
+
+int OrfDecoder::getBitsPerPixel() const {
+  int result = 12;
   if (mRootIFD->hasEntryRecursive(TiffTag::OLYMPUSIMAGEPROCESSING)) {
     // Newer cameras process the Image Processing SubIFD in the makernote
     const TiffEntry* img_entry =
@@ -144,16 +161,10 @@ RawImage OrfDecoder::decodeRawInternal() {
     if (image_processing.hasEntry(static_cast<TiffTag>(0x0611))) {
       const TiffEntry* validBits =
           image_processing.getEntry(static_cast<TiffTag>(0x0611));
-      if (validBits->getU16() != 12)
-        ThrowRDE("Only 12-bit images are supported currently.");
+      result = validBits->getU16();
     }
   }
-
-  OlympusDecompressor o(mRaw);
-  mRaw->createData();
-  o.decompress(input);
-
-  return mRaw;
+  return result;
 }
 
 void OrfDecoder::decodeUncompressedInterleaved(ByteStream s, uint32_t w,
@@ -369,6 +380,13 @@ void OrfDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
         // range is the same)
         mRaw->whitePoint =
             *mRaw->whitePoint - (mRaw->blackLevel - blackLevelSeparate1D(0));
+        if (getBitsPerPixel() == 14) {
+          mRaw->whitePoint = *mRaw->whitePoint * 4;
+          mRaw->blackLevel = mRaw->blackLevel * 4;
+          for (int i = 0; i < 4; i++) {
+            blackLevelSeparate1D(i) = blackLevelSeparate1D(i) * 4;
+          }
+        }
       }
     }
   }

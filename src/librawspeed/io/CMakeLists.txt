@@ -14,6 +14,8 @@ FILE(GLOB SOURCES
   "FileWriter.h"
   "IOException.cpp"
   "IOException.h"
+  "MMapReader.cpp"
+  "MMapReader.h"
 )
 
 target_sources(rawspeed_io PRIVATE

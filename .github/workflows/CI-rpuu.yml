@@ -103,7 +103,7 @@ jobs:
         run: |
           set -xe
           rm -rf ${RPUU_DST}
-          git clone https://raw.pixls.us/data-unique.git ${RPUU_DST}
+          git clone https://raw.pixls.us/data-unique.lfs.git ${RPUU_DST}
           cd ${RPUU_DST}
           sha256sum -c --strict filelist.sha256
           rm -rf *

@@ -207,7 +207,6 @@ void OlympusDecompressorImpl::decompress(ByteStream input) const {
   invariant(mRaw->dim.x > 0);
   invariant(mRaw->dim.x % 2 == 0);
 
-  input.skipBytes(7);
   BitStreamerMSB bits(input.peekRemainingBuffer().getAsArray1DRef());
 
   for (int y = 0; y < mRaw->dim.y; y++)
@@ -227,7 +226,7 @@ OlympusDecompressor::OlympusDecompressor(RawImage img) : mRaw(std::move(img)) {
              mRaw->dim.y);
 }
 
-void OlympusDecompressor::decompress(ByteStream input) const {
+void OlympusDecompressor::decompress(const ByteStream& input) const {
   OlympusDecompressorImpl(mRaw).decompress(input);
 }
 
