@@ -83,7 +83,7 @@ public:
   double pixelAspectRatio = 1;
 
   // White balance coefficients of the image
-  std::array<float, 4> wbCoeffs = {{NAN, NAN, NAN, NAN}};
+  Optional<std::array<float, 4>> wbCoeffs;
 
   // If not empty, a row-major color matrix,
   // that converts XYZ values to reference camera native color space values,

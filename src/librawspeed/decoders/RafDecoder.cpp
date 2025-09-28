@@ -361,16 +361,20 @@ void RafDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
     const TiffEntry* wb =
         mRootIFD->getEntryRecursive(TiffTag::FUJI_WB_GRBLEVELS);
     if (wb->count == 3) {
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(1);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(2);
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(1);
+      wbCoeffs[1] = wb->getFloat(0);
+      wbCoeffs[2] = wb->getFloat(2);
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   } else if (mRootIFD->hasEntryRecursive(TiffTag::FUJIOLDWB)) {
     const TiffEntry* wb = mRootIFD->getEntryRecursive(TiffTag::FUJIOLDWB);
     if (wb->count == 8) {
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(1);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(3);
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(1);
+      wbCoeffs[1] = wb->getFloat(0);
+      wbCoeffs[2] = wb->getFloat(3);
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   }
 }

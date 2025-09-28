@@ -23,8 +23,12 @@
 #include "rawspeedconfig.h"
 #include "decompressors/PanasonicV8Decompressor.h"
 #include "adt/Array1DRef.h"
+#include "adt/Array1DRefExtras.h"
 #include "adt/Array2DRef.h"
+#include "adt/CroppedArray2DRef.h"
 #include "adt/Invariant.h"
+#include "adt/Point.h"
+#include "adt/TiledArray2DRef.h"
 #include "bitstreams/BitStream.h"
 #include "bitstreams/BitStreamer.h"
 #include "bitstreams/BitStreamerMSB.h" // IWYU pragma: keep
@@ -39,6 +43,7 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
+#include <limits>
 #include <utility>
 #include <vector>
 
@@ -138,21 +143,90 @@ public:
   int32_t decodeNextDiffValue();
 };
 
-void PanasonicV8Decompressor::DecompressorParams::validate() const {
-  const int totalStrips = horizontalStripCount * verticalStripCount;
+namespace {
 
-  if (totalStrips > stripWidths.size())
-    ThrowRDE("Strip widths list does not have enough entries for the number of "
-             "strips!");
-  if (totalStrips > stripHeights.size())
-    ThrowRDE("Strip heights list does not have enough entries for the number "
-             "of strips!");
-  if (totalStrips > stripLineOffsets.size())
-    ThrowRDE("Strip line offset list does not have enough entries for the "
-             "number of strips!");
-  if (totalStrips > mStrips.size())
-    ThrowRDE("Strip byte buffer array does not have enough entries for the "
-             "number of strips!");
+enum class TileSequenceStatus : uint8_t { ContinuesRow, BeginsNewRow, Invalid };
+
+inline TileSequenceStatus
+evaluateConsecutiveTiles(const iRectangle2D rect, const iRectangle2D nextRect) {
+  using enum TileSequenceStatus;
+  // Are these two are horizontally-adjacent rectangles of same height?
+  if (rect.getTopRight() == nextRect.getTopLeft() &&
+      rect.getBottomRight() == nextRect.getBottomLeft())
+    return ContinuesRow;
+  // Otherwise, the next rectangle should be the first row of next Row.
+  if (nextRect.getTopLeft() == iPoint2D(0, rect.getBottom()))
+    return BeginsNewRow;
+  return Invalid;
+}
+
+void isValidImageGrid(iRectangle2D imgDim,
+                      Array1DRef<const iRectangle2D> rects) {
+  auto outPos = imgDim.pos;
+
+  iRectangle2D rect = rects(0);
+  if (rect.pos != outPos)
+    ThrowRDE("FIrst tile is out-of-order");
+  if (!rect.isThisInside(imgDim))
+    ThrowRDE("Tile isn't fully within the output image");
+  if (!rect.hasPositiveArea())
+    ThrowRDE("Got empty tile?");
+  outPos.x += rect.getWidth();
+  for (int tileIdx = 1; tileIdx != rects.size(); ++tileIdx) {
+    iRectangle2D nextRect = rects(tileIdx);
+    invariant(nextRect.isThisInside(imgDim));
+    invariant(nextRect.hasPositiveArea());
+    switch (evaluateConsecutiveTiles(rect, nextRect)) {
+    case TileSequenceStatus::ContinuesRow:
+      outPos.x += nextRect.getWidth();
+      rect = nextRect;
+      continue;
+    case TileSequenceStatus::BeginsNewRow:
+      assert(outPos.x == imgDim.getRight());
+      outPos.x = 0;
+      outPos.y += nextRect.getHeight();
+      rect = nextRect;
+      continue;
+    case TileSequenceStatus::Invalid:
+      __builtin_unreachable();
+      ThrowRDE("Invalid tiling config");
+    }
+  }
+  if (rect.getBottomRight() != imgDim.getBottomRight())
+    ThrowRDE("Tiles do not cover whole output image");
+}
+
+} // namespace
+
+std::vector<iRectangle2D>
+PanasonicV8Decompressor::DecompressorParamsBuilder::getOutRects(
+    iRectangle2D imgDim, Array1DRef<const uint32_t> stripLineOffsets,
+    Array1DRef<const uint16_t> stripWidths,
+    Array1DRef<const uint16_t> stripHeights) {
+  if (!imgDim.hasPositiveArea())
+    ThrowRDE("Empty image requested");
+  const int totalStrips = stripLineOffsets.size();
+  if (stripWidths.size() != totalStrips || stripHeights.size() != totalStrips)
+    ThrowRDE("Inputs have mismatched length");
+  if (totalStrips <= 0)
+    ThrowRDE("No strips provided");
+
+  std::vector<iRectangle2D> mOutRects;
+
+  for (int stripIdx = 0; stripIdx < totalStrips; ++stripIdx) {
+    const uint32_t stripWidth = stripWidths(stripIdx);
+    const uint32_t stripHeight = stripHeights(stripIdx);
+    const uint32_t stripOutputX = stripLineOffsets(stripIdx) & 0xFFFF;
+    const uint32_t stripOutputY = stripLineOffsets(stripIdx) >> 16;
+
+    const auto out = iRectangle2D(iPoint2D(stripOutputX, stripOutputY),
+                                  iPoint2D(stripWidth, stripHeight));
+
+    mOutRects.emplace_back(out);
+  }
+
+  isValidImageGrid(imgDim, getAsArray1DRef(mOutRects));
+  return mOutRects;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,26 +241,35 @@ PanasonicV8Decompressor::PanasonicV8Decompressor(
       mRawOutput->getBpp() != sizeof(uint16_t)) {
     ThrowRDE("Unexpected component count / data type");
   }
-  mParams.validate();
+  if (!mRawOutput->dim.hasPositiveArea())
+    ThrowRDE("Unexpected image dimensions");
 }
 
 void PanasonicV8Decompressor::decompress() const {
-  const int totalStrips =
-      mParams.horizontalStripCount * mParams.verticalStripCount;
+  const int numStrips = mParams.mStrips.size();
 #ifdef HAVE_OPENMP
   unsigned threadCount =
-      std::min(totalStrips, rawspeed_get_number_of_processor_cores());
+      std::min(numStrips, rawspeed_get_number_of_processor_cores());
 #pragma omp parallel for num_threads(threadCount)                              \
-    schedule(static) default(none) shared(totalStrips)
+    schedule(static) default(none) firstprivate(numStrips)
 #endif
-  for (int stripIdx = 0; stripIdx < totalStrips; ++stripIdx) {
+  for (int stripIdx = 0; stripIdx < numStrips; ++stripIdx) {
     try {
       Array1DRef<const uint8_t> strip = mParams.mStrips(stripIdx);
 
+      const auto outRect = mParams.mOutRect(stripIdx);
+
+      const auto out = CroppedArray2DRef<uint16_t>(
+                           mRawOutput->getU16DataAsUncroppedArray2DRef(),
+                           /*offsetCols=*/outRect.pos.x,
+                           /*offsetRows=*/outRect.pos.y,
+                           /*croppedWidth=*/outRect.dim.x,
+                           /*croppedHeight=*/outRect.dim.y)
+                           .getAsArray2DRef();
+
       InternalHuffDecoder decoder(mHuffmanLUT, strip);
 
-      decompressStrip(stripIdx, decoder,
-                      mRawOutput->getU16DataAsUncroppedArray2DRef());
+      decompressStrip(out, decoder);
     } catch (const RawspeedException& err) {
       // Propagate the exception out of OpenMP magic.
       mRawOutput->setError(err.what());
@@ -198,54 +281,54 @@ void PanasonicV8Decompressor::decompress() const {
 }
 
 void PanasonicV8Decompressor::decompressStrip(
-    const unsigned stripIdx, InternalHuffDecoder decoder,
-    Array2DRef<uint16_t> outBuffer) const {
-  const uint32_t stripWidth = mParams.stripWidths(stripIdx);
-  const uint32_t stripHeight = mParams.stripHeights(stripIdx);
-  const uint32_t stripOutputX = mParams.stripLineOffsets(stripIdx) & 0xFFFF;
-  const uint32_t stripOutputY = mParams.stripLineOffsets(stripIdx) >> 16;
+    const Array2DRef<uint16_t> out, InternalHuffDecoder decoder) const {
+  Bayer2x2 predictedStorage = mParams.initialPrediction;
+  const auto pred = Array2DRef(predictedStorage.data(), 2, 2);
 
-  std::vector<uint16_t> lineBuffer(stripWidth * 2);
-  Bayer2x2 predicted = mParams.initialPrediction;
+  invariant(out.height() % 2 == 0);
+  invariant(out.width() % 2 == 0);
 
-  for (unsigned row = 0; row < stripHeight; row += 2) {
+  for (int j = 0; j != 2; ++j)
+    for (int i = 0; i != 2; ++i)
+      pred(i, j) = pred(j, i);
+
+  const auto rowGroups = TiledArray2DRef(out,
+                                         /*tileWidth=*/out.width(),
+                                         /*tileHeight_=*/2);
+
+  invariant(rowGroups.numCols() == 1);
+  for (int rowGroup = 0; rowGroup != rowGroups.numRows(); ++rowGroup) {
+    const auto outRow = rowGroups(rowGroup, 0).getAsArray2DRef();
+
+    const auto outBlocks = TiledArray2DRef(outRow,
+                                           /*tileWidth=*/2,
+                                           /*tileHeight=*/2);
+
     // Each decoded 'row' is actually two rows of pixels in the raw image
     // because the image is encoded in rows of 2x2 CFA tiles. Likewise the
     // effective width here is 2x the strip width.
-    for (unsigned column = 0; column < stripWidth * 2; ++column) {
-      const unsigned ccIdx =
-          column % 4; // CFA color component index: r, g1, g2, b
-      const int32_t diff = decoder.decodeNextDiffValue();
-      const int32_t decodedValue = predicted[ccIdx] + diff;
-      assert(decodedValue > 0);
-      lineBuffer[column] =
-          uint16_t(std::clamp(decodedValue, 0, int32_t(mParams.gammaClipVal)));
+    invariant(outBlocks.numRows() == 1);
+    for (int blockIdx = 0; blockIdx < outBlocks.numCols(); ++blockIdx) {
+      const auto outBlock = outBlocks(0, blockIdx).getAsArray2DRef();
 
-      if (ccIdx == 3) {
-        // Completed decoding a 2x2 CFA tile. Update the predicted value to
-        // equal the decoded value.
-        std::copy_n(&lineBuffer[column - 3], 4, predicted.data());
+      for (int j = 0; j != 2; ++j) {
+        for (int i = 0; i != 2; ++i) {
+          const int32_t diff = decoder.decodeNextDiffValue();
+          const int32_t decodedValue = pred(i, j) + diff;
+          invariant(decodedValue > 0);
+          pred(i, j) = uint16_t(std::clamp(
+              decodedValue, 0, int32_t(std::numeric_limits<uint16_t>::max())));
+          outBlock(i, j) = pred(i, j);
+        }
       }
     }
+
     // At the end of the line, reset predicted value to the first tile of the
     // prior line.
-    std::copy_n(&lineBuffer[0], 4, predicted.data());
-
-    // Copy lineBuffer into output buffer.
-    for (unsigned linePos = 0; linePos < stripWidth * 2; linePos += 4) {
-      const uint32_t dstStartCol = stripOutputX + linePos / 2;
-
-      outBuffer[stripOutputY + row + 0](dstStartCol + 0) =
-          lineBuffer[linePos + 0]; // Top Red
-      outBuffer[stripOutputY + row + 0](dstStartCol + 1) =
-          lineBuffer[linePos + 2]; // Top Green
-      outBuffer[stripOutputY + row + 1](dstStartCol + 0) =
-          lineBuffer[linePos + 1]; // Bottom Green
-      outBuffer[stripOutputY + row + 1](dstStartCol + 1) =
-          lineBuffer[linePos + 3]; // Bottom Blue
-    }
-    // TODO: Investigate if it makes sense performance wise to structure
-    // lineBuffer such that it can be memcpy'd into the output Buffer.
+    const auto tmp = outBlocks(0, 0).getAsArray2DRef();
+    for (int j = 0; j != 2; ++j)
+      for (int i = 0; i != 2; ++i)
+        pred(i, j) = tmp(i, j);
   }
 }
 

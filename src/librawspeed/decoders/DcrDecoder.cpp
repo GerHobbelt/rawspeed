@@ -93,12 +93,14 @@ RawImage DcrDecoder::decodeRawInternal() {
   if (const TiffEntry* blob =
           kodakifd.getEntryRecursive(static_cast<TiffTag>(0x03fd));
       blob && blob->count == 72) {
+    std::array<float, 4> wbCoeffs = {};
     for (auto i = 0U; i < 3; i++) {
       const auto mul = blob->getU16(20 + i);
       if (0 == mul)
         ThrowRDE("WB coefficient is zero!");
-      mRaw->metadata.wbCoeffs[i] = 2048.0F / mul;
+      wbCoeffs[i] = 2048.0F / mul;
     }
+    mRaw->metadata.wbCoeffs = wbCoeffs;
   }
 
   const int bps = [CurveSize = linearization->count]() {

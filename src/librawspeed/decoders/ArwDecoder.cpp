@@ -483,9 +483,11 @@ void ArwDecoder::ParseA100WB() const {
     for (auto& coeff : tmp)
       coeff = bs.getU16();
 
-    mRaw->metadata.wbCoeffs[0] = static_cast<float>(tmp[0]);
-    mRaw->metadata.wbCoeffs[1] = static_cast<float>(tmp[1]);
-    mRaw->metadata.wbCoeffs[2] = static_cast<float>(tmp[3]);
+    std::array<float, 4> wbCoeffs = {};
+    wbCoeffs[0] = static_cast<float>(tmp[0]);
+    wbCoeffs[1] = static_cast<float>(tmp[1]);
+    wbCoeffs[2] = static_cast<float>(tmp[3]);
+    mRaw->metadata.wbCoeffs = wbCoeffs;
 
     // only need this one block, no need to process any further
     break;
@@ -615,16 +617,20 @@ void ArwDecoder::GetWB() const {
       const TiffEntry* wb = encryptedIFD.getEntry(TiffTag::SONYGRBGLEVELS);
       if (wb->count != 4)
         ThrowRDE("WB has %u entries instead of 4", wb->count);
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(1);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(2);
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(1);
+      wbCoeffs[1] = wb->getFloat(0);
+      wbCoeffs[2] = wb->getFloat(2);
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     } else if (encryptedIFD.hasEntry(TiffTag::SONYRGGBLEVELS)) {
       const TiffEntry* wb = encryptedIFD.getEntry(TiffTag::SONYRGGBLEVELS);
       if (wb->count != 4)
         ThrowRDE("WB has %u entries instead of 4", wb->count);
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(1);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(3);
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(0);
+      wbCoeffs[1] = wb->getFloat(1);
+      wbCoeffs[2] = wb->getFloat(3);
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
 
     if (encryptedIFD.hasEntry(TiffTag::SONYBLACKLEVEL)) {

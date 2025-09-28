@@ -21,9 +21,11 @@
 
 #include "decoders/Rw2Decoder.h"
 #include "adt/Array1DRef.h"
+#include "adt/Array1DRefExtras.h"
 #include "adt/Array2DRef.h"
 #include "adt/Point.h"
 #include "bitstreams/BitStreams.h"
+#include "common/BayerPhase.h"
 #include "common/Common.h"
 #include "common/RawImage.h"
 #include "decoders/RawDecoderException.h"
@@ -46,6 +48,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstdint>
+#include <limits>
 #include <memory>
 #include <string>
 #include <vector>
@@ -67,11 +70,6 @@ bool Rw2Decoder::isAppropriateDecoder(const TiffRootIFD* rootIFD,
 }
 
 namespace {
-
-template <typename T>
-[[nodiscard]] Array1DRef<const T> getAsArray1DRef(const std::vector<T>& vec) {
-  return {vec.data(), implicit_cast<int>(vec.size())};
-}
 
 /// Retrieve list of values from Panasonic TiffTag
 template <typename T>
@@ -135,6 +133,12 @@ void DecompressorV8Params::validate() const {
                   [](uint16_t x) { return x != 0; })) {
     ThrowRDE("Non-zero shift down value encountered! Shift down decoding has "
              "never been tested!");
+  }
+
+  if (gammaClipVal != std::numeric_limits<uint16_t>::max()) {
+    ThrowRDE("Got non-no-op gammaClipVal (%u). Not known to happen "
+             "in-the-wild. Please file a bug!",
+             gammaClipVal);
   }
 }
 
@@ -276,6 +280,10 @@ getInputStrips(const DecompressorV8Params& mParams, Buffer mInputFile) {
 } // namespace
 
 RawImage Rw2Decoder::decodeRawV8(const TiffIFD& raw) const {
+  parseCFA();
+  if (getAsBayerPhase(mRaw->cfa) != BayerPhase::RGGB)
+    ThrowRDE("Unexpected CFA, only RGGB is supported");
+
   const DecompressorV8Params mParams(raw);
   const std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> mHuffmanLUT =
       populateHuffmanLUT(raw);
@@ -283,17 +291,16 @@ RawImage Rw2Decoder::decodeRawV8(const TiffIFD& raw) const {
   const std::vector<Array1DRef<const uint8_t>> mStrips =
       getInputStrips(mParams, mFile);
 
-  PanasonicV8Decompressor::DecompressorParams mParams2{
-      .stripLineOffsets = getAsArray1DRef(mParams.stripLineOffsets),
-      .stripWidths = getAsArray1DRef(mParams.stripWidths),
-      .stripHeights = getAsArray1DRef(mParams.stripHeights),
-      .horizontalStripCount = mParams.horizontalStripCount,
-      .verticalStripCount = mParams.verticalStripCount,
-      .initialPrediction = mParams.initialPrediction,
-      .gammaClipVal = mParams.gammaClipVal,
-      .mStrips = getAsArray1DRef(mStrips)};
+  const auto imgDim = iRectangle2D({0, 0}, mRaw->dim);
 
-  PanasonicV8Decompressor v8(mRaw, mParams2, getAsArray1DRef(mHuffmanLUT));
+  PanasonicV8Decompressor::DecompressorParamsBuilder b(
+      imgDim, mParams.initialPrediction, getAsArray1DRef(mStrips),
+      getAsArray1DRef(mParams.stripLineOffsets),
+      getAsArray1DRef(mParams.stripWidths),
+      getAsArray1DRef(mParams.stripHeights));
+
+  PanasonicV8Decompressor v8(mRaw, b.getDecompressorParams(),
+                             getAsArray1DRef(mHuffmanLUT));
   mRaw->createData();
   v8.decompress();
   return mRaw;
@@ -542,19 +549,23 @@ void Rw2Decoder::decodeMetaDataInternal(const CameraMetaData* meta) {
   if (raw->hasEntry(static_cast<TiffTag>(0x0024)) &&
       raw->hasEntry(static_cast<TiffTag>(0x0025)) &&
       raw->hasEntry(static_cast<TiffTag>(0x0026))) {
-    mRaw->metadata.wbCoeffs[0] = static_cast<float>(
+    std::array<float, 4> wbCoeffs = {};
+    wbCoeffs[0] = static_cast<float>(
         raw->getEntry(static_cast<TiffTag>(0x0024))->getU16());
-    mRaw->metadata.wbCoeffs[1] = static_cast<float>(
+    wbCoeffs[1] = static_cast<float>(
         raw->getEntry(static_cast<TiffTag>(0x0025))->getU16());
-    mRaw->metadata.wbCoeffs[2] = static_cast<float>(
+    wbCoeffs[2] = static_cast<float>(
         raw->getEntry(static_cast<TiffTag>(0x0026))->getU16());
+    mRaw->metadata.wbCoeffs = wbCoeffs;
   } else if (raw->hasEntry(static_cast<TiffTag>(0x0011)) &&
              raw->hasEntry(static_cast<TiffTag>(0x0012))) {
-    mRaw->metadata.wbCoeffs[0] = static_cast<float>(
+    std::array<float, 4> wbCoeffs = {};
+    wbCoeffs[0] = static_cast<float>(
         raw->getEntry(static_cast<TiffTag>(0x0011))->getU16());
-    mRaw->metadata.wbCoeffs[1] = 256.0F;
-    mRaw->metadata.wbCoeffs[2] = static_cast<float>(
+    wbCoeffs[1] = 256.0F;
+    wbCoeffs[2] = static_cast<float>(
         raw->getEntry(static_cast<TiffTag>(0x0012))->getU16());
+    mRaw->metadata.wbCoeffs = wbCoeffs;
   }
 }
 

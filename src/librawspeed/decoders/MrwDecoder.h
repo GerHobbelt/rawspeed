@@ -21,6 +21,7 @@
 
 #pragma once
 
+#include "adt/Optional.h"
 #include "common/RawImage.h"
 #include "decoders/RawDecoder.h"
 #include "io/Buffer.h"
@@ -41,7 +42,7 @@ class MrwDecoder final : public RawDecoder {
   Buffer imageData;
   uint32_t bpp = 0;
   uint32_t packed = 0;
-  std::array<float, 4> wb_coeffs = {{NAN, NAN, NAN, NAN}};
+  Optional<std::array<float, 4>> wb_coeffs;
 
 public:
   explicit MrwDecoder(Buffer file);

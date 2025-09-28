@@ -20,7 +20,6 @@
 #include "RawSpeed-API.h"
 #include "adt/Array1DRef.h"
 #include "adt/Array2DRef.h"
-#include <array>
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
@@ -204,11 +203,14 @@ int main(int argc_, char* argv_[]) {
     }
     fprintf(stdout, "\n");
 
-    fprintf(stdout, "wbCoeffs: %f %f %f %f\n",
-            implicit_cast<double>(r->metadata.wbCoeffs[0]),
-            implicit_cast<double>(r->metadata.wbCoeffs[1]),
-            implicit_cast<double>(r->metadata.wbCoeffs[2]),
-            implicit_cast<double>(r->metadata.wbCoeffs[3]));
+    fprintf(stdout, "wbCoeffs:");
+    if (!r->metadata.wbCoeffs)
+      fprintf(stdout, " (none)");
+    else {
+      for (const auto& e : *r->metadata.wbCoeffs)
+        fprintf(stdout, " %f", implicit_cast<double>(e));
+    }
+    fprintf(stdout, "\n");
 
     fprintf(stdout, "isCFA: %d\n", r->isCFA);
     uint32_t filters = r->cfa.getDcrawFilter();

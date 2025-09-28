@@ -320,11 +320,13 @@ void OrfDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
 
   if (mRootIFD->hasEntryRecursive(TiffTag::OLYMPUSREDMULTIPLIER) &&
       mRootIFD->hasEntryRecursive(TiffTag::OLYMPUSBLUEMULTIPLIER)) {
-    mRaw->metadata.wbCoeffs[0] = static_cast<float>(
+    std::array<float, 4> wbCoeffs = {};
+    wbCoeffs[0] = static_cast<float>(
         mRootIFD->getEntryRecursive(TiffTag::OLYMPUSREDMULTIPLIER)->getU16());
-    mRaw->metadata.wbCoeffs[1] = 256.0F;
-    mRaw->metadata.wbCoeffs[2] = static_cast<float>(
+    wbCoeffs[1] = 256.0F;
+    wbCoeffs[2] = static_cast<float>(
         mRootIFD->getEntryRecursive(TiffTag::OLYMPUSBLUEMULTIPLIER)->getU16());
+    mRaw->metadata.wbCoeffs = wbCoeffs;
   } else if (mRootIFD->hasEntryRecursive(TiffTag::OLYMPUSIMAGEPROCESSING)) {
     // Newer cameras process the Image Processing SubIFD in the makernote
     const TiffEntry* img_entry =
@@ -340,9 +342,11 @@ void OrfDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
       const TiffEntry* wb =
           image_processing.getEntry(static_cast<TiffTag>(0x0100));
       if (wb->count == 2 || wb->count == 4) {
-        mRaw->metadata.wbCoeffs[0] = wb->getFloat(0);
-        mRaw->metadata.wbCoeffs[1] = 256.0F;
-        mRaw->metadata.wbCoeffs[2] = wb->getFloat(1);
+        std::array<float, 4> wbCoeffs = {};
+        wbCoeffs[0] = wb->getFloat(0);
+        wbCoeffs[1] = 256.0F;
+        wbCoeffs[2] = wb->getFloat(1);
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       }
     }
 

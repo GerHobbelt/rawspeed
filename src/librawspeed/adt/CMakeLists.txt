@@ -19,6 +19,7 @@ FILE(GLOB SOURCES
   "PartitioningOutputIterator.h"
   "Point.h"
   "Range.h"
+  "TiledArray2DRef.h"
   "VariableLengthLoad.h"
   "iterator_range.h"
 )

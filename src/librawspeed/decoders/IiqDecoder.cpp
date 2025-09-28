@@ -271,8 +271,10 @@ RawImage IiqDecoder::decodeRawInternal() {
   if (correction_meta_data.getSize() != 0 && iiq)
     CorrectPhaseOneC(correction_meta_data, split_row, split_col);
 
+  std::array<float, 4> wbCoeffs = {};
   for (int i = 0; i < 3; i++)
-    mRaw->metadata.wbCoeffs[i] = wb.getFloat();
+    wbCoeffs[i] = wb.getFloat();
+  mRaw->metadata.wbCoeffs = wbCoeffs;
 
   return mRaw;
 }

@@ -127,10 +127,11 @@ void MrwDecoder::parseHeader() {
       break;
     case 0x574247:     // WBG
       bs.skipBytes(4); // 4 factors
-      static_assert(4 == (sizeof(wb_coeffs) / sizeof(wb_coeffs[0])),
-                    "wrong coeff count");
-      for (auto& wb_coeff : wb_coeffs)
+      std::array<float, 4> wbCoeffs;
+      wbCoeffs = {};
+      for (auto& wb_coeff : wbCoeffs)
         wb_coeff = static_cast<float>(bs.getU16()); // gain
+      wb_coeffs = wbCoeffs;
 
       // FIXME?
       // Gf = Gr / 2^(6+F)
@@ -196,14 +197,20 @@ void MrwDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
   auto id = rootIFD->getID();
   setMetaData(meta, id.make, id.model, "", iso);
 
-  if (hints.contains("swapped_wb")) {
-    mRaw->metadata.wbCoeffs[0] = wb_coeffs[2];
-    mRaw->metadata.wbCoeffs[1] = wb_coeffs[0];
-    mRaw->metadata.wbCoeffs[2] = wb_coeffs[1];
-  } else {
-    mRaw->metadata.wbCoeffs[0] = wb_coeffs[0];
-    mRaw->metadata.wbCoeffs[1] = wb_coeffs[1];
-    mRaw->metadata.wbCoeffs[2] = wb_coeffs[3];
+  if (wb_coeffs) {
+    if (hints.contains("swapped_wb")) {
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = (*wb_coeffs)[2];
+      wbCoeffs[1] = (*wb_coeffs)[0];
+      wbCoeffs[2] = (*wb_coeffs)[1];
+      mRaw->metadata.wbCoeffs = wbCoeffs;
+    } else {
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = (*wb_coeffs)[0];
+      wbCoeffs[1] = (*wb_coeffs)[1];
+      wbCoeffs[2] = (*wb_coeffs)[3];
+      mRaw->metadata.wbCoeffs = wbCoeffs;
+    }
   }
 }
 

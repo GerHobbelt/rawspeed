@@ -145,9 +145,11 @@ void PefDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
     const TiffEntry* wb =
         mRootIFD->getEntryRecursive(static_cast<TiffTag>(0x0201));
     if (wb->count == 4) {
-      mRaw->metadata.wbCoeffs[0] = implicit_cast<float>(wb->getU32(0));
-      mRaw->metadata.wbCoeffs[1] = implicit_cast<float>(wb->getU32(1));
-      mRaw->metadata.wbCoeffs[2] = implicit_cast<float>(wb->getU32(3));
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = implicit_cast<float>(wb->getU32(0));
+      wbCoeffs[1] = implicit_cast<float>(wb->getU32(1));
+      wbCoeffs[2] = implicit_cast<float>(wb->getU32(3));
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   }
 }

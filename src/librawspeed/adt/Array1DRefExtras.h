@@ -20,27 +20,15 @@
 
 #pragma once
 
-#if !defined(_WIN32)
-
-#include "io/Buffer.h"
-#include <cstddef>
-#include <string>
+#include "adt/Array1DRef.h"
+#include "adt/Casts.h"
+#include <vector>
 
 namespace rawspeed {
 
-class MMapReader final {
-  int fd;
-  void* addr;
-  size_t length;
-
-public:
-  explicit MMapReader(const std::string& fname);
-
-  [[nodiscard]] Buffer getAsBuffer() const;
-
-  ~MMapReader();
-};
+template <typename T>
+[[nodiscard]] Array1DRef<const T> getAsArray1DRef(const std::vector<T>& vec) {
+  return {vec.data(), implicit_cast<int>(vec.size())};
+}
 
 } // namespace rawspeed
-
-#endif // !defined(_WIN32)

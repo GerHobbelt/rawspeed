@@ -20,15 +20,21 @@ set -ex
 apt-get install -y ninja-build
 export CMAKE_GENERATOR=Ninja
 
+RAWSPEED_SOURCE="$SRC/librawspeed/"
+RAWSPEED_BUILD="$WORK/rawspeed"
+
 ln -f -s /usr/local/bin/lld /usr/bin/ld
 
 cd "$SRC"
 
-wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.6/llvm-project-16.0.6.src.tar.xz
-tar -xf llvm-project-16.0.6.src.tar.xz llvm-project-16.0.6.src/{runtimes,cmake,llvm/cmake,libcxx,libcxxabi}/
-LIBCXX_BUILD="$SRC/llvm-project-16.0.6.build"
-mkdir "$LIBCXX_BUILD"
-cmake -S llvm-project-16.0.6.src/runtimes/ -B "$LIBCXX_BUILD" \
+LIBCXX_LLVM_VER="19.1.7"
+
+wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-$LIBCXX_LLVM_VER/llvm-project-$LIBCXX_LLVM_VER.src.tar.xz
+tar -xf llvm-project-$LIBCXX_LLVM_VER.src.tar.xz llvm-project-$LIBCXX_LLVM_VER.src/{runtimes,cmake,llvm/cmake,libcxx,libcxxabi}/
+LIBCXX_LLVM_SOURCE="$SRC/llvm-project-$LIBCXX_LLVM_VER.src"
+
+LIBCXX_BUILD="$WORK/llvm-project-$LIBCXX_LLVM_VER.libcxx.build"
+cmake -S "$LIBCXX_LLVM_SOURCE/runtimes/" -B "$LIBCXX_BUILD" \
       -DCMAKE_BUILD_TYPE=Release \
       -DBUILD_SHARED_LIBS=OFF \
       -DLLVM_INCLUDE_TESTS=OFF \
@@ -36,37 +42,47 @@ cmake -S llvm-project-16.0.6.src/runtimes/ -B "$LIBCXX_BUILD" \
       -DLIBCXX_ENABLE_SHARED=OFF \
       -DLIBCXX_ENABLE_STATIC_ABI_LIBRARY=ON \
       -DLIBCXXABI_ENABLE_SHARED=OFF \
+      -DLIBCXXABI_USE_LLVM_UNWINDER=OFF \
       -DLIBCXX_INCLUDE_BENCHMARKS=OFF \
       -DLIBCXXABI_ADDITIONAL_COMPILE_FLAGS="-fno-sanitize=vptr"
 cmake --build "$LIBCXX_BUILD" -- -j$(nproc) cxx cxxabi
 
 CXXFLAGS="$CXXFLAGS -nostdinc++ -nostdlib++ -isystem $LIBCXX_BUILD/include -isystem $LIBCXX_BUILD/include/c++/v1 -L$LIBCXX_BUILD/lib -lc++ -lc++abi"
 
+LIBOMP_LLVM_VER="20.1.5"
+
+wget -q https://github.com/llvm/llvm-project/releases/download/llvmorg-$LIBOMP_LLVM_VER/llvm-project-$LIBOMP_LLVM_VER.src.tar.xz
+tar -xf llvm-project-$LIBOMP_LLVM_VER.src.tar.xz llvm-project-$LIBOMP_LLVM_VER.src/{runtimes,cmake,llvm/cmake,openmp}/
+OPENMP_LLVM_SOURCE="$SRC/llvm-project-$LIBOMP_LLVM_VER.src"
+
+patch $OPENMP_LLVM_SOURCE/openmp/runtime/src/kmp.h $RAWSPEED_SOURCE/.ci/openmp.patch
+
+OPENMP_BUILD="$WORK/llvm-project-$LIBOMP_LLVM_VER.omp.build"
+cmake -S "$OPENMP_LLVM_SOURCE/openmp/" -B "$OPENMP_BUILD" \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DBUILD_SHARED_LIBS=OFF \
+      -DLIBOMP_ENABLE_SHARED=OFF \
+      -DOPENMP_ENABLE_LIBOMPTARGET=OFF \
+      -DLIBOMP_CXXFLAGS="-fno-sanitize=undefined,integer"
+cmake --build "$OPENMP_BUILD" -- -j$(nproc) omp
+
+CXXFLAGS="$CXXFLAGS -isystem $OPENMP_BUILD/runtime/src -L$OPENMP_BUILD/runtime/src"
+
 if [[ $SANITIZER = *undefined* ]]; then
   CFLAGS="$CFLAGS -fsanitize=unsigned-integer-overflow -fno-sanitize-recover=unsigned-integer-overflow"
   CXXFLAGS="$CXXFLAGS -fsanitize=unsigned-integer-overflow -fno-sanitize-recover=unsigned-integer-overflow"
 fi
 
-WITH_OPENMP=ON
-if [[ $SANITIZER = *memory* ]]; then
-  WITH_OPENMP=OFF
-fi
-
-cd "$WORK"
-mkdir build
-cd build
-
-cmake \
-  -DBINARY_PACKAGE_BUILD=ON -DWITH_OPENMP=$WITH_OPENMP \
-  -DUSE_BUNDLED_LLVMOPENMP=ON -DALLOW_DOWNLOADING_LLVMOPENMP=ON \
+cmake -S "$RAWSPEED_SOURCE" -B "$RAWSPEED_BUILD" \
+  -DBINARY_PACKAGE_BUILD=ON -DWITH_OPENMP=ON \
   -DWITH_PUGIXML=OFF -DUSE_XMLLINT=OFF -DWITH_JPEG=OFF -DWITH_ZLIB=OFF \
   -DBUILD_TESTING=OFF -DBUILD_TOOLS=OFF -DBUILD_BENCHMARKING=OFF \
   -DCMAKE_BUILD_TYPE=FUZZ -DBUILD_FUZZERS=ON \
   -DLIB_FUZZING_ENGINE:STRING="$LIB_FUZZING_ENGINE" \
-  -DCMAKE_INSTALL_PREFIX:PATH="$OUT" -DCMAKE_INSTALL_BINDIR:PATH="$OUT" \
-  "$SRC/librawspeed/"
+  -DCMAKE_INSTALL_PREFIX:PATH="$OUT" -DCMAKE_INSTALL_BINDIR:PATH="$OUT"
 
-cmake --build . -- -j$(nproc) all && cmake --build . -- -j$(nproc) install
+cmake --build "$RAWSPEED_BUILD" -- -j$(nproc) all && cmake --build "$RAWSPEED_BUILD" -- -j$(nproc) install
 
-du -hcs .
-du -hcs "$OUT"
+du -hcs "$SRC"/* \
+        "$WORK"/* \
+        "$OUT"

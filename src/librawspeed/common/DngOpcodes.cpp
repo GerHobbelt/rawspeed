@@ -580,9 +580,14 @@ protected:
     deltaF.reserve(deltaF_count);
     std::generate_n(std::back_inserter(deltaF), deltaF_count, [&bs]() {
       const auto F = bs.get<float>();
-      if (!std::isfinite(F))
+      switch (std::fpclassify(F)) {
+      case FP_NORMAL:
+      case FP_SUBNORMAL:
+      case FP_ZERO:
+        return F;
+      default:
         ThrowRDE("Got bad float %f.", implicit_cast<double>(F));
-      return F;
+      }
     });
   }
 };

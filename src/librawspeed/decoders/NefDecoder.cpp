@@ -497,11 +497,13 @@ void NefDecoder::parseWhiteBalance() const {
   if (mRootIFD->hasEntryRecursive(static_cast<TiffTag>(12))) {
     const TiffEntry* wb = mRootIFD->getEntryRecursive(static_cast<TiffTag>(12));
     if (wb->count == 4) {
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(2);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(1);
-      if (mRaw->metadata.wbCoeffs[1] <= 0.0F)
-        mRaw->metadata.wbCoeffs[1] = 1.0F;
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(0);
+      wbCoeffs[1] = wb->getFloat(2);
+      wbCoeffs[2] = wb->getFloat(1);
+      if (wbCoeffs[1] <= 0.0F)
+        wbCoeffs[1] = 1.0F;
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   } else if (mRootIFD->hasEntryRecursive(static_cast<TiffTag>(0x0097))) {
     const TiffEntry* wb =
@@ -517,14 +519,18 @@ void NefDecoder::parseWhiteBalance() const {
 
       if (version == 0x100 && wb->count >= 80 &&
           wb->type == TiffDataType::UNDEFINED) {
-        mRaw->metadata.wbCoeffs[0] = static_cast<float>(wb->getU16(36));
-        mRaw->metadata.wbCoeffs[2] = static_cast<float>(wb->getU16(37));
-        mRaw->metadata.wbCoeffs[1] = static_cast<float>(wb->getU16(38));
+        std::array<float, 4> wbCoeffs = {};
+        wbCoeffs[0] = static_cast<float>(wb->getU16(36));
+        wbCoeffs[2] = static_cast<float>(wb->getU16(37));
+        wbCoeffs[1] = static_cast<float>(wb->getU16(38));
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       } else if (version == 0x103 && wb->count >= 26 &&
                  wb->type == TiffDataType::UNDEFINED) {
-        mRaw->metadata.wbCoeffs[0] = static_cast<float>(wb->getU16(10));
-        mRaw->metadata.wbCoeffs[1] = static_cast<float>(wb->getU16(11));
-        mRaw->metadata.wbCoeffs[2] = static_cast<float>(wb->getU16(12));
+        std::array<float, 4> wbCoeffs = {};
+        wbCoeffs[0] = static_cast<float>(wb->getU16(10));
+        wbCoeffs[1] = static_cast<float>(wb->getU16(11));
+        wbCoeffs[2] = static_cast<float>(wb->getU16(12));
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       } else if (((version == 0x204 && wb->count >= 564) ||
                   (version == 0x205 && wb->count >= 284)) &&
                  mRootIFD->hasEntryRecursive(static_cast<TiffTag>(0x001d)) &&
@@ -566,12 +572,12 @@ void NefDecoder::parseWhiteBalance() const {
 
         // Finally set the WB coeffs
         uint32_t off = (version == 0x204) ? 6 : 14;
-        mRaw->metadata.wbCoeffs[0] =
-            static_cast<float>(getU16BE(&buf[off + 0]));
-        mRaw->metadata.wbCoeffs[1] =
-            static_cast<float>(getU16BE(&buf[off + 2]));
-        mRaw->metadata.wbCoeffs[2] =
-            static_cast<float>(getU16BE(&buf[off + 6]));
+        std::array<float, 4> wbCoeffs = {};
+
+        wbCoeffs[0] = static_cast<float>(getU16BE(&buf[off + 0]));
+        wbCoeffs[1] = static_cast<float>(getU16BE(&buf[off + 2]));
+        wbCoeffs[2] = static_cast<float>(getU16BE(&buf[off + 6]));
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       }
     }
   } else if (mRootIFD->hasEntryRecursive(static_cast<TiffTag>(0x0014))) {
@@ -581,9 +587,11 @@ void NefDecoder::parseWhiteBalance() const {
     if (wb->count == 2560 && wb->type == TiffDataType::UNDEFINED) {
       bs.skipBytes(1248);
       bs.setByteOrder(Endianness::big);
-      mRaw->metadata.wbCoeffs[0] = static_cast<float>(bs.getU16()) / 256.0F;
-      mRaw->metadata.wbCoeffs[1] = 1.0F;
-      mRaw->metadata.wbCoeffs[2] = static_cast<float>(bs.getU16()) / 256.0F;
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = static_cast<float>(bs.getU16()) / 256.0F;
+      wbCoeffs[1] = 1.0F;
+      wbCoeffs[2] = static_cast<float>(bs.getU16()) / 256.0F;
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     } else if (bs.hasPatternAt("NRW ", 0)) {
       uint32_t offset = 0;
       if (!bs.hasPatternAt("0100", 4) && wb->count > 72)
@@ -594,17 +602,19 @@ void NefDecoder::parseWhiteBalance() const {
       if (offset) {
         bs.skipBytes(offset);
         bs.setByteOrder(Endianness::little);
-        mRaw->metadata.wbCoeffs[0] = 4.0F * implicit_cast<float>(bs.getU32());
-        mRaw->metadata.wbCoeffs[1] = implicit_cast<float>(bs.getU32());
-        mRaw->metadata.wbCoeffs[1] += implicit_cast<float>(bs.getU32());
-        mRaw->metadata.wbCoeffs[2] = 4.0F * implicit_cast<float>(bs.getU32());
+        std::array<float, 4> wbCoeffs = {};
+        wbCoeffs[0] = 4.0F * implicit_cast<float>(bs.getU32());
+        wbCoeffs[1] = implicit_cast<float>(bs.getU32());
+        wbCoeffs[1] += implicit_cast<float>(bs.getU32());
+        wbCoeffs[2] = 4.0F * implicit_cast<float>(bs.getU32());
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       }
     }
   }
 
-  if (hints.contains("nikon_wb_adjustment")) {
-    mRaw->metadata.wbCoeffs[0] *= 256.0F / 527.0F;
-    mRaw->metadata.wbCoeffs[2] *= 256.0F / 317.0F;
+  if (hints.contains("nikon_wb_adjustment") && mRaw->metadata.wbCoeffs) {
+    (*mRaw->metadata.wbCoeffs)[0] *= 256.0F / 527.0F;
+    (*mRaw->metadata.wbCoeffs)[2] *= 256.0F / 317.0F;
   }
 }
 
@@ -686,9 +696,11 @@ void NefDecoder::DecodeNikonSNef(ByteStream input) const {
     ThrowRDE("Whitebalance has bad values (%f, %f)",
              implicit_cast<double>(wb_r), implicit_cast<double>(wb_b));
 
-  mRaw->metadata.wbCoeffs[0] = wb_r;
-  mRaw->metadata.wbCoeffs[1] = 1.0F;
-  mRaw->metadata.wbCoeffs[2] = wb_b;
+  std::array<float, 4> wbCoeffs = {};
+  wbCoeffs[0] = wb_r;
+  wbCoeffs[1] = 1.0F;
+  wbCoeffs[2] = wb_b;
+  mRaw->metadata.wbCoeffs = wbCoeffs;
 
   auto inv_wb_r = static_cast<int>(1024.0F / wb_r);
   auto inv_wb_b = static_cast<int>(1024.0F / wb_b);

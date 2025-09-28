@@ -11393,6 +11393,7 @@
 			<Alias>DC-G90</Alias>
 			<Alias>DC-G91</Alias>
 			<Alias>DC-G95D</Alias>
+			<Alias>DC-G97</Alias>
 			<Alias>DC-G99</Alias>
 			<Alias>DC-G99D</Alias>
 		</Aliases>
@@ -11412,6 +11413,7 @@
 			<Alias>DC-G90</Alias>
 			<Alias>DC-G91</Alias>
 			<Alias>DC-G95D</Alias>
+			<Alias>DC-G97</Alias>
 			<Alias>DC-G99</Alias>
 			<Alias>DC-G99D</Alias>
 		</Aliases>
@@ -11422,9 +11424,6 @@
 				<ColorMatrixRow plane="2">-568 1415 5158</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
-	</Camera>
-	<Camera make="Panasonic" model="DC-G97" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DC-G97">Panasonic DC-G97</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G99M2" supported="unknown-no-samples">
 		<ID make="Panasonic" model="DC-G99M2">Panasonic DC-G99M2</ID>

@@ -22,10 +22,16 @@
 
 #pragma once
 
+#include "adt/Array1DRef.h"
+#include "adt/Array1DRefExtras.h"
+#include "adt/Array2DRef.h"
+#include "adt/CroppedArray2DRef.h"
 #include "common/RawImage.h"
+#include "decoders/RawDecoderException.h"
 #include "decompressors/AbstractDecompressor.h"
 #include <array>
 #include <cstdint>
+#include <vector>
 
 namespace rawspeed {
 
@@ -48,20 +54,57 @@ public:
 
   /// Decompressor parameters populated from tags. They remain constant after
   /// construction.
+  struct DecompressorParamsBuilder;
+
   struct DecompressorParams {
-    const Array1DRef<const uint32_t> stripLineOffsets;
-    const Array1DRef<const uint16_t> stripWidths;
-    const Array1DRef<const uint16_t> stripHeights;
-    const uint16_t horizontalStripCount;
-    const uint16_t verticalStripCount;
+    const Array1DRef<const Array1DRef<const uint8_t>> mStrips;
+    const Array1DRef<const iRectangle2D> mOutRect;
 
     const Bayer2x2 initialPrediction;
 
-    const uint16_t gammaClipVal;
+    DecompressorParams() = delete;
 
+  private:
+    friend struct DecompressorParamsBuilder;
+
+    DecompressorParams(Array1DRef<const Array1DRef<const uint8_t>> mStrips_,
+                       Array1DRef<const iRectangle2D> mOutRect_,
+                       Bayer2x2 initialPrediction_)
+        : mStrips(mStrips_), mOutRect(mOutRect_),
+          initialPrediction(initialPrediction_) {}
+  };
+
+  struct DecompressorParamsBuilder {
     const Array1DRef<const Array1DRef<const uint8_t>> mStrips;
+    const Bayer2x2 initialPrediction;
 
-    void validate() const;
+    const std::vector<iRectangle2D> mOutRects;
+
+    std::vector<iRectangle2D> static getOutRects(
+        iRectangle2D imgDim, Array1DRef<const uint32_t> stripLineOffsets,
+        Array1DRef<const uint16_t> stripWidths,
+        Array1DRef<const uint16_t> stripHeights);
+
+    DecompressorParamsBuilder(
+        iRectangle2D imgDim, Bayer2x2 initialPrediction_,
+        Array1DRef<const Array1DRef<const uint8_t>> mStrips_,
+        Array1DRef<const uint32_t> stripLineOffsets,
+        Array1DRef<const uint16_t> stripWidths,
+        Array1DRef<const uint16_t> stripHeights)
+        : mStrips(mStrips_), initialPrediction(initialPrediction_),
+          mOutRects(getOutRects(imgDim, stripLineOffsets, stripWidths,
+                                stripHeights)) {
+      if (mStrips.size() != implicit_cast<int>(mOutRects.size()))
+        ThrowRDE("Got different number of input strips vs output tiles");
+      for (const auto& strip : mStrips_) {
+        if (strip.size() == 0)
+          ThrowRDE("Got empty input strip");
+      }
+    }
+
+    [[nodiscard]] DecompressorParams getDecompressorParams() const {
+      return {mStrips, getAsArray1DRef(mOutRects), initialPrediction};
+    }
   };
 
   // Pre-cached Huffman decoded values for rapid lookup.
@@ -79,8 +122,8 @@ private:
 
   /// Thread safe function for decompressing a single data-stripstrip within a
   /// Rw2V8 raw image.
-  void decompressStrip(unsigned stripIdx, InternalHuffDecoder decoder,
-                       Array2DRef<uint16_t> outBuffer) const;
+  void decompressStrip(Array2DRef<uint16_t> out,
+                       InternalHuffDecoder decoder) const;
 
 public:
   PanasonicV8Decompressor(RawImage outputImg, DecompressorParams mParams_,

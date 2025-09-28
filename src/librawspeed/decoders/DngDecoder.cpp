@@ -510,7 +510,7 @@ RawImage DngDecoder::decodeRawInternal() {
 #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
   // Yeah, sure, here it would be just dumb to leave this for production :)
   if (mRaw->dim.x > 9536 || mRaw->dim.y > 7680) {
-    ThrowRDE("Unexpected image dimensions found: (%u; %u)", mRaw->dim.x,
+    ThrowRDE("Unexpected image dimensions found: (%i; %i)", mRaw->dim.x,
              mRaw->dim.y);
   }
 #endif
@@ -649,10 +649,12 @@ void DngDecoder::parseWhiteBalance() const {
     const TiffEntry* as_shot_neutral =
         mRootIFD->getEntryRecursive(TiffTag::ASSHOTNEUTRAL);
     if (as_shot_neutral->count == 3) {
+      std::array<float, 4> wbCoeffs = {};
       for (uint32_t i = 0; i < 3; i++) {
         float c = as_shot_neutral->getFloat(i);
-        mRaw->metadata.wbCoeffs[i] = (c > 0.0F) ? (1.0F / c) : 0.0F;
+        wbCoeffs[i] = (c > 0.0F) ? (1.0F / c) : 0.0F;
       }
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
     return;
   }
@@ -673,6 +675,8 @@ void DngDecoder::parseWhiteBalance() const {
             {x * Y / y, Y, (1 - x - y) * Y / y}};
 
         // Convert from XYZ to camera reference values first
+        std::array<float, 4> wbCoeffs = {};
+
         for (uint32_t i = 0; i < 3; i++) {
           float c = (float(mRaw->metadata.colorMatrix[(i * 3) + 0]) *
                      as_shot_white[0]) +
@@ -680,8 +684,9 @@ void DngDecoder::parseWhiteBalance() const {
                      as_shot_white[1]) +
                     (float(mRaw->metadata.colorMatrix[(i * 3) + 2]) *
                      as_shot_white[2]);
-          mRaw->metadata.wbCoeffs[i] = (c > 0.0F) ? (1.0F / c) : 0.0F;
+          wbCoeffs[i] = (c > 0.0F) ? (1.0F / c) : 0.0F;
         }
+        mRaw->metadata.wbCoeffs = wbCoeffs;
       }
     }
   }

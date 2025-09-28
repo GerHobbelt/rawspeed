@@ -135,9 +135,11 @@ void KdcDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
       if (kodakifd.hasEntryRecursive(TiffTag::KODAK_KDC_WB)) {
         const TiffEntry* wb = kodakifd.getEntryRecursive(TiffTag::KODAK_KDC_WB);
         if (wb->count == 3) {
-          mRaw->metadata.wbCoeffs[0] = wb->getFloat(0);
-          mRaw->metadata.wbCoeffs[1] = wb->getFloat(1);
-          mRaw->metadata.wbCoeffs[2] = wb->getFloat(2);
+          std::array<float, 4> wbCoeffs = {};
+          wbCoeffs[0] = wb->getFloat(0);
+          wbCoeffs[1] = wb->getFloat(1);
+          wbCoeffs[2] = wb->getFloat(2);
+          mRaw->metadata.wbCoeffs = wbCoeffs;
         }
       }
     } catch (const TiffParserException& e) {
@@ -149,15 +151,17 @@ void KdcDecoder::decodeMetaDataInternal(const CameraMetaData* meta) {
   if (mRootIFD->hasEntryRecursive(TiffTag::KODAKWB)) {
     const TiffEntry* wb = mRootIFD->getEntryRecursive(TiffTag::KODAKWB);
     if (wb->count == 734 || wb->count == 1502) {
-      mRaw->metadata.wbCoeffs[0] =
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] =
           static_cast<float>(((static_cast<uint16_t>(wb->getByte(148))) << 8) |
                              wb->getByte(149)) /
           256.0F;
-      mRaw->metadata.wbCoeffs[1] = 1.0F;
-      mRaw->metadata.wbCoeffs[2] =
+      wbCoeffs[1] = 1.0F;
+      wbCoeffs[2] =
           static_cast<float>(((static_cast<uint16_t>(wb->getByte(150))) << 8) |
                              wb->getByte(151)) /
           256.0F;
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   }
 }

@@ -394,9 +394,12 @@ bool Cr2Decoder::decodeCanonColorData() const {
   int offset = getWhiteBalanceOffsetInColorData(f);
 
   offset /= 2;
-  mRaw->metadata.wbCoeffs[0] = static_cast<float>(wb->getU16(offset + 0));
-  mRaw->metadata.wbCoeffs[1] = static_cast<float>(wb->getU16(offset + 1));
-  mRaw->metadata.wbCoeffs[2] = static_cast<float>(wb->getU16(offset + 3));
+
+  std::array<float, 4> wbCoeffs = {};
+  wbCoeffs[0] = static_cast<float>(wb->getU16(offset + 0));
+  wbCoeffs[1] = static_cast<float>(wb->getU16(offset + 1));
+  wbCoeffs[2] = static_cast<float>(wb->getU16(offset + 3));
+  mRaw->metadata.wbCoeffs = wbCoeffs;
 
   auto levelOffsets = getBlackAndWhiteLevelOffsetsInColorData(f, ver);
   if (!levelOffsets)
@@ -446,22 +449,23 @@ void Cr2Decoder::parseWhiteBalance() const {
                         : 0;
     wb_offset = wb_offset * 8 + 2;
 
-    mRaw->metadata.wbCoeffs[0] =
-        static_cast<float>(g9_wb->getU32(wb_offset + 1));
-    mRaw->metadata.wbCoeffs[1] =
-        (static_cast<float>(g9_wb->getU32(wb_offset + 0)) +
-         static_cast<float>(g9_wb->getU32(wb_offset + 3))) /
-        2.0F;
-    mRaw->metadata.wbCoeffs[2] =
-        static_cast<float>(g9_wb->getU32(wb_offset + 2));
+    std::array<float, 4> wbCoeffs = {};
+    wbCoeffs[0] = static_cast<float>(g9_wb->getU32(wb_offset + 1));
+    wbCoeffs[1] = (static_cast<float>(g9_wb->getU32(wb_offset + 0)) +
+                   static_cast<float>(g9_wb->getU32(wb_offset + 3))) /
+                  2.0F;
+    wbCoeffs[2] = static_cast<float>(g9_wb->getU32(wb_offset + 2));
+    mRaw->metadata.wbCoeffs = wbCoeffs;
   } else if (mRootIFD->hasEntryRecursive(static_cast<TiffTag>(0xa4))) {
     // WB for the old 1D and 1DS
     const TiffEntry* wb =
         mRootIFD->getEntryRecursive(static_cast<TiffTag>(0xa4));
     if (wb->count >= 3) {
-      mRaw->metadata.wbCoeffs[0] = wb->getFloat(0);
-      mRaw->metadata.wbCoeffs[1] = wb->getFloat(1);
-      mRaw->metadata.wbCoeffs[2] = wb->getFloat(2);
+      std::array<float, 4> wbCoeffs = {};
+      wbCoeffs[0] = wb->getFloat(0);
+      wbCoeffs[1] = wb->getFloat(1);
+      wbCoeffs[2] = wb->getFloat(2);
+      mRaw->metadata.wbCoeffs = wbCoeffs;
     }
   }
 }

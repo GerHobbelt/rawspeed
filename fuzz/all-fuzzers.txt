@@ -21,6 +21,7 @@ PanasonicV4DecompressorFuzzer
 PanasonicV5DecompressorFuzzer
 PanasonicV6DecompressorFuzzer
 PanasonicV7DecompressorFuzzer
+PanasonicV8DecompressorFuzzer
 PentaxDecompressorFuzzer
 PhaseOneDecompressorFuzzer
 PrefixCodeDecoderFuzzer-LUTWithLookupVsLUTWithTree

@@ -60,17 +60,17 @@ public:
     return x == rhs.x && y == rhs.y;
   }
 
-  constexpr bool operator>(const iPoint2D& rhs) const {
+  constexpr bool RAWSPEED_READONLY operator>(const iPoint2D& rhs) const {
     return x > rhs.x && y > rhs.y;
   }
-  constexpr bool operator<(const iPoint2D& rhs) const {
+  constexpr bool RAWSPEED_READONLY operator<(const iPoint2D& rhs) const {
     return x < rhs.x && y < rhs.y;
   }
 
-  constexpr bool operator>=(const iPoint2D& rhs) const {
+  constexpr bool RAWSPEED_READONLY operator>=(const iPoint2D& rhs) const {
     return x >= rhs.x && y >= rhs.y;
   }
-  constexpr bool operator<=(const iPoint2D& rhs) const {
+  constexpr bool RAWSPEED_READONLY operator<=(const iPoint2D& rhs) const {
     return x <= rhs.x && y <= rhs.y;
   }
 
@@ -87,7 +87,8 @@ public:
     return x_abs * y_abs;
   }
 
-  [[nodiscard]] constexpr bool isThisInside(const iPoint2D& rhs) const {
+  [[nodiscard]] constexpr bool RAWSPEED_READONLY
+  isThisInside(const iPoint2D& rhs) const {
     return *this <= rhs;
   }
 
@@ -127,20 +128,21 @@ public:
   [[nodiscard]] constexpr iPoint2D getBottomLeft() const {
     return pos + iPoint2D(0, dim.y);
   }
-  [[nodiscard]] constexpr bool hasPositiveArea() const {
+  [[nodiscard]] constexpr bool RAWSPEED_READONLY hasPositiveArea() const {
     return (dim.x > 0) && (dim.y > 0);
   }
 
-  [[nodiscard]] constexpr bool isPointInside(const iPoint2D& subPoint) const {
+  [[nodiscard]] constexpr bool RAWSPEED_READONLY
+  isPointInside(const iPoint2D& subPoint) const {
     return subPoint >= getTopLeft() && subPoint < getBottomRight();
   }
 
-  [[nodiscard]] constexpr bool
+  [[nodiscard]] constexpr bool RAWSPEED_READONLY
   isPointInsideInclusive(const iPoint2D& subPoint) const {
     return subPoint >= getTopLeft() && subPoint <= getBottomRight();
   }
 
-  [[nodiscard]] constexpr bool
+  [[nodiscard]] constexpr bool RAWSPEED_READONLY
   isThisInside(const iRectangle2D& superRect) const {
     return getTopLeft() >= superRect.getTopLeft() &&
            getBottomRight() <= superRect.getBottomRight();
@@ -219,7 +221,8 @@ public:
   iPoint2D dim{0, 0};
 };
 
-inline bool operator==(const iRectangle2D& a, const iRectangle2D b) {
+inline bool RAWSPEED_READONLY operator==(const iRectangle2D& a,
+                                         const iRectangle2D b) {
   return std::tie(a.pos, a.dim) == std::tie(b.pos, b.dim);
 }
 

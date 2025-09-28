@@ -199,11 +199,14 @@ std::string img_hash(const RawImage& r, bool noSamples) {
   }
   APPEND(&oss, "\n");
 
-  APPEND(&oss, "wbCoeffs: %f %f %f %f\n",
-         implicit_cast<double>(r->metadata.wbCoeffs[0]),
-         implicit_cast<double>(r->metadata.wbCoeffs[1]),
-         implicit_cast<double>(r->metadata.wbCoeffs[2]),
-         implicit_cast<double>(r->metadata.wbCoeffs[3]));
+  APPEND(&oss, "wbCoeffs:");
+  if (!r->metadata.wbCoeffs)
+    APPEND(&oss, " (none)");
+  else {
+    for (const auto& e : *r->metadata.wbCoeffs)
+      APPEND(&oss, " %f", implicit_cast<double>(e));
+  }
+  APPEND(&oss, "\n");
 
   APPEND(&oss, "colorMatrix:");
   if (r->metadata.colorMatrix.empty())

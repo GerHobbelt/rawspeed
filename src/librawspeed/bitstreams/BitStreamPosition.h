@@ -24,6 +24,7 @@
 #include "adt/Invariant.h"
 #include "bitstreams/BitStreams.h"
 #include "common/Common.h"
+#include <climits>
 
 namespace rawspeed {
 
