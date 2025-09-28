@@ -37,8 +37,8 @@
       <xs:enumeration value="Minolta"/>
       <xs:enumeration value="Nikon"/>
       <xs:enumeration value="Nokia"/>
-      <xs:enumeration value="Olympus"/>
       <xs:enumeration value="OM System"/>
+      <xs:enumeration value="Olympus"/>
       <xs:enumeration value="OnePlus"/>
       <xs:enumeration value="Panasonic"/>
       <xs:enumeration value="Paralenz"/>
@@ -449,9 +449,9 @@
       <xs:enumeration value="OLYMPUS CORPORATION"/>
       <xs:enumeration value="OLYMPUS IMAGING CORP."/>
       <xs:enumeration value="OLYMPUS OPTICAL CO.,LTD"/>
-      <xs:enumeration value="Olympus"/>
       <xs:enumeration value="OM Digital Solutions"/>
       <xs:enumeration value="OM System"/>
+      <xs:enumeration value="Olympus"/>
       <xs:enumeration value="OnePlus"/>
       <xs:enumeration value="PENTAX Corporation"/>
       <xs:enumeration value="PENTAX RICOH IMAGING"/>
@@ -466,13 +466,14 @@
       <xs:enumeration value="RoverShot"/>
       <xs:enumeration value="SAMSUNG DIGITAL IMA"/>
       <xs:enumeration value="SAMSUNG TECHWIN Co."/>
+      <xs:enumeration value="SAMSUNG TECHWIN"/>
       <xs:enumeration value="SAMSUNG"/>
       <xs:enumeration value="SEIKO EPSON CORP."/>
       <xs:enumeration value="SIGMA"/>
-      <xs:enumeration value="Sigma"/>
       <xs:enumeration value="SONY"/>
       <xs:enumeration value="ST Micro"/>
       <xs:enumeration value="Samsung"/>
+      <xs:enumeration value="Sigma"/>
       <xs:enumeration value="Sinar AG"/>
       <xs:enumeration value="Sinar Photography AG"/>
       <xs:enumeration value="Sinar"/>

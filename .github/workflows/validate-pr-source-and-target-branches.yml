@@ -23,7 +23,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd rawspeed
-          gh pr close --comment "Pull Requests should only be submitted to `develop` branch" ${{ github.event.number }}
+          gh pr close --comment "Pull Requests should only be submitted to 'develop' branch" ${{ github.event.number }}
           exit 1
       - if: github.event_name == 'pull_request_target' && github.head_ref == github.base_ref
         name: Close Pull if PR is not from a proper branch
