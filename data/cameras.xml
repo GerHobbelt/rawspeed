@@ -843,7 +843,7 @@
 			<Color x="0" y="1">RED</Color>
 			<Color x="1" y="1">GREEN</Color>
 		</CFA>
-		<Crop x="158" y="51" width="5634" height="3753"/>
+		<Crop x="158" y="52" width="5634" height="3752"/>
 		<BlackAreas>
 			<Vertical x="0" width="156"/>
 			<Horizontal y="2" height="48"/>
@@ -2978,7 +2978,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D200" mode="12bit-compressed" supported="no-samples">
+	<Camera make="NIKON CORPORATION" model="NIKON D200" mode="12bit-compressed">
 		<ID make="Nikon" model="D200">Nikon D200</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
@@ -7068,7 +7068,7 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-1MarkII">
 		<ID make="OM System" model="OM-1 Mark II">OM Digital Solutions OM-1 Mark II</ID>
-		<Crop x="0" y="0" width="0" height="0"/>
+		<Crop x="0" y="0" width="-12" height="0"/>
 		<Sensor black="254" white="4095"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -7080,7 +7080,7 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-3">
 		<ID make="OM System" model="OM-3">OM Digital Solutions OM-3</ID>
-		<Crop x="0" y="0" width="0" height="0"/>
+		<Crop x="0" y="0" width="-12" height="0"/>
 		<Sensor black="254" white="4095"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -7101,6 +7101,9 @@
 				<ColorMatrixRow plane="2">-519 1224 5166</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="OM Digital Solutions" model="OM-5MarkII" supported="unknown-no-samples">
+		<ID make="OM System" model="OM-5 Mark II">OM Digital Solutions OM-5 Mark II</ID>
 	</Camera>
 	<Camera make="OM Digital Solutions" model="TG-7">
 		<ID make="OM System" model="TG-7">OM Digital Solutions TG-7</ID>
@@ -12156,7 +12159,7 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="PENTAX" model="PENTAX K-r" decoder_version="3" supported="no-samples">
+	<Camera make="PENTAX" model="PENTAX K-r" decoder_version="3">
 		<ID make="Pentax" model="K-r">PENTAX K-r</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
@@ -12164,7 +12167,7 @@
 			<Color x="0" y="1">GREEN</Color>
 			<Color x="1" y="1">RED</Color>
 		</CFA>
-		<Crop x="2" y="2" width="-44" height="0"/>
+		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="64" white="4000"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -14401,8 +14404,26 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="SONY" model="ZV-E10M2" supported="unknown-no-samples">
+	<Camera make="SONY" model="ZV-E10M2">
 		<ID make="Sony" model="ZV-E10M2">Sony ZV-E10M2</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="-28" height="0"/>
+		<Sensor black="512" white="16380"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">6972 -2408 -600</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4330 12101 2515</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-388 1277 5847</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="SONY" model="ILME-FX2" supported="unknown-no-samples">
+		<ID make="Sony" model="ILME-FX2">Sony ILME-FX2</ID>
 	</Camera>
 	<Camera make="SONY" model="ILME-FX3">
 		<ID make="Sony" model="ILME-FX3">Sony ILME-FX3</ID>
@@ -15342,8 +15363,39 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="FUJIFILM" model="GFX100RF" supported="unknown-no-samples">
-		<ID make="Fujifilm" model="GFX100RF">Fujifilm GFX100RF</ID>
+	<Camera make="FUJIFILM" model="GFX100RF">
+		<ID make="Fujifilm" model="GFX100RF">Fujifilm GFX 100RF</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Sensor black="0" white="0"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">12806 -5779 -1110</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3546 11507 2318</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-177 996 5715</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="FUJIFILM" model="GFX100RF" mode="compressed">
+		<ID make="Fujifilm" model="GFX100RF">Fujifilm GFX 100RF</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Sensor black="0" white="0"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">12806 -5779 -1110</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3546 11507 2318</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-177 996 5715</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="FUJIFILM" model="X-Pro1">
 		<ID make="Fujifilm" model="X-Pro1">Fujifilm X-Pro1</ID>
@@ -16151,6 +16203,9 @@
 				<ColorMatrixRow plane="2">-580 1303 5980</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="FUJIFILM" model="X-E5" supported="unknown-no-samples">
+		<ID make="Fujifilm" model="X-E5">Fujifilm X-E5</ID>
 	</Camera>
 	<Camera make="FUJIFILM" model="X-S10">
 		<ID make="Fujifilm" model="X-S10">Fujifilm X-S10</ID>
@@ -17143,6 +17198,24 @@
 				<ColorMatrixRow plane="0">4516 -245 -37</ColorMatrixRow>
 				<ColorMatrixRow plane="1">-7020 14976 2173</ColorMatrixRow>
 				<ColorMatrixRow plane="2">-3206 4671 7087</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="Phase One A/S" model="P40+">
+		<ID make="Phase One" model="P40+">Phase One P40+</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="36" y="6" width="-16" height="-46"/>
+		<Sensor black="0" white="16383"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">8035 435 -962</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-6001 13872 2320</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-1159 3065 5434</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>

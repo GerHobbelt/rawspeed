@@ -25,25 +25,33 @@
 #include "adt/Array1DRef.h"
 #include "adt/Array1DRefExtras.h"
 #include "adt/Array2DRef.h"
+#include "adt/Bit.h"
+#include "adt/Casts.h"
 #include "adt/CroppedArray2DRef.h"
 #include "adt/Invariant.h"
+#include "adt/Optional.h"
 #include "adt/Point.h"
 #include "adt/TiledArray2DRef.h"
 #include "bitstreams/BitStream.h"
 #include "bitstreams/BitStreamer.h"
 #include "bitstreams/BitStreamerMSB.h" // IWYU pragma: keep
 #include "bitstreams/BitStreams.h"
+#include "codes/AbstractPrefixCode.h"
+#include "codes/AbstractPrefixCodeDecoder.h"
 #include "common/Common.h"
 #include "common/RawImage.h"
 #include "common/RawspeedException.h"
 #include "decoders/RawDecoderException.h"
+#include "io/ByteStream.h"
 #include "io/IOException.h"
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <climits>
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <numeric>
 #include <utility>
 #include <vector>
 
@@ -81,13 +89,12 @@ struct BitStreamerReversedSequentialReplenisher
       std::copy_n(currInput.begin(), BitStreamerTraits<Tag>::MaxProcessBytes,
                   tmp.begin());
 
-      // Reverse the order of bits within each byte using a bit-twiddle trick.
-      // Three operation bit reversal from:
-      // https://graphics.stanford.edu/~seander/bithacks.html#ReverseByteWith64BitsDiv
-      for (std::byte& b : tmp) {
-        b = std::byte{
-            uint8_t((uint8_t(b) * 0x0202020202ULL & 0x010884422010ULL) % 1023)};
-      }
+      std::array<uint8_t, 4> ints;
+      for (int i = 0; i != 4; ++i)
+        ints[i] = uint8_t(tmp(i));
+      ints = bitreverse_each(ints);
+      for (int i = 0; i != 4; ++i)
+        tmp(i) = std::byte{ints[i]};
 
       return tmpStorage;
     }
@@ -129,15 +136,15 @@ public:
 };
 
 /// Utility class for Panasonic V8 entropy decoding
-class PanasonicV8Decompressor::InternalHuffDecoder {
+class PanasonicV8Decompressor::InternalDecoder {
 private:
-  const Array1DRef<const HuffmanLUTEntry>
-      mLUT; // Reference to PanasonicV8Decompressor::mHuffmanLUT
+  // Reference to PanasonicV8Decompressor::mDecoderLUT
+  const Array1DRef<const DecoderLUTEntry> mLUT;
   BitStreamerRevMSB mBitPump;
 
 public:
-  InternalHuffDecoder(const Array1DRef<const HuffmanLUTEntry>& LUT,
-                      Array1DRef<const uint8_t> bitStream)
+  InternalDecoder(const Array1DRef<const DecoderLUTEntry>& LUT,
+                  Array1DRef<const uint8_t> bitStream)
       : mLUT(LUT), mBitPump(bitStream) {}
 
   int32_t decodeNextDiffValue();
@@ -160,17 +167,15 @@ evaluateConsecutiveTiles(const iRectangle2D rect, const iRectangle2D nextRect) {
   return Invalid;
 }
 
-void isValidImageGrid(iRectangle2D imgDim,
-                      Array1DRef<const iRectangle2D> rects) {
-  auto outPos = imgDim.pos;
+void isValidImageGrid(iPoint2D imgSize, Array1DRef<const iRectangle2D> rects) {
+  auto outPos = iPoint2D(0, 0);
+  const auto imgDim = iRectangle2D(outPos, imgSize);
 
   iRectangle2D rect = rects(0);
   if (rect.pos != outPos)
-    ThrowRDE("FIrst tile is out-of-order");
-  if (!rect.isThisInside(imgDim))
-    ThrowRDE("Tile isn't fully within the output image");
-  if (!rect.hasPositiveArea())
-    ThrowRDE("Got empty tile?");
+    ThrowRDE("First tile is out-of-order");
+  invariant(rect.isThisInside(imgDim));
+  invariant(rect.hasPositiveArea());
   outPos.x += rect.getWidth();
   for (int tileIdx = 1; tileIdx != rects.size(); ++tileIdx) {
     iRectangle2D nextRect = rects(tileIdx);
@@ -182,13 +187,13 @@ void isValidImageGrid(iRectangle2D imgDim,
       rect = nextRect;
       continue;
     case TileSequenceStatus::BeginsNewRow:
-      assert(outPos.x == imgDim.getRight());
+      if (outPos.x != imgDim.getRight())
+        ThrowRDE("Previous row has not been fully filled yet");
       outPos.x = 0;
       outPos.y += nextRect.getHeight();
       rect = nextRect;
       continue;
     case TileSequenceStatus::Invalid:
-      __builtin_unreachable();
       ThrowRDE("Invalid tiling config");
     }
   }
@@ -196,15 +201,107 @@ void isValidImageGrid(iRectangle2D imgDim,
     ThrowRDE("Tiles do not cover whole output image");
 }
 
+template <typename T>
+int bitsPerPixelNeeded(
+    Array1DRef<const PanasonicV8Decompressor::DecoderLUTEntry> mDecoderLUT,
+    T cb) {
+  invariant(mDecoderLUT.size() > 0);
+  const auto r = std::accumulate(
+      mDecoderLUT.begin(), mDecoderLUT.end(), Optional<int>(),
+      [cb](auto init, const PanasonicV8Decompressor::DecoderLUTEntry& e) {
+        if (e.isSentinel())
+          return init;
+        invariant(e.bitcount > 0);
+        const auto total = e.bitcount + e.diffCat;
+        invariant(total > 0);
+        init = init.has_value() ? cb(*init, total) : total;
+        return init;
+      });
+  const auto bit = *r;
+  invariant(bit > 0);
+  return bit;
+}
+
+int minBitsPerPixelNeeded(
+    Array1DRef<const PanasonicV8Decompressor::DecoderLUTEntry> mDecoderLUT) {
+  return bitsPerPixelNeeded(mDecoderLUT,
+                            [](auto a, auto b) { return std::min(a, b); });
+}
+
+int maxBitsPerPixelNeeded(
+    Array1DRef<const PanasonicV8Decompressor::DecoderLUTEntry> mDecoderLUT) {
+  return bitsPerPixelNeeded(mDecoderLUT,
+                            [](auto a, auto b) { return std::max(a, b); });
+}
+
 } // namespace
+
+std::vector<PanasonicV8Decompressor::DecoderLUTEntry>
+PanasonicV8Decompressor::DecompressorParamsBuilder::getDecoderLUT(
+    ByteStream stream) {
+  std::vector<PanasonicV8Decompressor::DecoderLUTEntry> mDecoderLUT;
+
+  const auto numSymbols = stream.getU16();
+  if (numSymbols < 1 || numSymbols > 17)
+    ThrowRDE("Unexpected number of symbols: %u", numSymbols);
+
+  struct Entry {
+    uint8_t bitcount;
+    uint16_t symbol, mask;
+    uint8_t codeValue;
+  };
+  std::vector<Entry> table;
+  table.reserve(numSymbols);
+
+  for (unsigned symbolIndex = 0; symbolIndex != numSymbols; ++symbolIndex) {
+    const auto len = stream.getU16(); // Number of bits in symbol
+    if (len < 1 || len > 16)
+      ThrowRDE("Unexpected symbol length");
+    const auto code = stream.getU16();
+    if (!isIntN<uint32_t>(code, len))
+      ThrowRDE("Bad symbol code");
+    Entry entry;
+    entry.bitcount = implicit_cast<uint8_t>(len);
+    entry.symbol = uint16_t(code << (16U - entry.bitcount));
+    entry.codeValue = implicit_cast<uint8_t>(symbolIndex);
+    entry.mask = uint16_t(
+        0xffffU << (16U -
+                    entry.bitcount)); // mask of the bits overlapping symbol
+    if (entry.bitcount == PanasonicV8Decompressor::DecoderLUTEntry().bitcount &&
+        entry.codeValue == PanasonicV8Decompressor::DecoderLUTEntry().diffCat)
+      ThrowRDE("Sentinel symbol encountered");
+    table.emplace_back(entry);
+  }
+  assert(table.size() == numSymbols);
+
+  // Cache of decoding results for all possible 16-bit values.
+  mDecoderLUT.resize(1 + UINT16_MAX);
+
+  // Populates LUT by checking for a bitwise match between each value and the
+  // codes recorded in the table.
+  for (unsigned li = 0; li < mDecoderLUT.size(); ++li) {
+    PanasonicV8Decompressor::DecoderLUTEntry& lutVal = mDecoderLUT[li];
+    for (const auto& ti : table) {
+      if ((uint16_t(li) & ti.mask) == ti.symbol) {
+        lutVal.bitcount = ti.bitcount;
+        lutVal.diffCat = ti.codeValue;
+        break; // NOTE: not a prefix code!
+      }
+    }
+  }
+
+  return mDecoderLUT;
+}
 
 std::vector<iRectangle2D>
 PanasonicV8Decompressor::DecompressorParamsBuilder::getOutRects(
-    iRectangle2D imgDim, Array1DRef<const uint32_t> stripLineOffsets,
+    iPoint2D imgSize, Array1DRef<const uint32_t> stripLineOffsets,
     Array1DRef<const uint16_t> stripWidths,
     Array1DRef<const uint16_t> stripHeights) {
-  if (!imgDim.hasPositiveArea())
+  if (!imgSize.hasPositiveArea())
     ThrowRDE("Empty image requested");
+  if (imgSize.x % 2 != 0 || imgSize.y % 2 != 0)
+    ThrowRDE("Image size is not multiple of 2");
   const int totalStrips = stripLineOffsets.size();
   if (stripWidths.size() != totalStrips || stripHeights.size() != totalStrips)
     ThrowRDE("Inputs have mismatched length");
@@ -219,30 +316,51 @@ PanasonicV8Decompressor::DecompressorParamsBuilder::getOutRects(
     const uint32_t stripOutputX = stripLineOffsets(stripIdx) & 0xFFFF;
     const uint32_t stripOutputY = stripLineOffsets(stripIdx) >> 16;
 
-    const auto out = iRectangle2D(iPoint2D(stripOutputX, stripOutputY),
-                                  iPoint2D(stripWidth, stripHeight));
+    const auto rect = iRectangle2D(iPoint2D(stripOutputX, stripOutputY),
+                                   iPoint2D(stripWidth, stripHeight));
+    const auto imgDim = iRectangle2D({0, 0}, imgSize);
 
-    mOutRects.emplace_back(out);
+    if (!rect.isThisInside(imgDim))
+      ThrowRDE("Tile isn't fully within the output image");
+    if (!rect.hasPositiveArea())
+      ThrowRDE("The tile is empty");
+
+    if (rect.pos.x % 2 != 0 || rect.pos.y % 2 != 0)
+      ThrowRDE("Tile position is not multiple of 2");
+    if (rect.dim.x % 2 != 0 || rect.dim.y % 2 != 0)
+      ThrowRDE("Tile size is not multiple of 2");
+
+    mOutRects.emplace_back(rect);
   }
 
-  isValidImageGrid(imgDim, getAsArray1DRef(mOutRects));
+  isValidImageGrid(imgSize, getAsArray1DRef(mOutRects));
   return mOutRects;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-PanasonicV8Decompressor::PanasonicV8Decompressor(
-    RawImage outputImg, DecompressorParams mParams_,
-    Array1DRef<const HuffmanLUTEntry> mHuffmanLUT_)
-    : mRawOutput(std::move(outputImg)), mParams(std::move(mParams_)),
-      mHuffmanLUT(mHuffmanLUT_) {
+PanasonicV8Decompressor::PanasonicV8Decompressor(RawImage outputImg,
+                                                 DecompressorParams mParams_)
+    : mRawOutput(std::move(outputImg)), mParams(std::move(mParams_)) {
   if (mRawOutput->getCpp() != 1 ||
       mRawOutput->getDataType() != RawImageType::UINT16 ||
       mRawOutput->getBpp() != sizeof(uint16_t)) {
     ThrowRDE("Unexpected component count / data type");
   }
-  if (!mRawOutput->dim.hasPositiveArea())
+  if (mRawOutput->dim != mParams.imgSize)
     ThrowRDE("Unexpected image dimensions");
+  const auto maxBpp = maxBitsPerPixelNeeded(mParams.mDecoderLUT);
+  if (maxBpp > 32) {
+    ThrowRDE("Single pixel decode may consume more than 32 bits");
+  }
+  const auto minBpp = minBitsPerPixelNeeded(mParams.mDecoderLUT);
+  for (int stripIdx = 0; stripIdx < mParams.mStrips.size(); ++stripIdx) {
+    const auto strip = mParams.mStrips(stripIdx);
+    const auto maxPixelsInStrip = (uint64_t{CHAR_BIT} * strip.size()) / minBpp;
+    const auto outRect = mParams.mOutRect(stripIdx);
+    if (outRect.dim.area() > maxPixelsInStrip)
+      ThrowRDE("Input strip is unsufficient to produce requested tile");
+  }
 }
 
 void PanasonicV8Decompressor::decompress() const {
@@ -267,7 +385,7 @@ void PanasonicV8Decompressor::decompress() const {
                            /*croppedHeight=*/outRect.dim.y)
                            .getAsArray2DRef();
 
-      InternalHuffDecoder decoder(mHuffmanLUT, strip);
+      InternalDecoder decoder(mParams.mDecoderLUT, strip);
 
       decompressStrip(out, decoder);
     } catch (const RawspeedException& err) {
@@ -280,8 +398,8 @@ void PanasonicV8Decompressor::decompress() const {
   }
 }
 
-void PanasonicV8Decompressor::decompressStrip(
-    const Array2DRef<uint16_t> out, InternalHuffDecoder decoder) const {
+void PanasonicV8Decompressor::decompressStrip(const Array2DRef<uint16_t> out,
+                                              InternalDecoder decoder) const {
   Bayer2x2 predictedStorage = mParams.initialPrediction;
   const auto pred = Array2DRef(predictedStorage.data(), 2, 2);
 
@@ -315,7 +433,6 @@ void PanasonicV8Decompressor::decompressStrip(
         for (int i = 0; i != 2; ++i) {
           const int32_t diff = decoder.decodeNextDiffValue();
           const int32_t decodedValue = pred(i, j) + diff;
-          invariant(decodedValue > 0);
           pred(i, j) = uint16_t(std::clamp(
               decodedValue, 0, int32_t(std::numeric_limits<uint16_t>::max())));
           outBlock(i, j) = pred(i, j);
@@ -332,35 +449,24 @@ void PanasonicV8Decompressor::decompressStrip(
   }
 }
 
-int32_t inline PanasonicV8Decompressor::InternalHuffDecoder::
-    decodeNextDiffValue() {
+int32_t inline PanasonicV8Decompressor::InternalDecoder::decodeNextDiffValue() {
   // Retrieve the difference category, which indicates magnitude of the
   // difference between the predicted and actual value.
-  const auto next16 = uint16_t(mBitPump.peekBits(16));
-  const auto& [bits, diffCat] = mLUT(next16);
-  if (diffCat == 0 && bits == 7)
-    ThrowRDE("Huffman decoding encountered an invalid value!");
-  mBitPump.skipBits(bits); // Skip the bits that encoded the difference category
+  mBitPump.fill(32);
+  const auto next16 = uint16_t(mBitPump.peekBitsNoFill(16));
+  invariant(mLUT.size() == 1 + UINT16_MAX);
+  const auto& [codeLen, codeValue] = mLUT(next16);
+  if (codeValue == 0 && codeLen == 7)
+    ThrowRDE("Decoding encountered an invalid value!");
+  // Skip the bits that encoded the difference category
+  mBitPump.skipBitsNoFill(codeLen);
+  int diffLen = codeValue;
 
-  if (diffCat > 0) {
-    // Decode difference value. The scheme here encodes signed integers in a
-    // manner similar to offset binary encoding. Here, the encoding is biased by
-    // the difference category such that abs(diff) is in the range
-    // [2^{diffCat-1}, 2^{diffCat}).
-    const uint32_t rawDiffBits = mBitPump.getBits(diffCat);
-    const uint32_t sign = rawDiffBits >> (diffCat - 1);
-    const uint32_t val = rawDiffBits << 0;
+  if (diffLen == 0)
+    return 0;
 
-    // In comments below, n = diffCat
-    if (sign == 1)
-      // Positive value in range [2^{n-1}, 2^{n})
-      return val;
-    // Negative value in interval (-2^{n}, -2^{n-1}]
-    return static_cast<int32_t>(val) + static_cast<int32_t>(~0U << diffCat) + 1;
-  }
-  // diffBitCount of zero indicates no difference (next pixel is same as
-  // predicted)
-  return 0;
+  const uint32_t diff = mBitPump.getBitsNoFill(diffLen);
+  return AbstractPrefixCodeDecoder<BaselineCodeTag>::extend(diff, diffLen);
 }
 
 } // namespace rawspeed

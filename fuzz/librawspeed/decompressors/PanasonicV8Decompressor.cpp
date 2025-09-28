@@ -77,16 +77,16 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
     uint32_t numStripLineOffsets = bs.getU32();
     uint32_t numStripWidths = bs.getU32();
     uint32_t numStripHeights = bs.getU32();
-    uint32_t numHuffmanLUTEntries = bs.getU32();
+    uint32_t numDefineCodesSize = bs.getU32();
 
     auto stripSizes = bs.getStream(numStrips, sizeof(uint32_t));
     auto stripLineOffsetsInput =
         bs.getStream(numStripLineOffsets, sizeof(uint32_t));
     auto stripWidthsInput = bs.getStream(numStripWidths, sizeof(uint16_t));
     auto stripHeightsInput = bs.getStream(numStripHeights, sizeof(uint16_t));
-    auto huffmanLUTEntriesInput =
-        bs.getStream(numHuffmanLUTEntries, 2 * sizeof(uint8_t));
+    auto defineCodes = bs.getStream(numDefineCodesSize);
     const auto initialPrediction = bs.getArray<uint16_t, 4>();
+    const auto imgDim = bs.getArray<int, 2>();
 
     // The rest of the bs are the input strips.
 
@@ -113,26 +113,12 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
     auto stripHeights = stripHeightsInput.getVector<uint16_t>(numStripHeights);
     stripHeights.reserve(1); // Array1DRef does not like nullptr's.
 
-    const auto imgDim = iRectangle2D({0, 0}, mRaw->dim);
-
     PanasonicV8Decompressor::DecompressorParamsBuilder builder(
-        imgDim, initialPrediction, getAsArray1DRef(strips),
+        {imgDim[0], imgDim[1]}, initialPrediction, getAsArray1DRef(strips),
         getAsArray1DRef(stripLineOffsets), getAsArray1DRef(stripWidths),
-        getAsArray1DRef(stripHeights));
+        getAsArray1DRef(stripHeights), defineCodes);
 
-    std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> huffmanLUT;
-    huffmanLUT.reserve(std::max(1U, numHuffmanLUTEntries));
-    for (uint32_t entryIdx = 0; entryIdx < numHuffmanLUTEntries; ++entryIdx) {
-      const auto bitcount = huffmanLUTEntriesInput.get<uint8_t>();
-      const auto diffCat = huffmanLUTEntriesInput.get<uint8_t>();
-
-      huffmanLUT.emplace_back(PanasonicV8Decompressor::HuffmanLUTEntry{
-          .bitcount = bitcount, .diffCat = diffCat});
-    }
-    invariant(huffmanLUTEntriesInput.getRemainSize() == 0);
-
-    PanasonicV8Decompressor v8(mRaw, builder.getDecompressorParams(),
-                               getAsArray1DRef(huffmanLUT));
+    PanasonicV8Decompressor v8(mRaw, builder.getDecompressorParams());
     mRaw->createData();
     v8.decompress();
     MSan::CheckMemIsInitialized(mRaw->getByteDataAsUncroppedArray2DRef());

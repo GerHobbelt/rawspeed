@@ -24,10 +24,12 @@
 #include "adt/Casts.h"
 #include "adt/Invariant.h"
 #include <algorithm>
+#include <array>
 #include <bit>
 #include <climits>
 #include <concepts>
 #include <cstdint>
+#include <cstring>
 #include <type_traits>
 
 namespace rawspeed {
@@ -132,6 +134,42 @@ constexpr typename std::make_signed_t<T>
   const T SpareSignBits = bitwidth<T>() - nBits;
   using SignedT = std::make_signed_t<T>;
   return static_cast<SignedT>(value << SpareSignBits) >> SpareSignBits;
+}
+
+template <class T>
+  requires std::same_as<T, uint8_t>
+T bitreverse(const T v) {
+#if __has_builtin(__builtin_bitreverse8)
+  return __builtin_bitreverse8(v);
+#endif
+  // Reverse the order of bits within each byte using a bit-twiddle trick.
+  // Three operation bit reversal from:
+  // https://graphics.stanford.edu/~seander/bithacks.html#ReverseByteWith64BitsDiv
+  return uint8_t((uint8_t(v) * 0x0202020202ULL & 0x010884422010ULL) % 1023);
+}
+
+#if __has_builtin(__builtin_bitreverse32)
+template <class T>
+  requires std::same_as<T, uint32_t>
+T bitreverse(const T v) {
+  return __builtin_bitreverse32(v);
+}
+#endif
+
+template <class T>
+  requires std::same_as<T, uint8_t>
+std::array<T, 4> bitreverse_each(std::array<T, 4> x) {
+#if !__has_builtin(__builtin_bitreverse32)
+  for (T& e : x)
+    e = bitreverse(e);
+#else
+  uint32_t tmp;
+  std::memcpy(&tmp, x.data(), sizeof(uint32_t));
+  tmp = bitreverse(tmp);
+  tmp = __builtin_bswap32(tmp);
+  std::memcpy(x.data(), &tmp, sizeof(uint32_t));
+#endif
+  return x;
 }
 
 } // namespace rawspeed

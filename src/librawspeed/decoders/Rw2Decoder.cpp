@@ -97,8 +97,8 @@ struct DecompressorV8Params {
 
   PanasonicV8Decompressor::Bayer2x2 initialPrediction;
 
-  /// Huffman decoding shift down value. Appears to be unused.
-  std::vector<uint16_t> huffShiftDown;
+  /// Decoding shift down value. Appears to be unused.
+  std::vector<uint16_t> shiftDown;
 
   uint16_t gammaClipVal;
 
@@ -129,7 +129,7 @@ void DecompressorV8Params::validate() const {
     ThrowRDE("Strip bit length list does not have enough entries for the "
              "number of strips!");
 
-  if (std::any_of(huffShiftDown.begin(), huffShiftDown.end(),
+  if (std::any_of(shiftDown.begin(), shiftDown.end(),
                   [](uint16_t x) { return x != 0; })) {
     ThrowRDE("Non-zero shift down value encountered! Shift down decoding has "
              "never been tested!");
@@ -172,51 +172,12 @@ DecompressorV8Params::DecompressorV8Params(const TiffIFD& ifd) {
   initialPrediction[3] =
       ifd.getEntry(TiffTag::PANASONIC_V8_INIT_PRED_BLUE)->getU16();
 
-  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_HUF_SHIFT_DOWN,
-                         huffShiftDown);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_HUF_SHIFT_DOWN, shiftDown);
 
   gammaClipVal = ifd.getEntry(TiffTag::PANASONIC_V8_CLIP_VAL)->getU16();
   // NOLINTEND(cppcoreguidelines-prefer-member-initializer)
 
   validate();
-}
-
-std::vector<PanasonicV8Decompressor::HuffmanLUTEntry>
-populateHuffmanLUT(const TiffIFD& ifd) {
-  std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> mHuffmanLUT;
-
-  ByteStream stream = ifd.getEntry(TiffTag::PANASONIC_V8_HUF_TABLE)->getData();
-
-  struct HuffEntry {
-    uint16_t bitcount, symbol, mask;
-  };
-  std::vector<HuffEntry> huffTable(stream.getU16());
-
-  for (HuffEntry& entry : huffTable) {
-    entry.bitcount = stream.getU16(); // Number of bits in symbol
-    entry.symbol = uint16_t(stream.getU16() << (16U - entry.bitcount));
-    entry.mask = uint16_t(
-        0xffffU << (16U -
-                    entry.bitcount)); // mask of the bits overlapping symbol
-  }
-
-  // Cache of Huffman table results for all possible 16-bit values.
-  mHuffmanLUT.resize(1 + UINT16_MAX);
-
-  // Populates LUT by checking for a bitwise match between each value and the
-  // prefix codes recorded in the table.
-  for (unsigned li = 0; li < mHuffmanLUT.size(); ++li) {
-    PanasonicV8Decompressor::HuffmanLUTEntry& lutVal = mHuffmanLUT[li];
-    for (unsigned ti = 0; ti < huffTable.size(); ++ti) {
-      if ((uint16_t(li) & huffTable[ti].mask) == huffTable[ti].symbol) {
-        lutVal.bitcount = uint8_t(huffTable[ti].bitcount);
-        lutVal.diffCat = uint8_t(ti);
-        break;
-      }
-    }
-  }
-
-  return mHuffmanLUT;
 }
 
 /// Maybe the most complicated part of the entire file format, and seemingly,
@@ -285,22 +246,18 @@ RawImage Rw2Decoder::decodeRawV8(const TiffIFD& raw) const {
     ThrowRDE("Unexpected CFA, only RGGB is supported");
 
   const DecompressorV8Params mParams(raw);
-  const std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> mHuffmanLUT =
-      populateHuffmanLUT(raw);
   populateGammaLUT(mParams, raw);
   const std::vector<Array1DRef<const uint8_t>> mStrips =
       getInputStrips(mParams, mFile);
 
-  const auto imgDim = iRectangle2D({0, 0}, mRaw->dim);
-
   PanasonicV8Decompressor::DecompressorParamsBuilder b(
-      imgDim, mParams.initialPrediction, getAsArray1DRef(mStrips),
+      mRaw->dim, mParams.initialPrediction, getAsArray1DRef(mStrips),
       getAsArray1DRef(mParams.stripLineOffsets),
       getAsArray1DRef(mParams.stripWidths),
-      getAsArray1DRef(mParams.stripHeights));
+      getAsArray1DRef(mParams.stripHeights),
+      raw.getEntry(TiffTag::PANASONIC_V8_HUF_TABLE)->getData());
 
-  PanasonicV8Decompressor v8(mRaw, b.getDecompressorParams(),
-                             getAsArray1DRef(mHuffmanLUT));
+  PanasonicV8Decompressor v8(mRaw, b.getDecompressorParams());
   mRaw->createData();
   v8.decompress();
   return mRaw;
