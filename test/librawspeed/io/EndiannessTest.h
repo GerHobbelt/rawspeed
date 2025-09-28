@@ -25,6 +25,7 @@
 
 namespace rawspeed_test {
 
+// NOLINTNEXTLINE(google-build-namespaces)
 namespace {
 
 template <typename T> struct intPair final {
@@ -34,7 +35,7 @@ template <typename T> struct intPair final {
 
 using ushort16Type = intPair<uint16_t>;
 using ushort16TType = std::tuple<ushort16Type, bool>;
-static const ushort16Type ushort16Values[] = {
+const ushort16Type ushort16Values[] = {
     {0x01cd, 0xcd01}, {0x024e, 0x4e02}, {0x0726, 0x2607}, {0x07e3, 0xe307},
     {0x0857, 0x5708}, {0x0a0c, 0x0c0a}, {0x0a3c, 0x3c0a}, {0x0a5a, 0x5a0a},
     {0x0aac, 0xac0a}, {0x0bbb, 0xbb0b}, {0x0cf3, 0xf30c}, {0x0d13, 0x130d},
@@ -103,7 +104,7 @@ static const ushort16Type ushort16Values[] = {
 
 using uint32Type = intPair<uint32_t>;
 using uint32TType = std::tuple<uint32Type, bool>;
-static const uint32Type uint32Values[] = {
+const uint32Type uint32Values[] = {
     {0x017c2230, 0x30227c01}, {0x03b26f3a, 0x3a6fb203},
     {0x03e67a66, 0x667ae603}, {0x073bac8d, 0x8dac3b07},
     {0x083548ff, 0xff483508}, {0x086d9c35, 0x359c6d08},
@@ -236,7 +237,7 @@ static const uint32Type uint32Values[] = {
 
 using uint64Type = intPair<uint64_t>;
 using uint64TType = std::tuple<uint64Type, bool>;
-static const uint64Type uint64Values[] = {
+const uint64Type uint64Values[] = {
     {0x01a4f185910d9936, 0x36990d9185f1a401},
     {0x030d4fdc9f4011b5, 0xb511409fdc4f0d03},
     {0x034e6547a3d92e80, 0x802ed9a347654e03},

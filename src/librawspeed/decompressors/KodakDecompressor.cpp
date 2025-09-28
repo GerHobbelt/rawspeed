@@ -38,7 +38,7 @@
 #include <utility>
 
 #if __has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__)
-#include <sanitizer/asan_interface.h>
+#include <sanitizer/common_interface_defs.h>
 #endif
 
 namespace rawspeed {

@@ -39,6 +39,7 @@ template <typename T>
 
 namespace rawspeed_test {
 
+// NOLINTNEXTLINE(google-build-namespaces)
 namespace {
 
 template <typename T>
@@ -122,7 +123,7 @@ INSTANTIATE_TEST_SUITE_P(Unsigned, TwoRangesTest,
                                           testing::Range(0, 3),
                                           testing::Range(0U, 3U)));
 
-static const std::set<twoRangesType> AllOverlapped{
+const std::set<twoRangesType> AllOverlapped{
     std::make_tuple(0, 0, 0, 0), std::make_tuple(0, 0, 0, 1),
     std::make_tuple(0, 0, 0, 2), std::make_tuple(0, 1, 0, 0),
     std::make_tuple(0, 1, 0, 1), std::make_tuple(0, 1, 0, 2),

@@ -213,7 +213,7 @@ protected:
   std::vector<typename Spline<T>::Segment> gotSegments;
   std::vector<T> interpolated;
 };
-static const identityType identityValues[] = {
+const identityType identityValues[] = {
     make_tuple(std::array<rawspeed::iPoint2D, 2>{{{0, 0}, {65535, 65535}}},
                std::vector<std::array<double, 4>>{{{0.0, 1.0, 0.0, 0.0}}}),
     make_tuple(
@@ -311,7 +311,7 @@ protected:
   std::vector<int> expected;
   std::vector<T> got;
 };
-static const calculateStepsType calculateStepsValues[] = {
+const calculateStepsType calculateStepsValues[] = {
     // clang-format off
     make_tuple(0, std::vector<int>{0, 65535}),
     make_tuple(1, std::vector<int>{0, 32768, 65535}),
@@ -406,7 +406,7 @@ protected:
 };
 
 constexpr auto NumExtraSteps = 3;
-static const auto constantValues =
+const auto constantValues =
     ::testing::Combine(::testing::ValuesIn(calculateSteps(NumExtraSteps)),
                        ::testing::Range(0, 1 + NumExtraSteps));
 
@@ -505,7 +505,7 @@ protected:
 };
 
 using Sin2PiRefTest = ReferenceTest<SinReferenceTest<2, 1>>;
-static const referenceType sin2PiRefValues[] = {
+const referenceType sin2PiRefValues[] = {
     // clang-format off
     make_tuple(0,    1.0E-00),
     make_tuple(1,    1.0E+01), // FIXME: should be 1.0E-00
@@ -529,7 +529,7 @@ INSTANTIATE_TEST_SUITE_P(Sin2Pi, Sin2PiRefTest,
 TEST_P(Sin2PiRefTest, NearlyMatchesReference) { check(); }
 
 using SinPiRefTest = ReferenceTest<SinReferenceTest<1, 1>>;
-static const referenceType sinPiRefValues[] = {
+const referenceType sinPiRefValues[] = {
     // clang-format off
     make_tuple(0,  1.0E-00),
     make_tuple(1,  1.0E-01),

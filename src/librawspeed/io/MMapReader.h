@@ -33,9 +33,9 @@ class MMapReader final {
   size_t length;
 
 public:
-  MMapReader(const std::string& fname);
+  explicit MMapReader(const std::string& fname);
 
-  Buffer getAsBuffer() const;
+  [[nodiscard]] Buffer getAsBuffer() const;
 
   ~MMapReader();
 };

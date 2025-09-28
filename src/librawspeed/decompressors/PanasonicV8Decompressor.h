@@ -24,10 +24,8 @@
 
 #include "common/RawImage.h"
 #include "decompressors/AbstractDecompressor.h"
-#include "tiff/TiffIFD.h"
 #include <array>
 #include <cstdint>
-#include <vector>
 
 namespace rawspeed {
 
@@ -42,54 +40,51 @@ namespace rawspeed {
 /// actual value, allowing the actual value to be reconstructed.
 class PanasonicV8Decompressor final : public AbstractDecompressor {
 private:
-  Buffer mInputFile;
   mutable RawImage mRawOutput;
 
+public:
   /// Four values, one for each component of the sensor's color filter array.
   using Bayer2x2 = std::array<uint16_t, 4>;
 
   /// Decompressor parameters populated from tags. They remain constant after
   /// construction.
   struct DecompressorParams {
-    std::vector<uint32_t> stripByteOffsets, stripLineOffsets, stripBitLengths;
-    std::vector<uint16_t> stripWidths, stripHeights;
-    uint16_t horizontalStripCount, verticalStripCount;
+    const Array1DRef<const uint32_t> stripLineOffsets;
+    const Array1DRef<const uint16_t> stripWidths;
+    const Array1DRef<const uint16_t> stripHeights;
+    const uint16_t horizontalStripCount;
+    const uint16_t verticalStripCount;
 
-    Bayer2x2 initialPrediction;
+    const Bayer2x2 initialPrediction;
 
-    /// Huffman decoding shift down value. Appears to be unused.
-    std::vector<uint16_t> huffShiftDown;
+    const uint16_t gammaClipVal;
 
-    uint16_t gammaClipVal;
-  } mParams;
+    const Array1DRef<const Array1DRef<const uint8_t>> mStrips;
+
+    void validate() const;
+  };
 
   // Pre-cached Huffman decoded values for rapid lookup.
   struct HuffmanLUTEntry {
-    uint8_t bitcount = 7, diffCat = 0;
+    uint8_t bitcount = 7;
+    uint8_t diffCat = 0;
   };
-  using HuffmanLUT = std::vector<HuffmanLUTEntry>;
-  HuffmanLUT mHuffmanLUT;
 
-  // Lookup table for the raw's gamma curve. Appears to be unused.
-  // All known samples utilize an identity function.
-  std::vector<uint16_t> mGammaLUT;
+private:
+  const DecompressorParams mParams;
+  const Array1DRef<const HuffmanLUTEntry> mHuffmanLUT;
 
   /// Huffman decoder helper class. Defined only in the cpp file.
   class InternalHuffDecoder;
 
   /// Thread safe function for decompressing a single data-stripstrip within a
   /// Rw2V8 raw image.
-  void decompressStrip(const unsigned stripIdx, InternalHuffDecoder decoder,
+  void decompressStrip(unsigned stripIdx, InternalHuffDecoder decoder,
                        Array2DRef<uint16_t> outBuffer) const;
 
-  // Helpers called from the constructor
-  void validateParams();
-  void populateHuffmanLUT(const TiffIFD& ifd);
-  void populateGammaLUT(const TiffIFD& ifd);
-
 public:
-  PanasonicV8Decompressor(Buffer inputFile, RawImage outputImg,
-                          const TiffIFD& ifd);
+  PanasonicV8Decompressor(RawImage outputImg, DecompressorParams mParams_,
+                          Array1DRef<const HuffmanLUTEntry> mHuffmanLUT_);
 
   /// Run the decompressor on the provided raw image
   void decompress() const;

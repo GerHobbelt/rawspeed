@@ -1618,13 +1618,13 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Canon" model="Canon EOS M200" supported="no">
+	<Camera make="Canon" model="Canon EOS M200" supported="unknown-no-samples">
 		<ID make="Canon" model="EOS M200">Canon EOS M200</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon EOS R" supported="no">
 		<ID make="Canon" model="EOS R">Canon EOS R</ID>
 	</Camera>
-	<Camera make="Canon" model="Canon EOS Ra" supported="no">
+	<Camera make="Canon" model="Canon EOS Ra" supported="unknown-no-samples">
 		<ID make="Canon" model="EOS Ra">Canon EOS Ra</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon EOS RP" supported="no">
@@ -1639,10 +1639,10 @@
 	<Camera make="Canon" model="Canon EOS R5" supported="no">
 		<ID make="Canon" model="EOS R5">Canon EOS R5</ID>
 	</Camera>
-	<Camera make="Canon" model="Canon EOS R5m2" supported="unknown-no-samples">
+	<Camera make="Canon" model="Canon EOS R5m2" supported="no">
 		<ID make="Canon" model="EOS R5 Mark II">Canon EOS R5 Mark II</ID>
 	</Camera>
-	<Camera make="Canon" model="Canon EOS R5 C" supported="no">
+	<Camera make="Canon" model="Canon EOS R5 C" supported="unknown-no-samples">
 		<ID make="Canon" model="EOS R5 C">Canon EOS R5 C</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon EOS R6" supported="no">
@@ -7056,12 +7056,6 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-1">
 		<ID make="OM System" model="OM-1">OM Digital Solutions OM-1</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
 		<Crop x="0" y="0" width="-12" height="0"/>
 		<Sensor black="254" white="4000"/>
 		<ColorMatrices>
@@ -7074,12 +7068,6 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-1MarkII">
 		<ID make="OM System" model="OM-1 Mark II">OM Digital Solutions OM-1 Mark II</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="254" white="4095"/>
 		<ColorMatrices>
@@ -7092,12 +7080,6 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-3">
 		<ID make="OM System" model="OM-3">OM Digital Solutions OM-3</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="254" white="4095"/>
 		<ColorMatrices>
@@ -7122,12 +7104,6 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="TG-7">
 		<ID make="OM System" model="TG-7">OM Digital Solutions TG-7</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">GREEN</Color>
-			<Color x="1" y="0">RED</Color>
-			<Color x="0" y="1">BLUE</Color>
-			<Color x="1" y="1">GREEN</Color>
-		</CFA>
 		<Crop x="0" y="0" width="-24" height="0"/>
 		<Sensor black="257" white="4000"/>
 		<ColorMatrices>
@@ -10862,12 +10838,6 @@
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1RM2">
 		<ID make="Panasonic" model="DC-S1RM2">Panasonic DC-S1RM2</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>
@@ -10880,12 +10850,6 @@
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1RM2" mode="3:2">
 		<ID make="Panasonic" model="DC-S1RM2">Panasonic DC-S1RM2</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>

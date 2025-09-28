@@ -49,6 +49,7 @@ protected:
   [[nodiscard]] int getDecoderVersion() const override { return 3; }
 
 private:
+  [[nodiscard]] RawImage decodeRawV8(const TiffIFD& raw) const;
   void parseCFA() const;
   [[nodiscard]] const TiffIFD* getRaw() const;
   [[nodiscard]] std::string guessMode() const;

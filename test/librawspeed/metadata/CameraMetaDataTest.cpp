@@ -35,7 +35,7 @@ namespace {
 
 #ifdef HAVE_PUGIXML
 
-static const std::string camfile(RAWSPEED_SOURCE_DIR "/data/cameras.xml");
+const std::string camfile(RAWSPEED_SOURCE_DIR "/data/cameras.xml");
 
 TEST(CameraMetaDataTest, CompileTimeCanInherit) {
   struct MyCameraMetaData final : public CameraMetaData {};

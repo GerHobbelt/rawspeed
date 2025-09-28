@@ -19,14 +19,11 @@
 */
 
 #include "RawSpeed-API.h"
-#include "adt/AlignedAllocator.h"
 #include "adt/Array1DRef.h"
 #include "adt/Array2DRef.h"
 #include "adt/Casts.h"
-#include "adt/DefaultInitAllocatorAdaptor.h"
 #include "adt/NotARational.h"
 #include "io/FileIOException.h"
-#include "io/MMapReader.h"
 #include "md5.h"
 #include <array>
 #include <bit>
@@ -46,9 +43,17 @@
 #include <sstream>
 #include <string>
 #include <string_view>
-#include <tuple>
 #include <type_traits>
 #include <vector>
+
+#if !defined(_WIN32) &&                                                        \
+    !(__has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__))
+#include "io/MMapReader.h"
+#else
+#include "adt/AlignedAllocator.h"
+#include "adt/DefaultInitAllocatorAdaptor.h"
+#include <tuple>
+#endif
 
 #if !defined(__has_feature) || !__has_feature(thread_sanitizer)
 #include <iomanip>

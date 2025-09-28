@@ -47,14 +47,14 @@ namespace rawspeed_test {
 
 namespace {
 
-static constexpr iPoint2D::area_type maxVal =
+constexpr iPoint2D::area_type maxVal =
     numeric_limits<iPoint2D::value_type>::max();
-static constexpr iPoint2D::area_type minVal =
+constexpr iPoint2D::area_type minVal =
     numeric_limits<iPoint2D::value_type>::min();
-static constexpr iPoint2D::area_type absMinVal = -minVal;
-static constexpr iPoint2D::area_type maxAreaVal = maxVal * maxVal;
-static constexpr iPoint2D::area_type minAreaVal = absMinVal * absMinVal;
-static constexpr iPoint2D::area_type mixAreaVal = maxVal * absMinVal;
+constexpr iPoint2D::area_type absMinVal = -minVal;
+constexpr iPoint2D::area_type maxAreaVal = maxVal * maxVal;
+constexpr iPoint2D::area_type minAreaVal = absMinVal * absMinVal;
+constexpr iPoint2D::area_type mixAreaVal = maxVal * absMinVal;
 
 TEST(PointTest, Constructor) {
   int x = -10, y = 15;
@@ -189,7 +189,7 @@ make_pair($(($i+$k)), $(($j+$q)))),";
   done;
 done;
 */
-static const Six valueSum[]{
+const Six valueSum[]{
     make_tuple(make_pair(-5, -5), make_pair(-5, -5), make_pair(-10, -10)),
     make_tuple(make_pair(-5, -5), make_pair(-5, 0), make_pair(-10, -5)),
     make_tuple(make_pair(-5, -5), make_pair(-5, 5), make_pair(-10, 0)),
@@ -339,7 +339,7 @@ protected:
 INSTANTIATE_TEST_SUITE_P(HasPositiveAreaTest, HasPositiveAreaTest,
                          ::testing::Combine(::testing::Range(-2, 3),
                                             ::testing::Range(-2, 3)));
-static const iPoint2D PositiveAreaData[] = {
+const iPoint2D PositiveAreaData[] = {
     {1, 1},
     {1, 2},
     {2, 1},
@@ -387,7 +387,7 @@ do
   done;
 done;
 */
-static const areaType valueArea[]{
+const areaType valueArea[]{
     make_tuple(make_pair(-5, -5), 25),
     make_tuple(make_pair(-5, 0), 0),
     make_tuple(make_pair(-5, 5), 25),
@@ -506,7 +506,7 @@ do
   done;
 done;
 */
-static const operatorsType operatorsValues[]{
+const operatorsType operatorsValues[]{
     make_tuple(make_pair(-1, -1), make_pair(-1, -1), true, false, false, true,
                true),
     make_tuple(make_pair(-1, -1), make_pair(-1, 0), false, false, false, true,
@@ -721,7 +721,7 @@ make_pair($(($i<=$k?$i:$k)), $(($j<=$q?$j:$q)))),";
   done;
 done;
 */
-static const Six smallestValues[]{
+const Six smallestValues[]{
     make_tuple(make_pair(-5, -5), make_pair(-5, -5), make_pair(-5, -5)),
     make_tuple(make_pair(-5, -5), make_pair(-5, 0), make_pair(-5, -5)),
     make_tuple(make_pair(-5, -5), make_pair(-5, 5), make_pair(-5, -5)),

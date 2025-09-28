@@ -224,17 +224,6 @@ jobs:
           path: ${{ env.RPUU_DST }}
           key: ${{ inputs.rpuu-cache-key }}
           fail-on-cache-miss: true
-      - name: Checkout raw.pixls.us masterset
-        if: inputs.enable-sample-based-testing
-        timeout-minutes: 1
-        env:
-          RPUU_DST: ${{ env.RPUU_DST }}
-        run: |
-          set -xe
-          eatmydata apt install git-lfs
-          cd ${RPUU_DST}
-          git checkout -f
-          git lfs dedup || /bin/true
       - name: Fetch/Checkout CodeChecker git repo (for clang static analysis)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' || inputs.flavor == 'ClangStaticAnalysis' || inputs.flavor == 'ClangCTUStaticAnalysis'

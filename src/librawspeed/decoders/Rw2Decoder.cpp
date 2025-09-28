@@ -41,11 +41,14 @@
 #include "tiff/TiffEntry.h"
 #include "tiff/TiffIFD.h"
 #include "tiff/TiffTag.h"
+#include <algorithm>
 #include <array>
+#include <cassert>
 #include <cmath>
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <vector>
 
 using std::fabs;
 
@@ -61,6 +64,239 @@ bool Rw2Decoder::isAppropriateDecoder(const TiffRootIFD* rootIFD,
   // FIXME: magic
 
   return make == "Panasonic" || make == "LEICA" || make == "LEICA CAMERA AG";
+}
+
+namespace {
+
+template <typename T>
+[[nodiscard]] Array1DRef<const T> getAsArray1DRef(const std::vector<T>& vec) {
+  return {vec.data(), implicit_cast<int>(vec.size())};
+}
+
+/// Retrieve list of values from Panasonic TiffTag
+template <typename T>
+void getPanasonicTiffVector(const TiffIFD& ifd, TiffTag tag,
+                            std::vector<T>& output) {
+  ByteStream bs = ifd.getEntry(tag)->getData();
+  output.resize(bs.getU16());
+
+  // Note: Relying on ByteStream and its parent classes to prevent out-of-bounds
+  // reading.
+  for (T& v : output)
+    v = bs.get<T>();
+}
+
+/// Decompressor parameters populated from tags. They remain constant after
+/// construction.
+struct DecompressorV8Params {
+  std::vector<uint32_t> stripByteOffsets;
+  std::vector<uint32_t> stripLineOffsets;
+  std::vector<uint32_t> stripBitLengths;
+  std::vector<uint16_t> stripWidths;
+  std::vector<uint16_t> stripHeights;
+  uint16_t horizontalStripCount;
+  uint16_t verticalStripCount;
+
+  PanasonicV8Decompressor::Bayer2x2 initialPrediction;
+
+  /// Huffman decoding shift down value. Appears to be unused.
+  std::vector<uint16_t> huffShiftDown;
+
+  uint16_t gammaClipVal;
+
+  void validate() const;
+
+  DecompressorV8Params() = delete;
+
+  explicit DecompressorV8Params(const TiffIFD& ifd);
+};
+
+void DecompressorV8Params::validate() const {
+  const unsigned totalStrips = horizontalStripCount * verticalStripCount;
+
+  // Check that we won't be going OOB on any of these strip lists
+  if (totalStrips > stripByteOffsets.size())
+    ThrowRDE("Strip byte offset list does not have enough entries for the "
+             "number of strips!");
+  if (totalStrips > stripWidths.size())
+    ThrowRDE("Strip widths list does not have enough entries for the number of "
+             "strips!");
+  if (totalStrips > stripHeights.size())
+    ThrowRDE("Strip heights list does not have enough entries for the number "
+             "of strips!");
+  if (totalStrips > stripLineOffsets.size())
+    ThrowRDE("Strip line offset list does not have enough entries for the "
+             "number of strips!");
+  if (totalStrips > stripBitLengths.size())
+    ThrowRDE("Strip bit length list does not have enough entries for the "
+             "number of strips!");
+
+  if (std::any_of(huffShiftDown.begin(), huffShiftDown.end(),
+                  [](uint16_t x) { return x != 0; })) {
+    ThrowRDE("Non-zero shift down value encountered! Shift down decoding has "
+             "never been tested!");
+  }
+}
+
+DecompressorV8Params::DecompressorV8Params(const TiffIFD& ifd) {
+  // NOLINTBEGIN(cppcoreguidelines-prefer-member-initializer)
+  horizontalStripCount =
+      ifd.getEntry(TiffTag::PANASONIC_V8_NUMBER_OF_STRIPS_H)->getU16();
+  verticalStripCount =
+      ifd.getEntry(TiffTag::PANASONIC_V8_NUMBER_OF_STRIPS_V)->getU16();
+
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_STRIP_BYTE_OFFSETS,
+                         stripByteOffsets);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_STRIP_LINE_OFFSETS,
+                         stripLineOffsets);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_STRIP_DATA_SIZE,
+                         stripBitLengths);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_STRIP_WIDTHS, stripWidths);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_STRIP_HEIGHTS,
+                         stripHeights);
+
+  // Get decoder's initial prediction value:
+  // Note, the positions of the green samples are swapped. This is intentional,
+  // the original implementation did this each swap redundantly during decoding
+  // of each tile.
+  initialPrediction[0] =
+      ifd.getEntry(TiffTag::PANASONIC_V8_INIT_PRED_RED)->getU16();
+  initialPrediction[2] =
+      ifd.getEntry(TiffTag::PANASONIC_V8_INIT_PRED_GREEN1)->getU16();
+  initialPrediction[1] =
+      ifd.getEntry(TiffTag::PANASONIC_V8_INIT_PRED_GREEN2)->getU16();
+  initialPrediction[3] =
+      ifd.getEntry(TiffTag::PANASONIC_V8_INIT_PRED_BLUE)->getU16();
+
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_HUF_SHIFT_DOWN,
+                         huffShiftDown);
+
+  gammaClipVal = ifd.getEntry(TiffTag::PANASONIC_V8_CLIP_VAL)->getU16();
+  // NOLINTEND(cppcoreguidelines-prefer-member-initializer)
+
+  validate();
+}
+
+std::vector<PanasonicV8Decompressor::HuffmanLUTEntry>
+populateHuffmanLUT(const TiffIFD& ifd) {
+  std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> mHuffmanLUT;
+
+  ByteStream stream = ifd.getEntry(TiffTag::PANASONIC_V8_HUF_TABLE)->getData();
+
+  struct HuffEntry {
+    uint16_t bitcount, symbol, mask;
+  };
+  std::vector<HuffEntry> huffTable(stream.getU16());
+
+  for (HuffEntry& entry : huffTable) {
+    entry.bitcount = stream.getU16(); // Number of bits in symbol
+    entry.symbol = uint16_t(stream.getU16() << (16U - entry.bitcount));
+    entry.mask = uint16_t(
+        0xffffU << (16U -
+                    entry.bitcount)); // mask of the bits overlapping symbol
+  }
+
+  // Cache of Huffman table results for all possible 16-bit values.
+  mHuffmanLUT.resize(1 + UINT16_MAX);
+
+  // Populates LUT by checking for a bitwise match between each value and the
+  // prefix codes recorded in the table.
+  for (unsigned li = 0; li < mHuffmanLUT.size(); ++li) {
+    PanasonicV8Decompressor::HuffmanLUTEntry& lutVal = mHuffmanLUT[li];
+    for (unsigned ti = 0; ti < huffTable.size(); ++ti) {
+      if ((uint16_t(li) & huffTable[ti].mask) == huffTable[ti].symbol) {
+        lutVal.bitcount = uint8_t(huffTable[ti].bitcount);
+        lutVal.diffCat = uint8_t(ti);
+        break;
+      }
+    }
+  }
+
+  return mHuffmanLUT;
+}
+
+/// Maybe the most complicated part of the entire file format, and seemingly,
+/// completely unused.
+void populateGammaLUT(const DecompressorV8Params& mParams, const TiffIFD& ifd) {
+  std::vector<uint16_t> mGammaLUT;
+
+  // Retrieve encoded gamma curve from tags.
+  std::vector<uint32_t> encodedGammaPoints;
+  std::vector<uint32_t> encodedGammaSlopes;
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_GAMMA_POINTS,
+                         encodedGammaPoints);
+  getPanasonicTiffVector(ifd, TiffTag::PANASONIC_V8_GAMMA_SLOPES,
+                         encodedGammaSlopes);
+
+  // Determine if the points and slopes are all set to zero and 65536
+  // respectively. If so, no gamma function needs to be applied. This is
+  // currently true of all tested RW2 files.
+  const bool gamamPointsAreIdentity =
+      std::all_of(encodedGammaPoints.cbegin(), encodedGammaPoints.cend(),
+                  [](const uint32_t p) { return p == 0U; });
+  const bool gammaSlopesAreIdentity =
+      std::all_of(encodedGammaSlopes.cbegin(), encodedGammaSlopes.cend(),
+                  [](const uint32_t s) { return s == 65536U; });
+
+  if (!gamamPointsAreIdentity || !gammaSlopesAreIdentity) {
+    // Generate gamma LUT based on retrieved curve.
+    ThrowRDE("Non-identity gamma curve encountered. Never encountered in any "
+             "testing samples!");
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunreachable-code"
+    if (encodedGammaPoints.size() != 6 || encodedGammaSlopes.size() != 6) {
+      ThrowRDE("Gamma curve point and/or slope list is not the expected length "
+               "of 6");
+    }
+#pragma GCC diagnostic pop
+  }
+}
+
+std::vector<Array1DRef<const uint8_t>>
+getInputStrips(const DecompressorV8Params& mParams, Buffer mInputFile) {
+  std::vector<Array1DRef<const uint8_t>> mStrips;
+
+  const int totalStrips =
+      mParams.horizontalStripCount * mParams.verticalStripCount;
+
+  for (int stripIdx = 0; stripIdx < totalStrips; ++stripIdx) {
+    const uint32_t stripSize = (mParams.stripBitLengths[stripIdx] + 7) / 8;
+    const uint32_t stripOffset = mParams.stripByteOffsets[stripIdx];
+
+    // Note: Relying on Buffer to catch OOB access attempts
+    DataBuffer stripBuffer(mInputFile.getSubView(stripOffset, stripSize),
+                           Endianness::big);
+    mStrips.emplace_back(stripBuffer.getAsArray1DRef());
+  }
+
+  return mStrips;
+}
+
+} // namespace
+
+RawImage Rw2Decoder::decodeRawV8(const TiffIFD& raw) const {
+  const DecompressorV8Params mParams(raw);
+  const std::vector<PanasonicV8Decompressor::HuffmanLUTEntry> mHuffmanLUT =
+      populateHuffmanLUT(raw);
+  populateGammaLUT(mParams, raw);
+  const std::vector<Array1DRef<const uint8_t>> mStrips =
+      getInputStrips(mParams, mFile);
+
+  PanasonicV8Decompressor::DecompressorParams mParams2{
+      .stripLineOffsets = getAsArray1DRef(mParams.stripLineOffsets),
+      .stripWidths = getAsArray1DRef(mParams.stripWidths),
+      .stripHeights = getAsArray1DRef(mParams.stripHeights),
+      .horizontalStripCount = mParams.horizontalStripCount,
+      .verticalStripCount = mParams.verticalStripCount,
+      .initialPrediction = mParams.initialPrediction,
+      .gammaClipVal = mParams.gammaClipVal,
+      .mStrips = getAsArray1DRef(mStrips)};
+
+  PanasonicV8Decompressor v8(mRaw, mParams2, getAsArray1DRef(mHuffmanLUT));
+  mRaw->createData();
+  v8.decompress();
+  return mRaw;
 }
 
 RawImage Rw2Decoder::decodeRawInternal() {
@@ -177,10 +413,7 @@ RawImage Rw2Decoder::decodeRawInternal() {
       if (bitsPerSample > 16)
         ThrowRDE("Version %i: unexpected bits per sample: %i", version,
                  bitsPerSample);
-      PanasonicV8Decompressor v8(mFile, mRaw, *raw);
-      mRaw->createData();
-      v8.decompress();
-      return mRaw;
+      return decodeRawV8(*raw);
     }
     default:
       ThrowRDE("Version %i is unsupported", version);

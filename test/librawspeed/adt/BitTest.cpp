@@ -51,7 +51,7 @@ protected:
   int in;        // input
   bool expected; // expected output
 };
-static const powerOfTwoType powerOfTwoValues[] = {
+const powerOfTwoType powerOfTwoValues[] = {
     make_tuple(0, true),  make_tuple(1, true),   make_tuple(2, true),
     make_tuple(3, false), make_tuple(4, true),   make_tuple(5, false),
     make_tuple(6, false), make_tuple(7, false),  make_tuple(8, true),
@@ -103,7 +103,7 @@ protected:
   MOREROWS(1)                                                                  \
   MOREROWS(2) MOREROWS(4) MOREROWS(8) MOREROWS(16) MOREROWS(24) MOREROWS(30)
 
-static const ClampBitsType ClampBitsValues[] = {
+const ClampBitsType ClampBitsValues[] = {
     make_tuple(0, 0, 0),    make_tuple(0, 16, 0),
     make_tuple(32, 0, 0),   make_tuple(32, 16, 32),
     make_tuple(32, 2, 3),   make_tuple(-32, 0, 0),

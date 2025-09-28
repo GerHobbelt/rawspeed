@@ -48,11 +48,11 @@ namespace rawspeed_test {
 
 namespace {
 
-static const char* msg = "my very Smart error Message #1 !";
+const char* msg = "my very Smart error Message #1 !";
 
 #define FMT "%s"
 
-template <typename T> static void* MetaHelper(const char* str) {
+template <typename T> void* MetaHelper(const char* str) {
   ADD_FAILURE() << "non-specialzer was called";
   return nullptr;
 }

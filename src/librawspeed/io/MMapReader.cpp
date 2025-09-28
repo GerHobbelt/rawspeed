@@ -21,17 +21,23 @@
 #if !defined(_WIN32)
 
 #include "io/MMapReader.h"
+#include "adt/Array1DRef.h"
+#include "adt/Casts.h"
+#include "io/Buffer.h"
 #include "io/FileIOException.h"
+#include <cstdint>
 #include <fcntl.h>
 #include <limits>
+#include <string>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
 namespace rawspeed {
 
-MMapReader::MMapReader(const std::string& fname) {
-  fd = open(fname.c_str(), O_RDONLY);
+MMapReader::MMapReader(const std::string& fname)
+    : fd(open(fname.c_str(), O_RDONLY)) {
+
   if (fd == -1)
     ThrowFIE("Could not open file \"%s\".", fname.c_str());
 

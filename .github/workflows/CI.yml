@@ -14,15 +14,7 @@ concurrency:
 
 jobs:
   cache-rpuu:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: linux
-            distro: "debian:bookworm-slim"
     uses: ./.github/workflows/CI-rpuu.yml
-    with:
-      distro: ${{ matrix.distro }}
   linux-fast:
     needs: [ cache-rpuu ]
     strategy:

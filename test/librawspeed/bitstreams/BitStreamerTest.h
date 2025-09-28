@@ -34,6 +34,7 @@ using rawspeed::Endianness;
 
 namespace rawspeed_test {
 
+// NOLINTNEXTLINE(google-build-namespaces)
 namespace {
 
 template <typename T, typename Tag> struct BitStreamerPatternTest final {};

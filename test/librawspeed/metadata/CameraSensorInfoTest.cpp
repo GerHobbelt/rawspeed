@@ -247,7 +247,7 @@ struct IsoExpectationsT final {
   }
 };
 
-static const struct IsoExpectationsT CameraSensorIsoInfos[] = {
+const struct IsoExpectationsT CameraSensorIsoInfos[] = {
     IsoExpectationsT{0, 0, 0, true, true},
 
     IsoExpectationsT{100, 0, 200, false, false},

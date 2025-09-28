@@ -1,15 +1,21 @@
+name: Update raw.pixls.us masterset cache management
+
 on:
   workflow_call:
-    inputs:
-      distro:
-        required: true
-        type: string
     outputs:
       rpuu-cache-key:
         value: ${{ jobs.linux.outputs.rpuu-cache-key }}
+  schedule:
+    - cron: "30 0 * * SUN"
+  workflow_dispatch:
+
+concurrency:
+  group: rpuu-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: false
 
 env:
   RPUU_DST: ${{ github.workspace }}/raw-camera-samples/raw.pixls.us-unique
+  CACHE_WARMUP_ONLY: ${{ github.workflow != 'Update raw.pixls.us masterset cache management' }}
 
 jobs:
   linux:
@@ -17,7 +23,7 @@ jobs:
     name: Cache RPU masterset
     timeout-minutes: 3
     container:
-      image: ${{ inputs.distro }}
+      image: "debian:bookworm-slim"
       options: --tmpfs /tmp:exec
     steps:
       - name: Configure APT
@@ -48,20 +54,16 @@ jobs:
           APT::Get::Fix-Missing "true";
           EOT
           rm -rf /etc/apt/sources.list*
-          if [ "${{ inputs.distro }}" = "debian:bookworm-slim" ]; then
           tee /etc/apt/sources.list > /dev/null <<EOT
           deb http://debian-archive.trafficmanager.net/debian bookworm main
           deb http://debian-archive.trafficmanager.net/debian bookworm-updates main
           deb http://debian-archive.trafficmanager.net/debian-security bookworm-security main
           deb http://debian-archive.trafficmanager.net/debian bookworm-backports main
           EOT
-          fi
       - name: Update base packages
         timeout-minutes: 1
         env:
           DEBIAN_FRONTEND: noninteractive
-          COMPILER_FAMILY: ${{ inputs.compiler-family }}
-          FLAVOR: ${{ inputs.flavor }}
         run: |
           set -xe
           rm -rf /var/lib/apt/lists/*
@@ -72,41 +74,68 @@ jobs:
         timeout-minutes: 1
         env:
           DEBIAN_FRONTEND: noninteractive
-          COMPILER_FAMILY: ${{ inputs.compiler-family }}
-          FLAVOR: ${{ inputs.flavor }}
         run: |
           set -xe
-          eatmydata apt install ca-certificates wget git git-lfs zstd
-      - name: Fetch raw.pixls.us masterset digest
+          eatmydata apt install ca-certificates wget git git-annex zstd
+          git config --global user.email "bot@local"
+      - name: Check raw.pixls.us masterset cache availability
         timeout-minutes: 1
-        env:
-          RPUU_DST: ${{ env.RPUU_DST }}
-        id: fetch-rpuu-digest
-        run: |
-          set -xe
-          mkdir -p ${RPUU_DST}
-          wget https://raw.pixls.us/data-unique/filelist.sha256 -O ${RPUU_DST}/filelist.sha256
-          echo "rpuu-cache-key=raw.pixls.us-masterset-$(sha512sum ${RPUU_DST}/filelist.sha256 | awk '{print $1}')" >> $GITHUB_OUTPUT
-      - name: Cache raw.pixls.us masterset
-        timeout-minutes: 1
-        id: cache
-        uses: actions/cache@v4
+        id: cache-restore
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.RPUU_DST }}
-          key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}
-          lookup-only: true
+          key: "raw.pixls.us-masterset"
+          fail-on-cache-miss: false
+          lookup-only: ${{ env.CACHE_WARMUP_ONLY == 'true' }}
       - name: Fetch raw.pixls.us masterset
         timeout-minutes: 3
-        if: steps.cache.outputs.cache-hit != 'true'
+        id: cache-get
+        if: steps.cache-restore.outputs.cache-matched-key == ''
         env:
           RPUU_DST: ${{ env.RPUU_DST }}
         run: |
           set -xe
-          rm -rf ${RPUU_DST}
-          git clone https://raw.pixls.us/data-unique.lfs.git ${RPUU_DST}
+          git clone https://raw.pixls.us/data-unique.annex.git ${RPUU_DST}
           cd ${RPUU_DST}
+          git annex get --jobs cpus .
           sha256sum -c --strict filelist.sha256
-          rm -rf *
-          # avoid doubling the cache size, undo with `git checkout`.
+      - name: Update raw.pixls.us masterset
+        timeout-minutes: 3
+        id: cache-update
+        if: env.CACHE_WARMUP_ONLY != 'true' && steps.cache-restore.outputs.cache-matched-key != ''
+        env:
+          RPUU_DST: ${{ env.RPUU_DST }}
+        run: |
+          set -xe
+          cd ${RPUU_DST}
+          git fetch --all --prune
+          git branch -f git-annex origin/git-annex
+          git reset --hard origin/master
+          git reflog expire --all --expire all
+          git annex get --jobs cpus .
+          git annex unused
+          git-annex dropunused all --force
+          git repack -a -d -f -F --depth=4095 --window=1000000
+          sha256sum -c --strict filelist.sha256
+      - name: Get the raw.pixls.us masterset cache key
+        timeout-minutes: 1
+        env:
+          RPUU_DST: ${{ env.RPUU_DST }}
+        id: memoize-key
+        run: |
+          set -xe
+          if [ -f "${RPUU_DST}/timestamp.txt" ]; then
+          echo "rpuu-cache-key=raw.pixls.us-masterset-$(cat ${RPUU_DST}/timestamp.txt)" >> $GITHUB_OUTPUT
+          else
+          echo "rpuu-cache-key=${{ steps.cache-restore.outputs.cache-matched-key }}" >> $GITHUB_OUTPUT
+          fi
+      - name: Save updated raw.pixls.us masterset cache
+        if: ((steps.cache-get.outcome == 'success') || (steps.cache-update.outcome == 'success')) && (steps.memoize-key.outputs.rpuu-cache-key != steps.cache-restore.outputs.cache-matched-key)
+        timeout-minutes: 1
+        id: cache-save
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.RPUU_DST }}
+          key: ${{ steps.memoize-key.outputs.rpuu-cache-key }}
     outputs:
-      rpuu-cache-key: ${{ steps.fetch-rpuu-digest.outputs.rpuu-cache-key }}
+      rpuu-cache-key: ${{ steps.memoize-key.outputs.rpuu-cache-key }}
