@@ -6629,6 +6629,18 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="SP550UZ">
+		<ID make="Olympus" model="SP550UZ">Olympus SP550UZ</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="0" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11596 -4007 -1048</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5432 12798 2957</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-1029 175 6516</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
 	<Camera make="OLYMPUS IMAGING CORP." model="E-5">
 		<ID make="Olympus" model="E-5">Olympus E-5</ID>
 		<Crop x="0" y="0" width="-4" height="0"/>
