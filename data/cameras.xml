@@ -1399,9 +1399,9 @@
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">8532 -701 -1167</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4095 11879 2508</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-797 2424 7010</ColorMatrixRow>
+				<ColorMatrixRow plane="0">8300 -2110 -1120</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4917 12694 2482</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-938 2141 5666</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -1455,6 +1455,9 @@
 				<ColorMatrixRow plane="2">-1278 1414 7796</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Canon" model="Canon EOS C50" supported="unknown-no-samples">
+		<ID make="Canon" model="EOS C50">Canon EOS C50</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon EOS M">
 		<ID make="Canon" model="EOS M">Canon EOS M</ID>
@@ -1650,6 +1653,9 @@
 	</Camera>
 	<Camera make="Canon" model="Canon EOS R6m2" supported="no">
 		<ID make="Canon" model="EOS R6 Mark II">Canon EOS R6 Mark II</ID>
+	</Camera>
+	<Camera make="Canon" model="Canon EOS R6 Mark III" supported="unknown-no-samples">
+		<ID make="Canon" model="EOS R6 Mark III">Canon EOS R6 Mark III</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon EOS R7" supported="no">
 		<ID make="Canon" model="EOS R7">Canon EOS R7</ID>
@@ -2736,6 +2742,9 @@
 			<Horizontal y="0" height="10"/>
 			<Horizontal y="3062" height="60"/>
 		</BlackAreas>
+		<Aliases>
+			<Alias id="PowerShot S100V">Canon PowerShot S100V</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">7968 -2565 -636</ColorMatrixRow>
@@ -3875,9 +3884,9 @@
 		<Sensor black="1008" white="15892"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">9874 -3784 -823</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-4728 12673 2286</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-648 1513 6375</ColorMatrixRow>
+				<ColorMatrixRow plane="0">13133 -5542 -1280</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4325 12543 1972</ColorMatrixRow>
+				<ColorMatrixRow plane="2">34 792 7662</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -4055,9 +4064,9 @@
 		<Sensor black="1008" white="15520"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">10405 -3755 -1270</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5461 13787 1793</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1040 2015 6785</ColorMatrixRow>
+				<ColorMatrixRow plane="0">13705 -6004 -1400</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5464 13568 2062</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-940 1706 7618</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -4073,9 +4082,9 @@
 		<Sensor black="1008" white="15520"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">10405 -3755 -1270</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5461 13787 1793</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1040 2015 6785</ColorMatrixRow>
+				<ColorMatrixRow plane="0">13705 -6004 -1400</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5464 13568 2062</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-940 1706 7618</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -4091,9 +4100,9 @@
 		<Sensor black="252" white="3880"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">10405 -3755 -1270</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5461 13787 1793</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1040 2015 6785</ColorMatrixRow>
+				<ColorMatrixRow plane="0">13705 -6004 -1400</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5464 13568 2062</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-940 1706 7618</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -4109,9 +4118,9 @@
 		<Sensor black="252" white="3880"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">10405 -3755 -1270</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-5461 13787 1793</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1040 2015 6785</ColorMatrixRow>
+				<ColorMatrixRow plane="0">13705 -6004 -1400</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5464 13568 2062</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-940 1706 7618</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -6401,6 +6410,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="C70Z,C7000Z" supported="unknown-no-samples">
+		<ID make="Olympus" model="C7000Z">Olympus C7000Z</ID>
+	</Camera>
 	<Camera make="OLYMPUS IMAGING CORP." model="C7070WZ">
 		<ID make="Olympus" model="C7070WZ">Olympus C7070WZ</ID>
 		<Crop x="0" y="0" width="3088" height="2309"/>
@@ -6581,6 +6593,12 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="SH-3" supported="unknown-no-samples">
+		<ID make="Olympus" model="SH-3">Olympus SH-3</ID>
+	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="SP310" supported="unknown-no-samples">
+		<ID make="Olympus" model="SP310">Olympus SP310</ID>
+	</Camera>
 	<Camera make="OLYMPUS IMAGING CORP." model="SP320" supported="no-samples">
 		<ID make="Olympus" model="SP320">Olympus SP320</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
@@ -6637,7 +6655,22 @@
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">11596 -4007 -1048</ColorMatrixRow>
 				<ColorMatrixRow plane="1">-5432 12798 2957</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1029 175 6516</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-1029 1750 6516</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="SP560UZ" supported="unknown-no-samples">
+		<ID make="Olympus" model="SP560UZ">Olympus SP560UZ</ID>
+	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="SP565UZ">
+		<ID make="Olympus" model="SP565UZ">Olympus SP565UZ</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="0" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11856 -4469 -1159</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4814 12368 2756</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-993 1779 5589</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -6852,6 +6885,9 @@
 				<ColorMatrixRow plane="2">-387 1467 7787</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="OLYMPUS IMAGING CORP." model="E-PL1s" supported="unknown-no-samples">
+		<ID make="Olympus" model="E-PL1s">Olympus E-PL1s</ID>
 	</Camera>
 	<Camera make="OLYMPUS IMAGING CORP." model="E-PL2">
 		<ID make="Olympus" model="E-PL2">Olympus E-PL2</ID>
@@ -7101,7 +7137,7 @@
 		<Crop x="0" y="0" width="-14" height="0"/>
 		<Sensor black="200" white="3900"/>
 		<Aliases>
-			<Alias id="Stylus1">STYLUS1,1s</Alias>
+			<Alias id="Stylus1s">STYLUS1,1s</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10806,8 +10842,29 @@
 	<Camera make="Panasonic" model="DC-S1M2" supported="unknown-no-samples">
 		<ID make="Panasonic" model="DC-S1M2">Panasonic DC-S1M2</ID>
 	</Camera>
-	<Camera make="Panasonic" model="DC-S1M2ES" supported="unknown-no-samples">
+	<Camera make="Panasonic" model="DC-S1M2ES">
 		<ID make="Panasonic" model="DC-S1M2ES">Panasonic DC-S1M2ES</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="512" white="16383"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11333 -4794 -1062</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3912 12027 2115</ColorMatrixRow>
+				<ColorMatrixRow plane="2">42 784 5904</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="Panasonic" model="DC-S1M2ES" mode="3:2">
+		<ID make="Panasonic" model="DC-S1M2ES">Panasonic DC-S1M2ES</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="512" white="16383"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11333 -4794 -1062</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3912 12027 2115</ColorMatrixRow>
+				<ColorMatrixRow plane="2">42 784 5904</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5">
 		<ID make="Panasonic" model="DC-S5">Panasonic DC-S5</ID>
@@ -14337,7 +14394,7 @@
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="520" white="16596"/>
 		<Aliases>
-			<Alias id="SLT-A55">SLT-A55V</Alias>
+			<Alias>SLT-A55V</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -14394,7 +14451,7 @@
 		<Crop x="0" y="0" width="-30" height="0"/>
 		<Sensor black="520" white="16596"/>
 		<Aliases>
-			<Alias id="SLT-A65">SLT-A65V</Alias>
+			<Alias>SLT-A65V</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -14415,7 +14472,7 @@
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="520" white="16596"/>
 		<Aliases>
-			<Alias id="SLT-A77">SLT-A77V</Alias>
+			<Alias>SLT-A77V</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -14493,7 +14550,7 @@
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="520" white="16596"/>
 		<Aliases>
-			<Alias id="SLT-A99">SLT-A99V</Alias>
+			<Alias>SLT-A99V</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -16826,6 +16883,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="FUJIFILM" model="X-T30 III" supported="unknown-no-samples">
+		<ID make="Fujifilm" model="X-T30 III">Fujifilm X-T30 III</ID>
+	</Camera>
 	<Camera make="FUJIFILM" model="X-T50">
 		<ID make="Fujifilm" model="X-T50">Fujifilm X-T50</ID>
 		<CFA2 width="6" height="6">
@@ -17573,6 +17633,9 @@
 		</CFA>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="4095"/>
+		<Aliases>
+			<Alias>DCS Pro SLR/c</Alias>
+		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
 				<ColorMatrixRow plane="0">5494 2393 -232</ColorMatrixRow>
@@ -18216,6 +18279,9 @@
 	<Camera make="Leica Camera AG" model="LEICA M11-P" mode="dng">
 		<ID make="Leica" model="M11-P">LEICA M11-P</ID>
 	</Camera>
+	<Camera make="Leica Camera AG" model="LEICA M EV1" mode="dng">
+		<ID make="Leica" model="M EV1">LEICA M EV1</ID>
+	</Camera>
 	<Camera make="Leica Camera AG" model="LEICA M (Typ 240)" mode="dng">
 		<ID make="Leica" model="M (Typ 240)">LEICA M (Typ 240)</ID>
 	</Camera>
@@ -18248,6 +18314,9 @@
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA X (Typ 113)" mode="dng">
 		<ID make="Leica" model="X (Typ 113)">LEICA X (Typ 113)</ID>
+	</Camera>
+	<Camera make="LEICA CAMERA AG" model="LEICA X-E (Typ 102)" mode="dng">
+		<ID make="Leica" model="X-E (Typ 102)">LEICA X-E (Typ 102)</ID>
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA X-U (Typ 113)" mode="dng">
 		<ID make="Leica" model="X-U (Typ 113)">LEICA X-U (Typ 113)</ID>
@@ -18309,6 +18378,9 @@
 	<Camera make="RICOH IMAGING COMPANY, LTD." model="RICOH GR IV" mode="dng">
 		<ID make="Ricoh" model="GR IV">Ricoh GR IV</ID>
 	</Camera>
+	<Camera make="RICOH" model="RICOH GX200" mode="dng">
+		<ID make="Ricoh" model="GX200">RICOH GX200</ID>
+	</Camera>
 	<Camera make="Canon" model="Canon IXY 220F" mode="dng">
 		<ID make="Canon" model="IXY 220F">Canon IXY 220F</ID>
 		<Aliases>
@@ -18325,6 +18397,12 @@
 				<ColorMatrixRow plane="2">-1040 1912 3810</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Canon" model="Canon PowerShot D10" mode="dng">
+		<ID make="Canon" model="PowerShot D10">Canon PowerShot D10</ID>
+	</Camera>
+	<Camera make="Canon" model="Canon PowerShot S2 IS" mode="dng">
+		<ID make="Canon" model="PowerShot S2 IS">Canon PowerShot S2 IS</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon PowerShot SX10 IS" mode="dng">
 		<ID make="Canon" model="PowerShot SX10 IS">Canon PowerShot SX10 IS</ID>
