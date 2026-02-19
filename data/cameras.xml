@@ -650,7 +650,7 @@
 		</BlackAreas>
 		<Aliases>
 			<Alias id="EOS Rebel T7i">Canon EOS Rebel T7i</Alias>
-			<Alias id="EOS REBEL T7i">Canon EOS REBEL T7i</Alias>
+			<Alias id="EOS Rebel T7i">Canon EOS REBEL T7i</Alias>
 			<Alias id="EOS Kiss X9i">Canon EOS Kiss X9i</Alias>
 		</Aliases>
 		<ColorMatrices>
@@ -1345,6 +1345,7 @@
 		<Aliases>
 			<Alias id="EOS Rebel T5">Canon EOS REBEL T5</Alias>
 			<Alias id="EOS Kiss X70">Canon EOS Kiss X70</Alias>
+			<Alias id="EOS Hi">Canon EOS Hi</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -2248,6 +2249,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Canon" model="Canon PowerShot G7" supported="unknown-no-samples">
+		<ID make="Canon" model="PowerShot G7">Canon PowerShot G7</ID>
+	</Camera>
 	<Camera make="Canon" model="Canon PowerShot G7 X">
 		<ID make="Canon" model="PowerShot G7 X">Canon PowerShot G7 X</ID>
 		<CFA width="2" height="2">
@@ -2839,6 +2843,9 @@
 	</Camera>
 	<Camera make="Canon" model="Canon PowerShot SX70 HS" supported="no">
 		<ID make="Canon" model="PowerShot SX70 HS">Canon PowerShot SX70 HS</ID>
+	</Camera>
+	<Camera make="Canon" model="Canon PowerShot SX740 HS" supported="unknown-no-samples">
+		<ID make="Canon" model="PowerShot SX740 HS">Canon PowerShot SX740 HS</ID>
 	</Camera>
 	<Camera make="Canon" model="Canon PowerShot V1" supported="no">
 		<ID make="Canon" model="PowerShot V1">Canon PowerShot V1</ID>
@@ -5938,29 +5945,8 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON" model="E8400" mode="12bit-compressed" decoder_version="3" supported="no">
-		<ID make="Nikon" model="E8400">Nikon E8400</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">BLUE</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">RED</Color>
-		</CFA>
-		<Crop x="0" y="0" width="3280" height="2454"/>
-		<Sensor black="0" white="4095"/>
-		<Hints>
-			<Hint name="coolpixsplit" value=""/>
-		</Hints>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">7842 -2320 -992</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-8154 15718 2599</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1098 1342 7560</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON" model="E8400" mode="12bit-uncompressed" decoder_version="3" supported="no">
-		<ID make="Nikon" model="E8400">Nikon E8400</ID>
+	<Camera make="NIKON" model="E8400" mode="12bit-uncompressed" decoder_version="3" supported="unknown-no-samples">
+		<ID make="Nikon" model="E8400">Nikon Coolpix 8400</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -5981,7 +5967,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON" model="E8700" supported="unknown-no-samples">
-		<ID make="Nikon" model="E8700">Nikon E8700</ID>
+		<ID make="Nikon" model="E8700">Nikon Coolpix 8700</ID>
 	</Camera>
 	<Camera make="NIKON" model="COOLPIX P330" mode="12bit-compressed" decoder_version="5">
 		<ID make="Nikon" model="Coolpix P330">Nikon Coolpix P330</ID>
@@ -6084,29 +6070,8 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON" model="COOLPIX B700" supported="no-samples">
-		<ID make="Nikon" model="COOLPIX B700">Nikon Coolpix B700</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">RED</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">BLUE</Color>
-		</CFA>
-		<Crop x="0" y="0" width="0" height="0"/>
-		<Sensor black="200" white="4000"/>
-		<Hints>
-			<Hint name="coolpixmangled" value=""/>
-		</Hints>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">14387 -6014 -1299</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-1357 9975 1616</ColorMatrixRow>
-				<ColorMatrixRow plane="2">467 1047 4744</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
 	<Camera make="NIKON" model="COOLPIX B700" mode="12bit-uncompressed">
-		<ID make="Nikon" model="COOLPIX B700">Nikon Coolpix B700</ID>
+		<ID make="Nikon" model="Coolpix B700">Nikon Coolpix B700</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -6240,7 +6205,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="COOLPIX P950" mode="12bit-uncompressed">
-		<ID make="Nikon" model="COOLPIX P950">Nikon Coolpix P950</ID>
+		<ID make="Nikon" model="Coolpix P950">Nikon Coolpix P950</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -6261,7 +6226,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="COOLPIX P1000" mode="12bit-uncompressed">
-		<ID make="Nikon" model="COOLPIX P1000">Nikon Coolpix P1000</ID>
+		<ID make="Nikon" model="Coolpix P1000">Nikon Coolpix P1000</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -6271,7 +6236,7 @@
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="200" white="4095"/>
 		<Aliases>
-			<Alias>COOLPIX P1100</Alias>
+			<Alias id="Coolpix P1100">COOLPIX P1100</Alias>
 		</Aliases>
 		<Hints>
 			<Hint name="coolpixmangled" value=""/>
@@ -6284,29 +6249,8 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON" model="E8800" mode="12bit-compressed" decoder_version="3" supported="no">
-		<ID make="Nikon" model="Coolpix E8800">Nikon Coolpix E8800</ID>
-		<CFA width="2" height="2">
-			<Color x="0" y="0">BLUE</Color>
-			<Color x="1" y="0">GREEN</Color>
-			<Color x="0" y="1">GREEN</Color>
-			<Color x="1" y="1">RED</Color>
-		</CFA>
-		<Crop x="0" y="0" width="3280" height="2454"/>
-		<Sensor black="0" white="4095"/>
-		<Hints>
-			<Hint name="coolpixsplit" value=""/>
-		</Hints>
-		<ColorMatrices>
-			<ColorMatrix planes="3">
-				<ColorMatrixRow plane="0">7971 -2314 -913</ColorMatrixRow>
-				<ColorMatrixRow plane="1">-8451 15762 2894</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-1442 1520 7610</ColorMatrixRow>
-			</ColorMatrix>
-		</ColorMatrices>
-	</Camera>
-	<Camera make="NIKON" model="E8800" mode="12bit-uncompressed" decoder_version="3" supported="no">
-		<ID make="Nikon" model="Coolpix E8800">Nikon Coolpix E8800</ID>
+	<Camera make="NIKON" model="E8800" mode="12bit-uncompressed" decoder_version="3" supported="unknown-no-samples">
+		<ID make="Nikon" model="E8800">Nikon Coolpix 8800</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -10839,8 +10783,29 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Panasonic" model="DC-S1M2" supported="unknown-no-samples">
+	<Camera make="Panasonic" model="DC-S1M2">
 		<ID make="Panasonic" model="DC-S1M2">Panasonic DC-S1M2</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="512" white="16380"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">10730 -4442 -922</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4478 12504 2199</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-380 1198 6039</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="Panasonic" model="DC-S1M2" mode="3:2">
+		<ID make="Panasonic" model="DC-S1M2">Panasonic DC-S1M2</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="512" white="16380"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">10730 -4442 -922</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4478 12504 2199</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-380 1198 6039</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1M2ES">
 		<ID make="Panasonic" model="DC-S1M2ES">Panasonic DC-S1M2ES</ID>
@@ -14053,6 +14018,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="SONY" model="ILCE-7M5" supported="unknown-no-samples">
+		<ID make="Sony" model="ILCE-7M5">Sony ILCE-7M5</ID>
+	</Camera>
 	<Camera make="SONY" model="ILCE-7C">
 		<ID make="Sony" model="ILCE-7C">Sony ILCE-7C</ID>
 		<CFA width="2" height="2">
@@ -14154,7 +14122,7 @@
 		<Crop x="0" y="0" width="-20" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<Aliases>
-			<Alias id="ILCE-7RM3A">ILCE-7RM3A</Alias>
+			<Alias>ILCE-7RM3A</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -14175,7 +14143,7 @@
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<Aliases>
-			<Alias id="ILCE-7RM4A">ILCE-7RM4A</Alias>
+			<Alias>ILCE-7RM4A</Alias>
 		</Aliases>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -17336,6 +17304,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Leaf" model="Credo 50" supported="unknown-no-samples">
+		<ID make="Leaf" model="Credo 50">Leaf Credo 50</ID>
+	</Camera>
 	<Camera make="Leaf" model="Credo 60" supported="no-samples">
 		<ID make="Leaf" model="Credo 60">Leaf Credo 60</ID>
 		<CFA width="2" height="2">
@@ -17788,6 +17759,27 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="EASTMAN KODAK COMPANY" model="KODAK P712 ZOOM DIGITAL CAMERA">
+		<ID make="Kodak" model="P712">Kodak P712</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">BLUE</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">RED</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="0" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">9658 -3314 -823</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-5163 12695 2768</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-1342 1843 6044</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="EASTMAN KODAK COMPANY" model="KODAK P850 ZOOM DIGITAL CAMERA" supported="unknown-no-samples">
+		<ID make="Kodak" model="P850">Kodak P850</ID>
+	</Camera>
 	<Camera make="EASTMAN KODAK COMPANY" model="KODAK P880 ZOOM DIGITAL CAMERA">
 		<ID make="Kodak" model="P880">Kodak P880</ID>
 		<CFA width="2" height="2">
@@ -18022,6 +18014,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Hasselblad" model="Hasselblad H4D-60" supported="unknown-no-samples">
+		<ID make="Hasselblad" model="H4D-60">Hasselblad 60-Coated</ID>
+	</Camera>
 	<Camera make="Hasselblad" model="Hasselblad H5D-40">
 		<ID make="Hasselblad" model="H5D-40">Hasselblad 40-Coated5</ID>
 		<CFA width="2" height="2">
@@ -18070,6 +18065,12 @@
 				<ColorMatrixRow plane="2">-1138 1961 7067</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Hasselblad" model="Hasselblad H5D-60" supported="unknown-no-samples">
+		<ID make="Hasselblad" model="H5D-60">Hasselblad 60-Coated</ID>
+	</Camera>
+	<Camera make="Hasselblad" model="Hasselblad H6D-50c" supported="unknown-no-samples">
+		<ID make="Hasselblad" model="H6D-50c">Hasselblad 50-15-Coated5</ID>
 	</Camera>
 	<Camera make="Hasselblad" model="Flash Sync">
 		<ID make="Hasselblad" model="CF132">Hasselblad 22-Uncoated</ID>
@@ -18156,8 +18157,26 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Hasselblad" model="X2D II 100C" supported="unknown-no-samples">
-		<ID make="Hasselblad" model="X2D II 100C">Hasselblad 100-20-Coated6</ID>
+	<Camera make="Hasselblad" model="X2D II 100C">
+		<ID make="Hasselblad" model="X2D II 100C">Hasselblad 100-22-Coated6</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="124" y="92" width="-116" height="0"/>
+		<Sensor black="4317" white="65535"/>
+		<Aliases>
+			<Alias id="X2D II 100C">Hasselblad X2D II 100C</Alias>
+		</Aliases>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">6468 -1899 -545</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-4526 12267 2542</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-388 1276 6096</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="RICOH IMAGING COMPANY, LTD." model="PENTAX 645Z" mode="dng">
 		<ID make="Pentax" model="645Z">PENTAX 645Z</ID>
@@ -18336,6 +18355,9 @@
 	<Camera make="LEICA CAMERA AG" model="LEICA Q3 43" mode="dng">
 		<ID make="Leica" model="Q3 43">LEICA Q3 43</ID>
 	</Camera>
+	<Camera make="LEICA CAMERA AG" model="LEICA Q3 MONO" mode="dng">
+		<ID make="Leica" model="Q3 Monochrom">LEICA Q3 MONO</ID>
+	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA SL (Typ 601)" mode="dng">
 		<ID make="Leica" model="SL (Typ 601)">LEICA SL (Typ 601)</ID>
 	</Camera>
@@ -18356,6 +18378,9 @@
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA D-Lux 8" mode="dng">
 		<ID make="Leica" model="D-Lux 8">LEICA D-Lux 8</ID>
+		<Aliases>
+			<Alias id="D-Lux 8">D-LUX 8 "100 YEARS OF LEICA"</Alias>
+		</Aliases>
 	</Camera>
 	<Camera make="RICOH IMAGING COMPANY, LTD." model="GR" mode="dng">
 		<ID make="Ricoh" model="GR">GR</ID>
@@ -18377,6 +18402,12 @@
 	</Camera>
 	<Camera make="RICOH IMAGING COMPANY, LTD." model="RICOH GR IV" mode="dng">
 		<ID make="Ricoh" model="GR IV">Ricoh GR IV</ID>
+		<Aliases>
+			<Alias id="GR IV HDF">RICOH GR IV HDF</Alias>
+		</Aliases>
+	</Camera>
+	<Camera make="RICOH IMAGING COMPANY, LTD." model="RICOH GR IV Monochrome" mode="dng">
+		<ID make="Ricoh" model="GR IV Monochrome">Ricoh GR IV Monochrome</ID>
 	</Camera>
 	<Camera make="RICOH" model="RICOH GX200" mode="dng">
 		<ID make="Ricoh" model="GX200">RICOH GX200</ID>

@@ -26,6 +26,18 @@
 #include <cstdint>
 #include <cstring>
 
+#ifdef _MSC_VER
+#include <intrin.h>
+
+#define BSWAP16(A) _byteswap_ushort(A)
+#define BSWAP32(A) _byteswap_ulong(A)
+#define BSWAP64(A) _byteswap_uint64(A)
+#else
+#define BSWAP16(A) __builtin_bswap16(A)
+#define BSWAP32(A) __builtin_bswap32(A)
+#define BSWAP64(A) __builtin_bswap64(A)
+#endif
+
 namespace rawspeed {
 
 enum class Endianness : uint16_t {
@@ -59,18 +71,6 @@ inline Endianness getHostEndianness() {
   return getHostEndiannessRuntime();
 #endif
 }
-
-#ifdef _MSC_VER
-#include <intrin.h>
-
-#define BSWAP16(A) _byteswap_ushort(A)
-#define BSWAP32(A) _byteswap_ulong(A)
-#define BSWAP64(A) _byteswap_uint64(A)
-#else
-#define BSWAP16(A) __builtin_bswap16(A)
-#define BSWAP32(A) __builtin_bswap32(A)
-#define BSWAP64(A) __builtin_bswap64(A)
-#endif
 
 inline int8_t getByteSwapped(int8_t v) { return v; }
 inline uint8_t getByteSwapped(uint8_t v) { return v; }

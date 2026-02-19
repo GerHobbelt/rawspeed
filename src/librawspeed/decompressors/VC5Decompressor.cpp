@@ -94,9 +94,11 @@ constexpr auto decompand(int16_t val) {
 #ifndef NDEBUG
 [[maybe_unused]] const int ignore = []() {
   for (const RLV& entry : table17.entries) {
-    assert(((-decompand(entry.value)) == decompand(-int16_t(entry.value))) &&
-           "negation of decompanded value is the same as decompanding of "
-           "negated value");
+    assert(
+        ((-decompand(entry.value)) ==
+         decompand(rawspeed::implicit_cast<int16_t>(-int16_t(entry.value)))) &&
+        "negation of decompanded value is the same as decompanding of "
+        "negated value");
   }
   return 0;
 }();
@@ -416,7 +418,7 @@ VC5Decompressor::VC5Decompressor(ByteStream bs, const RawImage& img)
       wavelet.height = waveletHeight;
 
       wavelet.bands.resize(
-          &wavelet == channel.wavelets.begin() ? 1 : Wavelet::maxBands);
+          &wavelet == &*channel.wavelets.begin() ? 1 : Wavelet::maxBands);
     }
   }
 
@@ -954,7 +956,7 @@ VC5Decompressor::getRLV(const PrefixCodeDecoder& decoder,
   auto value = implicit_cast<int16_t>(bitfield >> RLVRunLengthBitWidth);
 
   if (value != 0 && bits.getBitsNoFill(1))
-    value = -value;
+    value = implicit_cast<int16_t>(-value);
 
   return {value, count};
 }

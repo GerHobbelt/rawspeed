@@ -18,6 +18,7 @@ set (CLANG_DISABLED_WARNING_FLAGS
   "switch-default"
   "switch-enum"
   "unused-parameter"
+  "nrvo"
   "sign-conversion" # FIXME: should enable this.
   "unsafe-buffer-usage-in-libc-call" # FIXME: should probably be enabled
 )
