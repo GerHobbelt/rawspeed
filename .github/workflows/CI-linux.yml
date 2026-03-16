@@ -209,7 +209,7 @@ jobs:
           ln -s /usr/bin/ld.gold /usr/bin/ld
       - name: Fetch/Checkout RawSpeed git repo
         timeout-minutes: 1
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: 'rawspeed'
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
@@ -226,7 +226,7 @@ jobs:
       - name: Get cache of raw.pixls.us masterset
         timeout-minutes: 1
         if: inputs.enable-sample-based-testing
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ env.RPUU_DST }}
           key: ${{ inputs.rpuu-cache-key }}
@@ -234,7 +234,7 @@ jobs:
       - name: Fetch/Checkout CodeChecker git repo (for clang static analysis)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' || inputs.flavor == 'ClangStaticAnalysis' || inputs.flavor == 'ClangCTUStaticAnalysis'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: 'Ericsson/codechecker'
           path: 'codechecker'
@@ -256,13 +256,13 @@ jobs:
       - name: Initialize CodeQL (for CodeQL static analysis)
         timeout-minutes: 1
         if: inputs.flavor == 'CodeQLAnalysis'
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: cpp
       - name: Set up JDK 11 (for SonarCloud static analysis)
         timeout-minutes: 1
         if: inputs.flavor == 'SonarCloudStaticAnalysis' && github.repository == 'darktable-org/rawspeed' && github.event_name != 'pull_request' && github.ref_type == 'branch' && (github.ref_name == 'develop' || github.ref_name == 'stable')
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: 21
@@ -297,7 +297,7 @@ jobs:
         id: clang-format-upload
         timeout-minutes: 1
         if: inputs.flavor == 'ClangFormat' && failure() && steps.clang-format.conclusion == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: clang-format.patch
           path: ${{ github.workspace }}/clang-format.patch
@@ -361,7 +361,7 @@ jobs:
       - name: Upload docs artifact
         timeout-minutes: 1
         if: inputs.flavor == 'WWW'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ${{ github.workspace }}/rawspeed-build/docs/html
       - name: Test (unit tests)
@@ -449,7 +449,7 @@ jobs:
       - if: inputs.flavor == 'Coverage'
         timeout-minutes: 1
         name: Cache code coverage (linux reports)
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ${{ env.COVERAGE_REPORT_PREFIX }}/linux # relative path!
           key: coverage-${{ github.sha }}-linux
@@ -490,7 +490,7 @@ jobs:
       - name: Upload results of clang-tidy static analysis [YAML]
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' && failure() && steps.CC-CTSA.conclusion == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: clangtidy_report
           path: ${{ github.workspace }}/rawspeed-build/clang-tidy/
@@ -500,7 +500,7 @@ jobs:
       - name: Upload results of clang-tidy static analysis [SARIF]
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' && failure() && steps.CC-CTSA.conclusion == 'failure'
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: "${{ github.workspace }}/codechecker_clangtidy_report.json"
           checkout_path: "${{ github.workspace }}/rawspeed"
@@ -508,7 +508,7 @@ jobs:
       - name: Upload results of clang-tidy static analysis [HTML]
         timeout-minutes: 1
         if: inputs.flavor == 'ClangTidy' && failure() && steps.CC-CTSA.conclusion == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: codechecker_clangtidy_report
           path: ${{ github.workspace }}/codechecker_clangtidy_report/
@@ -538,7 +538,7 @@ jobs:
       - name: Upload results of clang static analysis [SARIF] (plain mode)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangStaticAnalysis' && failure() && steps.CC-CSA-plain.conclusion == 'failure'
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: "${{ github.workspace }}/codechecker_report.json"
           checkout_path: "${{ github.workspace }}/rawspeed"
@@ -546,7 +546,7 @@ jobs:
       - name: Upload results of clang static analysis [HTML] (plain mode)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangStaticAnalysis' && failure() && steps.CC-CSA-plain.conclusion == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: codechecker_report
           path: ${{ github.workspace }}/codechecker_report/
@@ -576,7 +576,7 @@ jobs:
       - name: Upload results of clang static analysis [SARIF] (plain mode)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangCTUStaticAnalysis' && failure() && steps.CC-CSA-CTU.conclusion == 'failure'
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: "${{ github.workspace }}/codechecker_ctu_report.json"
           checkout_path: "${{ github.workspace }}/rawspeed"
@@ -584,7 +584,7 @@ jobs:
       - name: Upload results of clang static analysis [HTML] (CTU mode)
         timeout-minutes: 1
         if: inputs.flavor == 'ClangCTUStaticAnalysis' && failure() && steps.CC-CSA-CTU.conclusion == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: codechecker_ctu_report
           path: ${{ github.workspace }}/codechecker_ctu_report/
@@ -594,7 +594,7 @@ jobs:
       - name: Perform CodeQL static analysis
         timeout-minutes: 11
         if: inputs.flavor == 'CodeQLAnalysis' && !cancelled() && steps.build.conclusion != 'skipped'
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
       - name: Perform SonarCloud static analysis
         timeout-minutes: 6
         if: inputs.flavor == 'SonarCloudStaticAnalysis'

@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Fetch/Checkout RawSpeed git repo
         timeout-minutes: 1
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: 'rawspeed'
       - if: github.event_name == 'pull_request_target' && github.base_ref != 'develop'

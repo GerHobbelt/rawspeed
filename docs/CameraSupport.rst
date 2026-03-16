@@ -35,8 +35,11 @@ Camera Support
         mode = camera.getAttribute("mode")
         if mode == '':
             mode = 'Default mode'
-        if camera.hasAttribute("supported") and camera.getAttribute("supported") == 'no':
-            mode += " - *unsupported*"
+        if camera.hasAttribute("supported"):
+            if camera.getAttribute("supported") == 'no':
+                mode += " - *unsupported*"
+            if 'unknown' in camera.getAttribute("supported"):
+                mode += " - *unknown*"
 
         unique_makes[make][model]['modes'].add(mode)
 
@@ -82,11 +85,11 @@ Camera Support
         models = OrderedDict(sorted(models.items()))
         for model, content in models.items():
             # Leaf cameras have aliases in their model name, we need to split them here
-            aliases = model.split("/")
+            aliases = model.split("/", 1) if make == "Leaf" else [model]
             model_name = aliases[0]
 
-            # Concatenate official aliases with the ones we found above
-            aliases = list(content['aliases']) + aliases[1:]
+            # Concatenate unique official aliases with the ones we found above
+            aliases = [a for a in list(content['aliases']) if a != model_name] + aliases[1:]
 
             modes = [mode for mode in content['modes']
                     if "unsupported" not in mode]
@@ -94,7 +97,13 @@ Camera Support
             if len(modes) == 0:
                 supported = "✗"
             else:
-                supported = "✓"
+                modes = [mode for mode in modes
+                        if "unknown" not in mode]
+
+                if len(modes) == 0:
+                    supported = "?"
+                else:
+                    supported = "✓"
 
             sys.stdout.write("   ")
             csvwriter.writerow([make, model_name, supported, ', '.join(aliases), ', '.join(content['modes'])])

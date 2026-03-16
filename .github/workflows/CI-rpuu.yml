@@ -81,7 +81,7 @@ jobs:
       - name: Check raw.pixls.us masterset cache availability
         timeout-minutes: 1
         id: cache-restore
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ env.RPUU_DST }}
           key: "raw.pixls.us-masterset"
@@ -133,7 +133,7 @@ jobs:
         if: ((steps.cache-get.outcome == 'success') || (steps.cache-update.outcome == 'success')) && (steps.memoize-key.outputs.rpuu-cache-key != steps.cache-restore.outputs.cache-matched-key)
         timeout-minutes: 1
         id: cache-save
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ${{ env.RPUU_DST }}
           key: ${{ steps.memoize-key.outputs.rpuu-cache-key }}
