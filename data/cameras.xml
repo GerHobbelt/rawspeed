@@ -18627,9 +18627,6 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Nikon" model="LS-5000" mode="dng">
-		<ID make="Nikon" model="LS-5000">Nikon LS-5000</ID>
-	</Camera>
 	<Camera make="Sigma" model="Sigma BF" mode="dng">
 		<ID make="Sigma" model="BF">Sigma BF</ID>
 	</Camera>

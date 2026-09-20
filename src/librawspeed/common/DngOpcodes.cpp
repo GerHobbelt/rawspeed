@@ -796,6 +796,8 @@ DngOpcodes::Map(uint32_t code) {
         "ScalePerColumn",
         &DngOpcodes::constructor<
             DngOpcodes::ScalePerRowOrCol<DeltaRowOrColBase::SelectX>>);
+  case 14U:
+    return make_pair("WarpRectilinear2", nullptr);
   default:
     return std::nullopt;
   }
