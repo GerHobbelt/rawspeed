@@ -75,7 +75,7 @@ LJpegDecompressor::LJpegDecompressor(RawImage img, iRectangle2D imgFrame_,
 
 #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
   // Yeah, sure, here it would be just dumb to leave this for production :)
-  if (mRaw->dim.x > 9728 || mRaw->dim.y > 6656) {
+  if (mRaw->dim.x > 10240 || mRaw->dim.y > 7168) {
     ThrowRDE("Unexpected image dimensions found: (%i; %i)", mRaw->dim.x,
              mRaw->dim.y);
   }
