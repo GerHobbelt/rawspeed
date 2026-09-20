@@ -460,6 +460,7 @@
       <xs:enumeration value="Paralenz"/>
       <xs:enumeration value="Pentax"/>
       <xs:enumeration value="Phase One A/S"/>
+      <xs:enumeration value="Phase One"/>
       <xs:enumeration value="Pixelink"/>
       <xs:enumeration value="RICOH IMAGING COMPANY, LTD."/>
       <xs:enumeration value="RICOH"/>
