@@ -310,7 +310,6 @@
 		<Aliases>
 			<Alias id="EOS Digital Rebel XT">Canon EOS DIGITAL REBEL XT</Alias>
 			<Alias id="EOS Kiss Digital N">Canon EOS Kiss Digital N</Alias>
-			<Alias id="EOS 350D">Canon EOS 350D</Alias>
 			<Alias id="EOS 350D">Canon EOS 350D Digital</Alias>
 		</Aliases>
 		<ColorMatrices>
@@ -384,7 +383,6 @@
 		<Crop x="22" y="18" width="4290" height="2856"/>
 		<Aliases>
 			<Alias id="EOS Digital Rebel XSi">Canon EOS DIGITAL REBEL XSi</Alias>
-			<Alias id="EOS Kiss Digital X2">Canon EOS Kiss Digital X2</Alias>
 			<Alias id="EOS Kiss X2">Canon EOS Kiss X2</Alias>
 		</Aliases>
 		<ColorMatrices>
@@ -1293,7 +1291,6 @@
 		</BlackAreas>
 		<Aliases>
 			<Alias id="EOS Digital Rebel XS">Canon EOS DIGITAL REBEL XS</Alias>
-			<Alias id="EOS Kiss Digital F">Canon EOS Kiss Digital F</Alias>
 			<Alias id="EOS Kiss F">Canon EOS Kiss F</Alias>
 		</Aliases>
 		<ColorMatrices>
@@ -5948,10 +5945,10 @@
 		</Hints>
 		<ColorMatrices>
 			<ColorMatrix planes="4">
-				<ColorMatrixRow plane="0">-5368 11478 2368</ColorMatrixRow>
-				<ColorMatrixRow plane="1">5537 -113 3148</ColorMatrixRow>
-				<ColorMatrixRow plane="2">-4969 10021 5782</ColorMatrixRow>
-				<ColorMatrixRow plane="3">778 9028 211</ColorMatrixRow>
+				<ColorMatrixRow plane="0">-6475 12496 2428</ColorMatrixRow>
+				<ColorMatrixRow plane="1">5409 -16 3180</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-5965 10912 5866</ColorMatrixRow>
+				<ColorMatrixRow plane="3">-177 9918 248</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
@@ -10541,6 +10538,8 @@
 				<ColorMatrixRow plane="2">-650 1494 4862</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Panasonic" model="DC-L10" supported="unknown-no-samples">
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1">
 		<Crop x="0" y="0" width="-50" height="0"/>
