@@ -5890,8 +5890,30 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="NIKON" model="E5000" mode="12bit-uncompressed" decoder_version="4">
+		<ID make="Nikon" model="E5000">Nikon Coolpix 5000</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">FUJI_GREEN</Color>
+			<Color x="1" y="0">MAGENTA</Color>
+			<Color x="0" y="1">YELLOW</Color>
+			<Color x="1" y="1">CYAN</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="0" white="4095"/>
+		<Hints>
+			<Hint name="coolpixsplit" value=""/>
+		</Hints>
+		<ColorMatrices>
+			<ColorMatrix planes="4">
+				<ColorMatrixRow plane="0">-6678 12805 2248</ColorMatrixRow>
+				<ColorMatrixRow plane="1">5725 -499 3375</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-5903 10713 6034</ColorMatrixRow>
+				<ColorMatrixRow plane="3">-270 9976 134</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
 	<Camera make="NIKON" model="E5400" mode="12bit-uncompressed" decoder_version="3">
-		<ID make="Nikon" model="E5400">Nikon E5400</ID>
+		<ID make="Nikon" model="E5400">Nikon Coolpix 5400</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">BLUE</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -5912,7 +5934,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON" model="E5700" mode="12bit-uncompressed" decoder_version="4">
-		<ID make="Nikon" model="E5700">Nikon E5700</ID>
+		<ID make="Nikon" model="E5700">Nikon Coolpix 5700</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">FUJI_GREEN</Color>
 			<Color x="1" y="0">MAGENTA</Color>
@@ -7152,7 +7174,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-CM1">
-		<ID make="Panasonic" model="DMC-CM1">Panasonic DMC-CM1</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7164,7 +7185,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-CM1" mode="3:2">
-		<ID make="Panasonic" model="DMC-CM1">Panasonic DMC-CM1</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7176,10 +7196,8 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-CM10" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DMC-CM10">Panasonic DMC-CM10</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FX150">
-		<ID make="Panasonic" model="DMC-FX150">Panasonic DMC-FX150</ID>
 		<Crop x="0" y="0" width="-80" height="-6"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7194,7 +7212,6 @@
 		<ID make="Panasonic" model="DMC-FX180">Panasonic DMC-FX150</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FX150" mode="4:3">
-		<ID make="Panasonic" model="DMC-FX150">Panasonic DMC-FX150</ID>
 		<Crop x="0" y="0" width="-80" height="-6"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7206,7 +7223,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FX150" mode="3:2">
-		<ID make="Panasonic" model="DMC-FX150">Panasonic DMC-FX150</ID>
 		<Crop x="0" y="0" width="-80" height="-6"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7218,7 +7234,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FX150" mode="16:9">
-		<ID make="Panasonic" model="DMC-FX150">Panasonic DMC-FX150</ID>
 		<Crop x="0" y="0" width="-80" height="-4"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7230,7 +7245,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ28" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ28">Panasonic DMC-FZ28</ID>
 		<Crop x="0" y="0" width="-62" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7242,7 +7256,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ28" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ28">Panasonic DMC-FZ28</ID>
 		<Crop x="0" y="0" width="-62" height="-2"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7254,7 +7267,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ28" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ28">Panasonic DMC-FZ28</ID>
 		<Crop x="0" y="0" width="-62" height="-4"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7266,7 +7278,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ28">
-		<ID make="Panasonic" model="DMC-FZ28">Panasonic DMC-FZ28</ID>
 		<Crop x="0" y="0" width="-62" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7278,7 +7289,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ150">
-		<ID make="Panasonic" model="DMC-FZ150">Panasonic DMC-FZ150</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="145" white="3956"/>
 		<ColorMatrices>
@@ -7290,7 +7300,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ150" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ150">Panasonic DMC-FZ150</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="145" white="3956"/>
 		<ColorMatrices>
@@ -7302,7 +7311,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ150" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ150">Panasonic DMC-FZ150</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<ColorMatrices>
@@ -7314,7 +7322,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ150" mode="1:1">
-		<ID make="Panasonic" model="DMC-FZ150">Panasonic DMC-FZ150</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="142" white="3971"/>
 		<ColorMatrices>
@@ -7326,7 +7333,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ150" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ150">Panasonic DMC-FZ150</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="142" white="3971"/>
 		<ColorMatrices>
@@ -7338,7 +7344,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ200">
-		<ID make="Panasonic" model="DMC-FZ200">Panasonic DMC-FZ200</ID>
 		<Crop x="0" y="0" width="-128" height="-4"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7350,7 +7355,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ200" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ200">Panasonic DMC-FZ200</ID>
 		<Crop x="0" y="0" width="-128" height="-4"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7362,7 +7366,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ200" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ200">Panasonic DMC-FZ200</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7374,7 +7377,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ200" mode="1:1">
-		<ID make="Panasonic" model="DMC-FZ200">Panasonic DMC-FZ200</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7386,7 +7388,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ200" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ200">Panasonic DMC-FZ200</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7458,7 +7459,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ2000">
-		<ID make="Panasonic" model="DMC-FZ2000">Panasonic DMC-FZ2000</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="2095"/>
 		<Aliases>
@@ -7476,7 +7476,6 @@
 		<ID make="Panasonic" model="DMC-FZH1">Panasonic DMC-FZ2000</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ2000" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ2000">Panasonic DMC-FZ2000</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="2095"/>
 		<Aliases>
@@ -7491,7 +7490,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ300">
-		<ID make="Panasonic" model="DMC-FZ300">Panasonic DMC-FZ300</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -7503,7 +7501,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ300" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ300">Panasonic DMC-FZ300</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -7539,7 +7536,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G1">
-		<ID make="Panasonic" model="DMC-G1">Panasonic DMC-G1</ID>
 		<Crop x="0" y="0" width="4018" height="3016"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7551,7 +7547,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G1" mode="4:3">
-		<ID make="Panasonic" model="DMC-G1">Panasonic DMC-G1</ID>
 		<Crop x="0" y="0" width="4018" height="3016"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7563,7 +7558,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G1" mode="16:9">
-		<ID make="Panasonic" model="DMC-G1">Panasonic DMC-G1</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7575,7 +7569,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G1" mode="3:2">
-		<ID make="Panasonic" model="DMC-G1">Panasonic DMC-G1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7587,7 +7580,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G2" mode="4:3">
-		<ID make="Panasonic" model="DMC-G2">Panasonic DMC-G2</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7599,7 +7591,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G2" mode="3:2">
-		<ID make="Panasonic" model="DMC-G2">Panasonic DMC-G2</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7611,7 +7602,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G2" mode="16:9">
-		<ID make="Panasonic" model="DMC-G2">Panasonic DMC-G2</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7623,7 +7613,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G2" mode="1:1">
-		<ID make="Panasonic" model="DMC-G2">Panasonic DMC-G2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7635,7 +7624,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G2">
-		<ID make="Panasonic" model="DMC-G2">Panasonic DMC-G2</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7647,7 +7635,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G10">
-		<ID make="Panasonic" model="DMC-G10">Panasonic DMC-G10</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7659,7 +7646,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G10" mode="4:3">
-		<ID make="Panasonic" model="DMC-G10">Panasonic DMC-G10</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7671,7 +7657,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G10" mode="3:2">
-		<ID make="Panasonic" model="DMC-G10">Panasonic DMC-G10</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7683,7 +7668,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G10" mode="16:9">
-		<ID make="Panasonic" model="DMC-G10">Panasonic DMC-G10</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7695,7 +7679,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G10" mode="1:1">
-		<ID make="Panasonic" model="DMC-G10">Panasonic DMC-G10</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3900"/>
 		<ColorMatrices>
@@ -7707,7 +7690,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH1" mode="4:3">
-		<ID make="Panasonic" model="DMC-GH1">Panasonic DMC-GH1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -7719,7 +7701,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH1" mode="3:2">
-		<ID make="Panasonic" model="DMC-GH1">Panasonic DMC-GH1</ID>
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -7731,7 +7712,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH1">
-		<ID make="Panasonic" model="DMC-GH1">Panasonic DMC-GH1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -7743,7 +7723,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH3" mode="4:3">
-		<ID make="Panasonic" model="DMC-GH3">Panasonic DMC-GH3</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="155" white="3956"/>
 		<Sensor black="165" white="3941" iso_min="6400"/>
@@ -7756,7 +7735,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH3" mode="3:2">
-		<ID make="Panasonic" model="DMC-GH3">Panasonic DMC-GH3</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="155" white="3956"/>
 		<Sensor black="165" white="3941" iso_min="6400"/>
@@ -7769,7 +7747,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH3" mode="16:9">
-		<ID make="Panasonic" model="DMC-GH3">Panasonic DMC-GH3</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="155" white="3956"/>
 		<Sensor black="165" white="3941" iso_min="6400"/>
@@ -7782,7 +7759,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH3" mode="1:1">
-		<ID make="Panasonic" model="DMC-GH3">Panasonic DMC-GH3</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="155" white="3956"/>
 		<Sensor black="165" white="3941" iso_min="6400"/>
@@ -7795,7 +7771,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH3">
-		<ID make="Panasonic" model="DMC-GH3">Panasonic DMC-GH3</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="155" white="3956"/>
 		<Sensor black="165" white="3941" iso_min="6400"/>
@@ -7808,7 +7783,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH4" mode="4:3">
-		<ID make="Panasonic" model="DMC-GH4">Panasonic DMC-GH4</ID>
 		<Crop x="8" y="8" width="-200" height="-8"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7820,7 +7794,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH4" mode="3:2">
-		<ID make="Panasonic" model="DMC-GH4">Panasonic DMC-GH4</ID>
 		<Crop x="8" y="8" width="-200" height="-8"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7832,7 +7805,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH4" mode="16:9">
-		<ID make="Panasonic" model="DMC-GH4">Panasonic DMC-GH4</ID>
 		<Crop x="8" y="8" width="-200" height="-8"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7844,7 +7816,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH4" mode="1:1">
-		<ID make="Panasonic" model="DMC-GH4">Panasonic DMC-GH4</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7856,7 +7827,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH4">
-		<ID make="Panasonic" model="DMC-GH4">Panasonic DMC-GH4</ID>
 		<Crop x="8" y="8" width="-200" height="-8"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -7868,7 +7838,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF1">
-		<ID make="Panasonic" model="DMC-GF1">Panasonic DMC-GF1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7880,7 +7849,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF1" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF1">Panasonic DMC-GF1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7892,7 +7860,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF1" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF1">Panasonic DMC-GF1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7904,7 +7871,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF1" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF1">Panasonic DMC-GF1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7916,7 +7882,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF1" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF1">Panasonic DMC-GF1</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3986"/>
 		<ColorMatrices>
@@ -7928,7 +7893,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF2">
-		<ID make="Panasonic" model="DMC-GF2">Panasonic DMC-GF2</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7940,7 +7904,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF2" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF2">Panasonic DMC-GF2</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7952,7 +7915,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF2" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF2">Panasonic DMC-GF2</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7964,7 +7926,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF2" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF2">Panasonic DMC-GF2</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7976,7 +7937,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF2" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF2">Panasonic DMC-GF2</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -7988,7 +7948,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM1" mode="4:3">
-		<ID make="Panasonic" model="DMC-GM1">Panasonic DMC-GM1</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<Aliases>
@@ -8003,7 +7962,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM1" mode="3:2">
-		<ID make="Panasonic" model="DMC-GM1">Panasonic DMC-GM1</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<Aliases>
@@ -8018,7 +7976,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM1" mode="16:9">
-		<ID make="Panasonic" model="DMC-GM1">Panasonic DMC-GM1</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<Aliases>
@@ -8033,7 +7990,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM1" mode="1:1">
-		<ID make="Panasonic" model="DMC-GM1">Panasonic DMC-GM1</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<Aliases>
@@ -8048,7 +8004,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM1">
-		<ID make="Panasonic" model="DMC-GM1">Panasonic DMC-GM1</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<Aliases>
@@ -8063,7 +8018,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM5">
-		<ID make="Panasonic" model="DMC-GM5">Panasonic DMC-GM5</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8075,7 +8029,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM5" mode="4:3">
-		<ID make="Panasonic" model="DMC-GM5">Panasonic DMC-GM5</ID>
 		<Crop x="8" y="8" width="4592" height="3448"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8087,7 +8040,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM5" mode="3:2">
-		<ID make="Panasonic" model="DMC-GM5">Panasonic DMC-GM5</ID>
 		<Crop x="8" y="8" width="4592" height="3064"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8099,7 +8051,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM5" mode="16:9">
-		<ID make="Panasonic" model="DMC-GM5">Panasonic DMC-GM5</ID>
 		<Crop x="8" y="8" width="4592" height="2584"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8111,7 +8062,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GM5" mode="1:1">
-		<ID make="Panasonic" model="DMC-GM5">Panasonic DMC-GM5</ID>
 		<Crop x="8" y="8" width="3424" height="3424"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8123,7 +8073,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G3" mode="4:3">
-		<ID make="Panasonic" model="DMC-G3">Panasonic DMC-G3</ID>
 		<Crop x="0" y="0" width="-152" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -8135,7 +8084,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G3" mode="1:1">
-		<ID make="Panasonic" model="DMC-G3">Panasonic DMC-G3</ID>
 		<Crop x="0" y="0" width="-200" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -8147,7 +8095,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G3" mode="16:9">
-		<ID make="Panasonic" model="DMC-G3">Panasonic DMC-G3</ID>
 		<Crop x="0" y="0" width="-168" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -8159,7 +8106,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G3" mode="3:2">
-		<ID make="Panasonic" model="DMC-G3">Panasonic DMC-G3</ID>
 		<Crop x="0" y="0" width="-168" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -8171,7 +8117,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G3">
-		<ID make="Panasonic" model="DMC-G3">Panasonic DMC-G3</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -8183,7 +8128,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G5" mode="4:3">
-		<ID make="Panasonic" model="DMC-G5">Panasonic DMC-G5</ID>
 		<Crop x="0" y="0" width="-192" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8195,7 +8139,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G5" mode="3:2">
-		<ID make="Panasonic" model="DMC-G5">Panasonic DMC-G5</ID>
 		<Crop x="0" y="0" width="-192" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8229,7 +8172,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G5">
-		<ID make="Panasonic" model="DMC-G5">Panasonic DMC-G5</ID>
 		<Crop x="0" y="0" width="-192" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8241,7 +8183,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G6">
-		<ID make="Panasonic" model="DMC-G6">Panasonic DMC-G6</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="142" white="3956"/>
 		<ColorMatrices>
@@ -8253,7 +8194,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G6" mode="4:3">
-		<ID make="Panasonic" model="DMC-G6">Panasonic DMC-G6</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="142" white="3956"/>
 		<ColorMatrices>
@@ -8265,7 +8205,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G6" mode="3:2">
-		<ID make="Panasonic" model="DMC-G6">Panasonic DMC-G6</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="142" white="3956"/>
 		<ColorMatrices>
@@ -8277,7 +8216,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G6" mode="16:9">
-		<ID make="Panasonic" model="DMC-G6">Panasonic DMC-G6</ID>
 		<Crop x="0" y="0" width="-194" height="0"/>
 		<Sensor black="142" white="3956"/>
 		<ColorMatrices>
@@ -8289,7 +8227,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G6" mode="1:1">
-		<ID make="Panasonic" model="DMC-G6">Panasonic DMC-G6</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="3956"/>
 		<ColorMatrices>
@@ -8301,7 +8238,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G7">
-		<ID make="Panasonic" model="DMC-G7">Panasonic DMC-G7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8316,7 +8252,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G7" mode="4:3">
-		<ID make="Panasonic" model="DMC-G7">Panasonic DMC-G7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8331,7 +8266,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G7" mode="3:2">
-		<ID make="Panasonic" model="DMC-G7">Panasonic DMC-G7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8346,7 +8280,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G7" mode="1:1">
-		<ID make="Panasonic" model="DMC-G7">Panasonic DMC-G7</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8361,7 +8294,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G7" mode="16:9">
-		<ID make="Panasonic" model="DMC-G7">Panasonic DMC-G7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8376,7 +8308,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G8">
-		<ID make="Panasonic" model="DMC-G8">Panasonic DMC-G8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8393,7 +8324,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-G8" mode="4:3">
-		<ID make="Panasonic" model="DMC-G8">Panasonic DMC-G8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -8410,7 +8340,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF3">
-		<ID make="Panasonic" model="DMC-GF3">Panasonic DMC-GF3</ID>
 		<Crop x="0" y="0" width="-72" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8422,7 +8351,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF3" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF3">Panasonic DMC-GF3</ID>
 		<Crop x="0" y="0" width="-72" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8434,7 +8362,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF3" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF3">Panasonic DMC-GF3</ID>
 		<Crop x="0" y="0" width="-72" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8446,7 +8373,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF3" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF3">Panasonic DMC-GF3</ID>
 		<Crop x="0" y="0" width="-72" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8458,7 +8384,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF3" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF3">Panasonic DMC-GF3</ID>
 		<Crop x="0" y="0" width="-184" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8470,7 +8395,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF5">
-		<ID make="Panasonic" model="DMC-GF5">Panasonic DMC-GF5</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8482,7 +8406,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF5" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF5">Panasonic DMC-GF5</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8494,7 +8417,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF5" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF5">Panasonic DMC-GF5</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8506,7 +8428,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF5" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF5">Panasonic DMC-GF5</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8518,7 +8439,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF5" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF5">Panasonic DMC-GF5</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8530,7 +8450,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF6">
-		<ID make="Panasonic" model="DMC-GF6">Panasonic DMC-GF6</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8542,7 +8461,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF6" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF6">Panasonic DMC-GF6</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8554,7 +8472,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF6" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF6">Panasonic DMC-GF6</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8566,7 +8483,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF6" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF6">Panasonic DMC-GF6</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8578,7 +8494,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF6" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF6">Panasonic DMC-GF6</ID>
 		<Crop x="0" y="0" width="-34" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -8590,7 +8505,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF7">
-		<ID make="Panasonic" model="DMC-GF7">Panasonic DMC-GF7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8602,7 +8516,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF7" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF7">Panasonic DMC-GF7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8614,7 +8527,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF7" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF7">Panasonic DMC-GF7</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8626,7 +8538,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF7" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF7">Panasonic DMC-GF7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8638,7 +8549,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF7" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF7">Panasonic DMC-GF7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8650,7 +8560,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF8">
-		<ID make="Panasonic" model="DMC-GF8">Panasonic DMC-GF8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8662,7 +8571,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF8" mode="4:3">
-		<ID make="Panasonic" model="DMC-GF8">Panasonic DMC-GF8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8674,7 +8582,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF8" mode="1:1">
-		<ID make="Panasonic" model="DMC-GF8">Panasonic DMC-GF8</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8686,7 +8593,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF8" mode="3:2">
-		<ID make="Panasonic" model="DMC-GF8">Panasonic DMC-GF8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8698,7 +8604,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GF8" mode="16:9">
-		<ID make="Panasonic" model="DMC-GF8">Panasonic DMC-GF8</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -8710,7 +8615,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH2">
-		<ID make="Panasonic" model="DMC-GH2">Panasonic DMC-GH2</ID>
 		<Crop x="0" y="0" width="-216" height="0"/>
 		<Sensor black="15" white="3800"/>
 		<ColorMatrices>
@@ -8722,7 +8626,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH2" mode="4:3">
-		<ID make="Panasonic" model="DMC-GH2">Panasonic DMC-GH2</ID>
 		<Crop x="0" y="0" width="-136" height="0"/>
 		<Sensor black="15" white="3800"/>
 		<ColorMatrices>
@@ -8734,7 +8637,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH2" mode="16:9">
-		<ID make="Panasonic" model="DMC-GH2">Panasonic DMC-GH2</ID>
 		<Crop x="0" y="0" width="-216" height="0"/>
 		<Sensor black="15" white="3800"/>
 		<ColorMatrices>
@@ -8746,7 +8648,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH2" mode="3:2">
-		<ID make="Panasonic" model="DMC-GH2">Panasonic DMC-GH2</ID>
 		<Crop x="0" y="0" width="-216" height="0"/>
 		<Sensor black="15" white="3800"/>
 		<ColorMatrices>
@@ -8758,7 +8659,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH2" mode="1:1">
-		<ID make="Panasonic" model="DMC-GH2">Panasonic DMC-GH2</ID>
 		<Crop x="0" y="0" width="-168" height="0"/>
 		<Sensor black="15" white="3800"/>
 		<ColorMatrices>
@@ -8770,7 +8670,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GH1" mode="16:9">
-		<ID make="Panasonic" model="DMC-GH1">Panasonic DMC-GH1</ID>
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -8782,7 +8681,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ35" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ35">Panasonic DMC-FZ35</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="150" white="3986"/>
 		<Aliases>
@@ -8797,7 +8695,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ35" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ35">Panasonic DMC-FZ35</ID>
 		<Crop x="0" y="0" width="-42" height="-4"/>
 		<Sensor black="143" white="3986"/>
 		<Aliases>
@@ -8812,7 +8709,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ35" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ35">Panasonic DMC-FZ35</ID>
 		<Crop x="0" y="0" width="-42" height="-4"/>
 		<Sensor black="143" white="3986"/>
 		<Aliases>
@@ -8827,7 +8723,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ35">
-		<ID make="Panasonic" model="DMC-FZ35">Panasonic DMC-FZ35</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="150" white="3986"/>
 		<Aliases>
@@ -8920,7 +8815,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ70">
-		<ID make="Panasonic" model="DMC-FZ70">Panasonic DMC-FZ70</ID>
 		<Crop x="0" y="0" width="-182" height="0"/>
 		<Sensor black="120" white="3971"/>
 		<Aliases>
@@ -8935,7 +8829,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ70" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ70">Panasonic DMC-FZ70</ID>
 		<Crop x="0" y="0" width="-182" height="0"/>
 		<Sensor black="120" white="3971"/>
 		<Aliases>
@@ -8950,7 +8843,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ70" mode="1:1">
-		<ID make="Panasonic" model="DMC-FZ70">Panasonic DMC-FZ70</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="144" white="3956"/>
 		<Aliases>
@@ -8965,7 +8857,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ70" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ70">Panasonic DMC-FZ70</ID>
 		<Crop x="0" y="0" width="-182" height="0"/>
 		<Sensor black="144" white="3956"/>
 		<Aliases>
@@ -8980,7 +8871,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ70" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ70">Panasonic DMC-FZ70</ID>
 		<Crop x="0" y="0" width="-182" height="0"/>
 		<Sensor black="144" white="3956"/>
 		<Aliases>
@@ -8995,7 +8885,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ100">
-		<ID make="Panasonic" model="DMC-FZ100">Panasonic DMC-FZ100</ID>
 		<Crop x="0" y="0" width="-200" height="0"/>
 		<Sensor black="120" white="3986"/>
 		<ColorMatrices>
@@ -9007,7 +8896,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ100" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ100">Panasonic DMC-FZ100</ID>
 		<Crop x="0" y="0" width="-200" height="0"/>
 		<Sensor black="120" white="3986"/>
 		<ColorMatrices>
@@ -9019,7 +8907,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ100" mode="1:1">
-		<ID make="Panasonic" model="DMC-FZ100">Panasonic DMC-FZ100</ID>
 		<Crop x="0" y="0" width="-168" height="0"/>
 		<Sensor black="120" white="3986"/>
 		<ColorMatrices>
@@ -9031,7 +8918,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ100" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ100">Panasonic DMC-FZ100</ID>
 		<Crop x="0" y="0" width="-200" height="0"/>
 		<Sensor black="120" white="3986"/>
 		<ColorMatrices>
@@ -9043,7 +8929,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ100" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ100">Panasonic DMC-FZ100</ID>
 		<Crop x="0" y="0" width="-200" height="0"/>
 		<Sensor black="120" white="3986"/>
 		<ColorMatrices>
@@ -9055,7 +8940,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ1000">
-		<ID make="Panasonic" model="DMC-FZ1000">Panasonic DMC-FZ1000</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9067,7 +8951,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ1000" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ1000">Panasonic DMC-FZ1000</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="142" white="4095"/>
 		<ColorMatrices>
@@ -9079,7 +8962,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ1000" mode="1:1">
-		<ID make="Panasonic" model="DMC-FZ1000">Panasonic DMC-FZ1000</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9091,7 +8973,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ1000" mode="4:3">
-		<ID make="Panasonic" model="DMC-FZ1000">Panasonic DMC-FZ1000</ID>
 		<Crop x="0" y="0" width="-160" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9103,7 +8984,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ1000" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ1000">Panasonic DMC-FZ1000</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9163,7 +9043,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX1">
-		<ID make="Panasonic" model="DMC-GX1">Panasonic DMC-GX1</ID>
 		<Crop x="0" y="0" width="-154" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9175,7 +9054,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX1" mode="4:3">
-		<ID make="Panasonic" model="DMC-GX1">Panasonic DMC-GX1</ID>
 		<Crop x="0" y="0" width="-154" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9187,7 +9065,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX1" mode="3:2">
-		<ID make="Panasonic" model="DMC-GX1">Panasonic DMC-GX1</ID>
 		<Crop x="0" y="0" width="-170" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9199,7 +9076,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX1" mode="16:9">
-		<ID make="Panasonic" model="DMC-GX1">Panasonic DMC-GX1</ID>
 		<Crop x="0" y="0" width="-170" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9211,7 +9087,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX1" mode="1:1">
-		<ID make="Panasonic" model="DMC-GX1">Panasonic DMC-GX1</ID>
 		<Crop x="0" y="0" width="-198" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9223,7 +9098,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX7">
-		<ID make="Panasonic" model="DMC-GX7">Panasonic DMC-GX7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9235,7 +9109,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX7" mode="4:3">
-		<ID make="Panasonic" model="DMC-GX7">Panasonic DMC-GX7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9247,7 +9120,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX7" mode="3:2">
-		<ID make="Panasonic" model="DMC-GX7">Panasonic DMC-GX7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9259,7 +9131,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX7" mode="16:9">
-		<ID make="Panasonic" model="DMC-GX7">Panasonic DMC-GX7</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9271,7 +9142,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX7" mode="1:1">
-		<ID make="Panasonic" model="DMC-GX7">Panasonic DMC-GX7</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="150" white="3956"/>
 		<ColorMatrices>
@@ -9283,7 +9153,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX8">
-		<ID make="Panasonic" model="DMC-GX8">Panasonic DMC-GX8</ID>
 		<Crop x="0" y="0" width="-64" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9295,7 +9164,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX8" mode="4:3">
-		<ID make="Panasonic" model="DMC-GX8">Panasonic DMC-GX8</ID>
 		<Crop x="0" y="0" width="-64" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -9307,7 +9175,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX85">
-		<ID make="Panasonic" model="DMC-GX85">Panasonic DMC-GX85</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -9323,7 +9190,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-GX85" mode="4:3">
-		<ID make="Panasonic" model="DMC-GX85">Panasonic DMC-GX85</ID>
 		<Crop x="0" y="0" width="-206" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -9339,10 +9205,8 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LC1" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DMC-LC1">Panasonic DMC-LC1</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LF1">
-		<ID make="Panasonic" model="DMC-LF1">Panasonic DMC-LF1</ID>
 		<Crop x="0" y="0" width="-130" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<ColorMatrices>
@@ -9354,7 +9218,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LF1" mode="4:3">
-		<ID make="Panasonic" model="DMC-LF1">Panasonic DMC-LF1</ID>
 		<Crop x="0" y="0" width="-126" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -9366,7 +9229,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LF1" mode="3:2">
-		<ID make="Panasonic" model="DMC-LF1">Panasonic DMC-LF1</ID>
 		<Crop x="0" y="0" width="-126" height="0"/>
 		<Sensor black="143" white="3971"/>
 		<ColorMatrices>
@@ -9378,7 +9240,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LF1" mode="16:9">
-		<ID make="Panasonic" model="DMC-LF1">Panasonic DMC-LF1</ID>
 		<Crop x="0" y="0" width="-126" height="0"/>
 		<Sensor black="143" white="3956"/>
 		<ColorMatrices>
@@ -9390,7 +9251,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LF1" mode="1:1">
-		<ID make="Panasonic" model="DMC-LF1">Panasonic DMC-LF1</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="142" white="3971"/>
 		<ColorMatrices>
@@ -9402,7 +9262,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX3">
-		<ID make="Panasonic" model="DMC-LX3">Panasonic DMC-LX3</ID>
 		<Crop x="0" y="0" width="-84" height="0"/>
 		<Sensor black="15" white="3971"/>
 		<ColorMatrices>
@@ -9414,7 +9273,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX3" mode="16:9">
-		<ID make="Panasonic" model="DMC-LX3">Panasonic DMC-LX3</ID>
 		<Crop x="0" y="0" width="3990" height="2250"/>
 		<Sensor black="15" white="3971"/>
 		<ColorMatrices>
@@ -9426,7 +9284,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX3" mode="4:3">
-		<ID make="Panasonic" model="DMC-LX3">Panasonic DMC-LX3</ID>
 		<Crop x="0" y="0" width="3666" height="2754"/>
 		<Sensor black="15" white="3971"/>
 		<ColorMatrices>
@@ -9438,7 +9295,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX3" mode="3:2">
-		<ID make="Panasonic" model="DMC-LX3">Panasonic DMC-LX3</ID>
 		<Crop x="0" y="0" width="-44" height="0"/>
 		<Sensor black="15" white="3971"/>
 		<ColorMatrices>
@@ -9450,7 +9306,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX3" mode="1:1">
-		<ID make="Panasonic" model="DMC-LX3">Panasonic DMC-LX3</ID>
 		<Crop x="0" y="0" width="-74" height="0"/>
 		<Sensor black="15" white="3971"/>
 		<ColorMatrices>
@@ -9827,7 +9682,6 @@
 		<ID make="Leica" model="V-LUX 3">Leica V-LUX 3</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-L10" decoder_version="2">
-		<ID make="Panasonic" model="DMC-L10">Panasonic DMC-L10</ID>
 		<Crop x="0" y="0" width="-28" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9839,7 +9693,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-L10" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-L10">Panasonic DMC-L10</ID>
 		<Crop x="0" y="0" width="-28" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9851,7 +9704,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ30" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ30">Panasonic DMC-FZ30</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3971"/>
 		<ColorMatrices>
@@ -9863,7 +9715,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ30" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ30">Panasonic DMC-FZ30</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="0" white="3971"/>
 		<ColorMatrices>
@@ -9875,7 +9726,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ50" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ50">Panasonic DMC-FZ50</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9887,7 +9737,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ50" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ50">Panasonic DMC-FZ50</ID>
 		<Crop x="20" y="18" width="-16" height="-5"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9899,7 +9748,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ50" mode="16:9" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ50">Panasonic DMC-FZ50</ID>
 		<Crop x="3" y="0" width="-15" height="-5"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9911,7 +9759,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ50" mode="3:2" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ50">Panasonic DMC-FZ50</ID>
 		<Crop x="3" y="0" width="-17" height="-5"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9923,7 +9770,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ8" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ8">Panasonic DMC-FZ8</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9935,7 +9781,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ8" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ8">Panasonic DMC-FZ8</ID>
 		<Crop x="5" y="0" width="-31" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9947,7 +9792,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ18" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ18">Panasonic DMC-FZ18</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9959,7 +9803,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ18" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-FZ18">Panasonic DMC-FZ18</ID>
 		<Crop x="10" y="0" width="-30" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9971,7 +9814,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ18" mode="16:9">
-		<ID make="Panasonic" model="DMC-FZ18">Panasonic DMC-FZ18</ID>
 		<Crop x="9" y="0" width="-31" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9983,7 +9825,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-FZ18" mode="3:2">
-		<ID make="Panasonic" model="DMC-FZ18">Panasonic DMC-FZ18</ID>
 		<Crop x="9" y="0" width="-31" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -9995,7 +9836,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-L1" decoder_version="2">
-		<ID make="Panasonic" model="DMC-L1">Panasonic DMC-L1</ID>
 		<Crop x="0" y="0" width="-11" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -10007,7 +9847,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-L1" mode="4:3" decoder_version="2">
-		<ID make="Panasonic" model="DMC-L1">Panasonic DMC-L1</ID>
 		<Crop x="0" y="0" width="-11" height="-1"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -10043,7 +9882,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX2" decoder_version="2">
-		<ID make="Panasonic" model="DMC-LX2">Panasonic DMC-LX2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -10055,7 +9893,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX2" mode="16:9" decoder_version="2">
-		<ID make="Panasonic" model="DMC-LX2">Panasonic DMC-LX2</ID>
 		<Crop x="4" y="0" width="-38" height="-3"/>
 		<Sensor black="0" white="3986"/>
 		<ColorMatrices>
@@ -10139,7 +9976,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX5">
-		<ID make="Panasonic" model="DMC-LX5">Panasonic DMC-LX5</ID>
 		<Crop x="0" y="0" width="-200" height="-4"/>
 		<Sensor black="150" white="3986"/>
 		<ColorMatrices>
@@ -10151,7 +9987,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX5" mode="4:3">
-		<ID make="Panasonic" model="DMC-LX5">Panasonic DMC-LX5</ID>
 		<Crop x="0" y="0" width="-200" height="-4"/>
 		<Sensor black="150" white="3986"/>
 		<ColorMatrices>
@@ -10163,7 +9998,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX5" mode="3:2">
-		<ID make="Panasonic" model="DMC-LX5">Panasonic DMC-LX5</ID>
 		<Crop x="0" y="0" width="-74" height="-4"/>
 		<Sensor black="150" white="3986"/>
 		<ColorMatrices>
@@ -10175,7 +10009,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX5" mode="16:9">
-		<ID make="Panasonic" model="DMC-LX5">Panasonic DMC-LX5</ID>
 		<Crop x="0" y="0" width="-104" height="-4"/>
 		<Sensor black="150" white="3986"/>
 		<ColorMatrices>
@@ -10187,7 +10020,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX5" mode="1:1">
-		<ID make="Panasonic" model="DMC-LX5">Panasonic DMC-LX5</ID>
 		<Crop x="0" y="0" width="-220" height="-4"/>
 		<Sensor black="150" white="3986"/>
 		<ColorMatrices>
@@ -10289,7 +10121,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX7">
-		<ID make="Panasonic" model="DMC-LX7">Panasonic DMC-LX7</ID>
 		<Sensor black="150" white="3971"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10300,7 +10131,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX7" mode="4:3">
-		<ID make="Panasonic" model="DMC-LX7">Panasonic DMC-LX7</ID>
 		<Sensor black="150" white="3971"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10311,7 +10141,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX7" mode="3:2">
-		<ID make="Panasonic" model="DMC-LX7">Panasonic DMC-LX7</ID>
 		<Sensor black="150" white="3971"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10322,7 +10151,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX7" mode="16:9">
-		<ID make="Panasonic" model="DMC-LX7">Panasonic DMC-LX7</ID>
 		<Sensor black="150" white="3971"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10333,7 +10161,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX7" mode="1:1">
-		<ID make="Panasonic" model="DMC-LX7">Panasonic DMC-LX7</ID>
 		<Sensor black="150" white="3971"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -10584,7 +10411,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX1" mode="16:9">
-		<ID make="Panasonic" model="DMC-LX1">Panasonic DMC-LX1</ID>
 		<Crop x="6" y="0" width="-16" height="0"/>
 		<Sensor black="0" white="3971"/>
 		<ColorMatrices>
@@ -10596,7 +10422,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX1">
-		<ID make="Panasonic" model="DMC-LX1">Panasonic DMC-LX1</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="3971"/>
 		<ColorMatrices>
@@ -10608,7 +10433,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX100">
-		<ID make="Panasonic" model="DMC-LX100">Panasonic DMC-LX100</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10620,7 +10444,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX100" mode="4:3">
-		<ID make="Panasonic" model="DMC-LX100">Panasonic DMC-LX100</ID>
 		<Crop x="0" y="0" width="-16" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10632,7 +10455,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX100" mode="16:9">
-		<ID make="Panasonic" model="DMC-LX100">Panasonic DMC-LX100</ID>
 		<Crop x="0" y="0" width="-96" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10644,7 +10466,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX100" mode="3:2">
-		<ID make="Panasonic" model="DMC-LX100">Panasonic DMC-LX100</ID>
 		<Crop x="0" y="0" width="-80" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10656,7 +10477,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DMC-LX100" mode="1:1">
-		<ID make="Panasonic" model="DMC-LX100">Panasonic DMC-LX100</ID>
 		<Crop x="0" y="0" width="-144" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10668,7 +10488,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-LX100M2">
-		<ID make="Panasonic" model="DC-LX100M2">Panasonic DC-LX100M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10680,7 +10499,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-LX100M2" mode="4:3">
-		<ID make="Panasonic" model="DC-LX100M2">Panasonic DC-LX100M2</ID>
 		<Crop x="10" y="6" width="-60" height="-4"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -10692,7 +10510,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-LX100M2" mode="1:1">
-		<ID make="Panasonic" model="DC-LX100M2">Panasonic DC-LX100M2</ID>
 		<Crop x="0" y="6" width="-130" height="-4"/>
 		<Sensor black="144" white="4095"/>
 		<ColorMatrices>
@@ -10704,7 +10521,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-LX100M2" mode="16:9">
-		<ID make="Panasonic" model="DC-LX100M2">Panasonic DC-LX100M2</ID>
 		<Crop x="10" y="0" width="-90" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<ColorMatrices>
@@ -10716,7 +10532,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-LX100M2" mode="3:2">
-		<ID make="Panasonic" model="DC-LX100M2">Panasonic DC-LX100M2</ID>
 		<Crop x="4" y="0" width="-90" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<ColorMatrices>
@@ -10728,7 +10543,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1">
-		<ID make="Panasonic" model="DC-S1">Panasonic DC-S1</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="511" white="16380"/>
 		<ColorMatrices>
@@ -10740,7 +10554,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1" mode="3:2">
-		<ID make="Panasonic" model="DC-S1">Panasonic DC-S1</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="511" white="16380"/>
 		<ColorMatrices>
@@ -10752,7 +10565,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1H">
-		<ID make="Panasonic" model="DC-S1H">Panasonic DC-S1H</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="510" white="16380"/>
 		<ColorMatrices>
@@ -10764,7 +10576,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1H" mode="3:2">
-		<ID make="Panasonic" model="DC-S1H">Panasonic DC-S1H</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="510" white="16380"/>
 		<ColorMatrices>
@@ -10776,7 +10587,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1M2">
-		<ID make="Panasonic" model="DC-S1M2">Panasonic DC-S1M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>
@@ -10788,7 +10598,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1M2" mode="3:2">
-		<ID make="Panasonic" model="DC-S1M2">Panasonic DC-S1M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>
@@ -10800,7 +10609,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1M2ES">
-		<ID make="Panasonic" model="DC-S1M2ES">Panasonic DC-S1M2ES</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10812,7 +10620,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1M2ES" mode="3:2">
-		<ID make="Panasonic" model="DC-S1M2ES">Panasonic DC-S1M2ES</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10824,7 +10631,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5">
-		<ID make="Panasonic" model="DC-S5">Panasonic DC-S5</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="509" white="16380"/>
 		<Aliases>
@@ -10839,7 +10645,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5" mode="3:2">
-		<ID make="Panasonic" model="DC-S5">Panasonic DC-S5</ID>
 		<Crop x="0" y="0" width="-50" height="0"/>
 		<Sensor black="509" white="16380"/>
 		<Aliases>
@@ -10854,7 +10659,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5M2">
-		<ID make="Panasonic" model="DC-S5M2">Panasonic DC-S5M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10866,7 +10670,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5M2" mode="3:2">
-		<ID make="Panasonic" model="DC-S5M2">Panasonic DC-S5M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10878,7 +10681,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5M2X">
-		<ID make="Panasonic" model="DC-S5M2X">Panasonic DC-S5M2X</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10890,7 +10692,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S5M2X" mode="3:2">
-		<ID make="Panasonic" model="DC-S5M2X">Panasonic DC-S5M2X</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16383"/>
 		<ColorMatrices>
@@ -10902,7 +10703,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1R">
-		<ID make="Panasonic" model="DC-S1R">Panasonic DC-S1R</ID>
 		<Crop x="0" y="0" width="-58" height="0"/>
 		<Sensor black="510" white="16380"/>
 		<ColorMatrices>
@@ -10914,7 +10714,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1R" mode="3:2">
-		<ID make="Panasonic" model="DC-S1R">Panasonic DC-S1R</ID>
 		<Crop x="0" y="0" width="-58" height="0"/>
 		<Sensor black="510" white="16380"/>
 		<ColorMatrices>
@@ -10926,7 +10725,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1RM2">
-		<ID make="Panasonic" model="DC-S1RM2">Panasonic DC-S1RM2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>
@@ -10938,7 +10736,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S1RM2" mode="3:2">
-		<ID make="Panasonic" model="DC-S1RM2">Panasonic DC-S1RM2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="512" white="16380"/>
 		<ColorMatrices>
@@ -10950,7 +10747,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S9">
-		<ID make="Panasonic" model="DC-S9">Panasonic DC-S9</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="128" white="4095"/>
 		<ColorMatrices>
@@ -10962,7 +10758,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-S9" mode="3:2">
-		<ID make="Panasonic" model="DC-S9">Panasonic DC-S9</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="128" white="4095"/>
 		<ColorMatrices>
@@ -11308,7 +11103,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5">
-		<ID make="Panasonic" model="DC-GH5">Panasonic DC-GH5</ID>
 		<Crop x="0" y="0" width="-56" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -11320,7 +11114,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5" mode="4:3">
-		<ID make="Panasonic" model="DC-GH5">Panasonic DC-GH5</ID>
 		<Crop x="0" y="0" width="-56" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<ColorMatrices>
@@ -11332,7 +11125,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5S" decoder_version="3">
-		<ID make="Panasonic" model="DC-GH5S">Panasonic DC-GH5S</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="510" white="8000"/>
 		<ColorMatrices>
@@ -11344,7 +11136,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5S" mode="4:3" decoder_version="3">
-		<ID make="Panasonic" model="DC-GH5S">Panasonic DC-GH5S</ID>
 		<Crop x="0" y="0" width="-40" height="0"/>
 		<Sensor black="510" white="8000"/>
 		<ColorMatrices>
@@ -11356,7 +11147,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5S" mode="3:2" decoder_version="3">
-		<ID make="Panasonic" model="DC-GH5S">Panasonic DC-GH5S</ID>
 		<Crop x="0" y="0" width="-24" height="0"/>
 		<Sensor black="510" white="8000"/>
 		<ColorMatrices>
@@ -11368,7 +11158,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5S" mode="16:9" decoder_version="3">
-		<ID make="Panasonic" model="DC-GH5S">Panasonic DC-GH5S</ID>
 		<Crop x="0" y="0" width="-68" height="0"/>
 		<Sensor black="510" white="8000"/>
 		<ColorMatrices>
@@ -11380,7 +11169,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5S" mode="1:1" decoder_version="3">
-		<ID make="Panasonic" model="DC-GH5S">Panasonic DC-GH5S</ID>
 		<Crop x="0" y="0" width="-32" height="0"/>
 		<Sensor black="510" white="8000"/>
 		<ColorMatrices>
@@ -11392,7 +11180,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5M2">
-		<ID make="Panasonic" model="DC-GH5M2">Panasonic DC-GH5M2</ID>
 		<Crop x="0" y="0" width="-56" height="0"/>
 		<Sensor black="129" white="4088"/>
 		<ColorMatrices>
@@ -11404,7 +11191,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH5M2" mode="4:3">
-		<ID make="Panasonic" model="DC-GH5M2">Panasonic DC-GH5M2</ID>
 		<Crop x="0" y="0" width="-56" height="0"/>
 		<Sensor black="129" white="4088"/>
 		<ColorMatrices>
@@ -11416,7 +11202,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH6">
-		<ID make="Panasonic" model="DC-GH6">Panasonic DC-GH6</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11428,7 +11213,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH6" mode="4:3">
-		<ID make="Panasonic" model="DC-GH6">Panasonic DC-GH6</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11440,7 +11224,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH7">
-		<ID make="Panasonic" model="DC-GH7">Panasonic DC-GH7</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11452,7 +11235,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GH7" mode="4:3">
-		<ID make="Panasonic" model="DC-GH7">Panasonic DC-GH7</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11464,7 +11246,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G9">
-		<ID make="Panasonic" model="DC-G9">Panasonic DC-G9</ID>
 		<Sensor black="148" white="4095"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -11475,7 +11256,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G9" mode="4:3">
-		<ID make="Panasonic" model="DC-G9">Panasonic DC-G9</ID>
 		<Sensor black="148" white="4095"/>
 		<ColorMatrices>
 			<ColorMatrix planes="3">
@@ -11486,7 +11266,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G9M2">
-		<ID make="Panasonic" model="DC-G9M2">Panasonic DC-G9M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11498,7 +11277,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G9M2" mode="4:3">
-		<ID make="Panasonic" model="DC-G9M2">Panasonic DC-G9M2</ID>
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="2048" white="65535"/>
 		<ColorMatrices>
@@ -11510,7 +11288,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G95">
-		<ID make="Panasonic" model="DC-G95">Panasonic DC-G95</ID>
+		<ID make="Panasonic" model="DC-G95">Panasonic DC-G99</ID>
 		<Crop x="0" y="0" width="-66" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<Aliases>
@@ -11530,7 +11308,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G95" mode="4:3">
-		<ID make="Panasonic" model="DC-G95">Panasonic DC-G95</ID>
+		<ID make="Panasonic" model="DC-G95">Panasonic DC-G99</ID>
 		<Crop x="0" y="0" width="-66" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<Aliases>
@@ -11550,10 +11328,8 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G99M2" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DC-G99M2">Panasonic DC-G99M2</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GF9">
-		<ID make="Panasonic" model="DC-GF9">Panasonic DC-GF9</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -11569,7 +11345,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GF9" mode="4:3">
-		<ID make="Panasonic" model="DC-GF9">Panasonic DC-GF9</ID>
 		<Crop x="0" y="0" width="-208" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -11585,7 +11360,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G100">
-		<ID make="Panasonic" model="DC-G100">Panasonic DC-G100</ID>
 		<Crop x="0" y="0" width="-64" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<Aliases>
@@ -11601,7 +11375,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-G100" mode="4:3">
-		<ID make="Panasonic" model="DC-G100">Panasonic DC-G100</ID>
 		<Crop x="0" y="0" width="-64" height="0"/>
 		<Sensor black="144" white="4095"/>
 		<Aliases>
@@ -11649,7 +11422,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GX9">
-		<ID make="Panasonic" model="DC-GX9">Panasonic DC-GX9</ID>
 		<Crop x="0" y="0" width="-66" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -11664,7 +11436,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Panasonic" model="DC-GX9" mode="4:3">
-		<ID make="Panasonic" model="DC-GX9">Panasonic DC-GX9</ID>
 		<Crop x="0" y="0" width="-66" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
@@ -17359,7 +17130,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Leaf" model="Credo 40">
-		<ID make="Leaf" model="Credo 40">Leaf Credo 40</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17377,10 +17147,8 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Leaf" model="Credo 50" supported="unknown-no-samples">
-		<ID make="Leaf" model="Credo 50">Leaf Credo 50</ID>
 	</Camera>
 	<Camera make="Leaf" model="Credo 60" supported="no-samples">
-		<ID make="Leaf" model="Credo 60">Leaf Credo 60</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17398,7 +17166,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Leaf" model="Credo 80" supported="no-samples">
-		<ID make="Leaf" model="Credo 80">Leaf Credo 80</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17719,7 +17486,6 @@
 	<Camera make="Phase One" model="IQ4 150MP" supported="no">
 	</Camera>
 	<Camera make="Kodak" model="DCS Pro SLR/n">
-		<ID make="Kodak" model="DCS Pro SLR/n">Kodak DCS Pro SLR/n</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">RED</Color>
@@ -17758,7 +17524,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Kodak" model="DCS Pro 14nx">
-		<ID make="Kodak" model="DCS Pro 14nx">Kodak DCS Pro 14nx</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">RED</Color>
@@ -17794,7 +17559,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Kodak" model="DCS520C">
-		<ID make="Kodak" model="DCS520C">Kodak DCS520C</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">RED</Color>
@@ -17812,7 +17576,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Kodak" model="DCS560C">
-		<ID make="Kodak" model="DCS560C">Kodak DCS560C</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">RED</Color>
@@ -17866,7 +17629,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Kodak" model="DCS760C">
-		<ID make="Kodak" model="DCS760C">Kodak DCS760C</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">RED</Color>
@@ -20136,7 +19898,6 @@
 		</Hints>
 	</Camera>
 	<Camera make="GITUP" model="GIT2" mode="chdk-a">
-		<ID make="GITUP" model="GIT2">GITUP GIT2</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -20159,7 +19920,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="GITUP" model="GIT2" mode="chdk-b">
-		<ID make="GITUP" model="GIT2">GITUP GIT2</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -20182,7 +19942,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="GITUP" model="GIT2P" mode="chdk-a">
-		<ID make="GITUP" model="GIT2P">GITUP GIT2P</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -20205,7 +19964,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="GITUP" model="GIT2P" mode="chdk-b">
-		<ID make="GITUP" model="GIT2P">GITUP GIT2P</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -20228,7 +19986,6 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Paralenz" model="Dive Camera" mode="chdk">
-		<ID make="Paralenz" model="Dive Camera">Paralenz Dive Camera</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
