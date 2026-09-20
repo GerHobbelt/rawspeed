@@ -17478,6 +17478,9 @@
 		<Crop x="0" y="0" width="0" height="0"/>
 		<Sensor black="0" white="15000"/>
 	</Camera>
+	<Camera make="Phase One A/S" model="P20" supported="unknown-no-samples">
+		<ID make="Phase One" model="P20">Phase One P20</ID>
+	</Camera>
 	<Camera make="Phase One A/S" model="P20+">
 		<ID make="Phase One" model="P20+">Phase One P20+</ID>
 		<CFA width="2" height="2">
@@ -17495,6 +17498,15 @@
 				<ColorMatrixRow plane="2">-3038 4253 7517</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Phase One A/S" model="P21" supported="unknown-no-samples">
+		<ID make="Phase One" model="P21">Phase One P21</ID>
+	</Camera>
+	<Camera make="Phase One A/S" model="P21+" supported="unknown-no-samples">
+		<ID make="Phase One" model="P21+">Phase One P21+</ID>
+	</Camera>
+	<Camera make="Phase One A/S" model="P25" supported="no">
+		<ID make="Phase One" model="P25">Phase One P25</ID>
 	</Camera>
 	<Camera make="Phase One A/S" model="P25+">
 		<ID make="Phase One" model="P25+">Phase One P25+</ID>
@@ -17531,6 +17543,9 @@
 				<ColorMatrixRow plane="2">-3206 4671 7087</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Phase One A/S" model="P30+" supported="unknown-no-samples">
+		<ID make="Phase One" model="P30+">Phase One P30+</ID>
 	</Camera>
 	<Camera make="Phase One A/S" model="P40+">
 		<ID make="Phase One" model="P40+">Phase One P40+</ID>
@@ -17625,6 +17640,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="Phase One A/S" model="IQ160" supported="unknown-no-samples">
+		<ID make="Phase One" model="IQ160">Phase One IQ160</ID>
+	</Camera>
 	<Camera make="Phase One A/S" model="IQ180">
 		<ID make="Phase One" model="IQ180">Phase One IQ180</ID>
 		<CFA width="2" height="2">
@@ -17660,6 +17678,12 @@
 				<ColorMatrixRow plane="2">0 0 7666</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Phase One A/S" model="IQ260" supported="unknown-no-samples">
+		<ID make="Phase One" model="IQ260">Phase One IQ260</ID>
+	</Camera>
+	<Camera make="Phase One A/S" model="IQ280" supported="unknown-no-samples">
+		<ID make="Phase One" model="IQ280">Phase One IQ280</ID>
 	</Camera>
 	<Camera make="Kodak" model="DCS Pro SLR/n">
 		<ID make="Kodak" model="DCS Pro SLR/n">Kodak DCS Pro SLR/n</ID>
@@ -17864,6 +17888,9 @@
 				<ColorMatrixRow plane="2">-1626 2194 7904</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Eastman Kodak Company" model="Kodak Digital Science DC40 Zoom Camera" supported="unknown-no-samples">
+		<ID make="Kodak" model="DC40">Kodak Digital Science DC40 Zoom Camera</ID>
 	</Camera>
 	<Camera make="Eastman Kodak Company" model="Kodak Digital Science DC50 Zoom Camera" supported="no-samples">
 		<ID make="Kodak" model="DC50">Kodak Digital Science DC50 Zoom Camera</ID>
