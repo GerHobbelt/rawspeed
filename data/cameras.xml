@@ -18410,6 +18410,9 @@
 	<Camera make="Leica Camera AG" model="LEICA M MONOCHROM (Typ 246)" mode="dng">
 		<ID make="Leica" model="M Monochrom (Typ 246)">LEICA M MONOCHROM (Typ 246)</ID>
 	</Camera>
+	<Camera make="Leica Camera AG" model="M Monochrom" mode="dng">
+		<ID make="Leica" model="M Monochrom">M Monochrom</ID>
+	</Camera>
 	<Camera make="Leica Camera AG" model="LEICA M (Typ 262)" mode="dng">
 		<ID make="Leica" model="M (Typ 262)">LEICA M (Typ 262)</ID>
 	</Camera>
