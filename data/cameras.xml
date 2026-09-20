@@ -1655,6 +1655,9 @@
 	<Camera make="Canon" model="Canon EOS R6 Mark III" supported="no">
 		<ID make="Canon" model="EOS R6 Mark III">Canon EOS R6 Mark III</ID>
 	</Camera>
+	<Camera make="Canon" model="Canon EOS R6 V" supported="unknown-no-samples">
+		<ID make="Canon" model="EOS R6 V">Canon EOS R6 V</ID>
+	</Camera>
 	<Camera make="Canon" model="Canon EOS R7" supported="no">
 		<ID make="Canon" model="EOS R7">Canon EOS R7</ID>
 	</Camera>
@@ -13962,6 +13965,9 @@
 				<ColorMatrixRow plane="2">-429 1282 5774</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="SONY" model="ILCE-7RM6" supported="unknown-no-samples">
+		<ID make="Sony" model="ILCE-7RM6">Sony ILCE-7RM6</ID>
 	</Camera>
 	<Camera make="SONY" model="ILCE-7S">
 		<ID make="Sony" model="ILCE-7S">Sony ILCE-7S</ID>
