@@ -12783,6 +12783,9 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
+	<Camera make="SONY" model="DSC-RX10M5" supported="unknown-no-samples">
+		<ID make="Sony" model="DSC-RX10M5">Sony DSC-RX10M5</ID>
+	</Camera>
 	<Camera make="SONY" model="DSC-RX100">
 		<ID make="Sony" model="DSC-RX100">Sony DSC-RX100</ID>
 		<CFA width="2" height="2">
@@ -18302,6 +18305,9 @@
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA SL3" mode="dng">
 		<ID make="Leica" model="SL3">LEICA SL3</ID>
+	</Camera>
+	<Camera make="LEICA CAMERA AG" model="LEICA SL3-P" mode="dng">
+		<ID make="Leica" model="SL3-P">LEICA SL3-P</ID>
 	</Camera>
 	<Camera make="LEICA CAMERA AG" model="LEICA SL3-S" mode="dng">
 		<ID make="Leica" model="SL3-S">LEICA SL3-S</ID>
