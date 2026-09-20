@@ -11714,8 +11714,8 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="Panasonic" model="DMC-TZ97" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DMC-TZ97">Panasonic DMC-ZS80</ID>
+	<Camera make="Panasonic" model="DC-TZ97" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-TZ97">Panasonic DC-ZS80</ID>
 	</Camera>
 	<Camera make="Panasonic" model="DC-TZ96">
 		<ID make="Panasonic" model="DC-TZ96">Panasonic DC-ZS80</ID>
@@ -11810,6 +11810,14 @@
 				<ColorMatrixRow plane="2">-628 1647 4898</ColorMatrixRow>
 			</ColorMatrix>
 		</ColorMatrices>
+	</Camera>
+	<Camera make="Panasonic" model="DC-TX3" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-TX3">Panasonic DC-ZS300</ID>
+	</Camera>
+	<Camera make="Panasonic" model="DC-TZ300" supported="unknown-no-samples">
+		<ID make="Panasonic" model="DC-TZ300">Panasonic DC-ZS300</ID>
+	</Camera>
+	<Camera make="Panasonic" model="DC-ZS300" supported="unknown-no-samples">
 	</Camera>
 	<Camera make="PENTAX Corporation" model="PENTAX K100D">
 		<ID make="Pentax" model="K100D">Pentax K100D</ID>
@@ -17426,6 +17434,7 @@
 		</ColorMatrices>
 	</Camera>
 	<Camera make="Leaf" model="Leaf Aptus-II 8(LI300247   )/Mamiya 645 AFD" supported="no-samples">
+		<ID make="Leaf" model="Aptus-II 8">Leaf Aptus-II 8</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">GREEN</Color>
 			<Color x="1" y="0">BLUE</Color>
@@ -17436,6 +17445,7 @@
 		<Sensor black="0" white="15000"/>
 	</Camera>
 	<Camera make="Leaf" model="Leaf AFi-II 7(BT12701    )/Leaf AFi" supported="no-samples">
+		<ID make="Leaf" model="AFi-II 7">Leaf AFi-II 7</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17449,6 +17459,7 @@
 		<ID make="Leaf" model="AFi-II 12">Leaf AFi-II 12</ID>
 	</Camera>
 	<Camera make="Leaf" model="Leaf Aptus-II 10(LI300019   )/Phase One 645DF" supported="no-samples">
+		<ID make="Leaf" model="Aptus-II 10">Leaf Aptus-II 10</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17459,6 +17470,7 @@
 		<Sensor black="0" white="15000"/>
 	</Camera>
 	<Camera make="Leaf" model="Leaf Aptus-II 10R(           )/Large Format" supported="no-samples">
+		<ID make="Leaf" model="Aptus-II 10R">Leaf Aptus-II 10R</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
@@ -17469,6 +17481,7 @@
 		<Sensor black="0" white="15000"/>
 	</Camera>
 	<Camera make="Leaf" model="Leaf Aptus-II 12(LI301306   )/Phase One 645DF/645AF" supported="no-samples">
+		<ID make="Leaf" model="Aptus-II 12">Leaf Aptus-II 12</ID>
 		<CFA width="2" height="2">
 			<Color x="0" y="0">RED</Color>
 			<Color x="1" y="0">GREEN</Color>
