@@ -1664,6 +1664,9 @@
 	<Camera make="Canon" model="Canon EOS R8" supported="no">
 		<ID make="Canon" model="EOS R8">Canon EOS R8</ID>
 	</Camera>
+	<Camera make="Canon" model="Canon EOS R8 Mark II" supported="unknown-no-samples">
+		<ID make="Canon" model="EOS R8 Mark II">Canon EOS R8 Mark II</ID>
+	</Camera>
 	<Camera make="Canon" model="Canon EOS R10" supported="no">
 		<ID make="Canon" model="EOS R10">Canon EOS R10</ID>
 	</Camera>
@@ -5529,8 +5532,89 @@
 			</ColorMatrix>
 		</ColorMatrices>
 	</Camera>
-	<Camera make="NIKON CORPORATION" model="NIKON D810A" supported="unknown-no-samples">
+	<Camera make="NIKON CORPORATION" model="NIKON D810A" mode="sNEF-uncompressed">
 		<ID make="Nikon" model="D810A">Nikon D810A</ID>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="0" white="65535"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11973 -5685 -888</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-1965 10326 1901</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-115 1123 7169</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="NIKON CORPORATION" model="NIKON D810A" mode="12bit-uncompressed">
+		<ID make="Nikon" model="D810A">Nikon D810A</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="150" white="3880"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11973 -5685 -888</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-1965 10326 1901</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-115 1123 7169</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="NIKON CORPORATION" model="NIKON D810A" mode="12bit-compressed">
+		<ID make="Nikon" model="D810A">Nikon D810A</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="150" white="3880"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11973 -5685 -888</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-1965 10326 1901</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-115 1123 7169</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="NIKON CORPORATION" model="NIKON D810A" mode="14bit-uncompressed">
+		<ID make="Nikon" model="D810A">Nikon D810A</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="600" white="15520"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11973 -5685 -888</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-1965 10326 1901</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-115 1123 7169</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="NIKON CORPORATION" model="NIKON D810A" mode="14bit-compressed">
+		<ID make="Nikon" model="D810A">Nikon D810A</ID>
+		<CFA width="2" height="2">
+			<Color x="0" y="0">RED</Color>
+			<Color x="1" y="0">GREEN</Color>
+			<Color x="0" y="1">GREEN</Color>
+			<Color x="1" y="1">BLUE</Color>
+		</CFA>
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="600" white="15520"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">11973 -5685 -888</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-1965 10326 1901</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-115 1123 7169</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="NIKON CORPORATION" model="NIKON D850" mode="12bit-compressed">
 		<ID make="Nikon" model="D850">Nikon D850</ID>
@@ -7166,6 +7250,18 @@
 	</Camera>
 	<Camera make="OM Digital Solutions" model="OM-5MarkII">
 		<ID make="OM System" model="OM-5 Mark II">OM Digital Solutions OM-5 Mark II</ID>
+		<Crop x="0" y="0" width="-28" height="0"/>
+		<Sensor black="254" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">12008 -5230 -1123</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-2265 10496 2046</ColorMatrixRow>
+				<ColorMatrixRow plane="2">69 734 4938</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="OM Digital Solutions" model="PEN">
+		<ID make="OM System" model="PEN">OM Digital Solutions PEN</ID>
 		<Crop x="0" y="0" width="-28" height="0"/>
 		<Sensor black="254" white="4095"/>
 		<ColorMatrices>
@@ -11131,15 +11227,13 @@
 	<Camera make="Panasonic" model="DC-FZ81" supported="unknown-no-samples">
 		<ID make="Panasonic" model="DC-FZ81">Panasonic DC-FZ80</ID>
 	</Camera>
-	<Camera make="Panasonic" model="DC-FZ83" supported="unknown-no-samples">
-		<ID make="Panasonic" model="DC-FZ83">Panasonic DC-FZ80</ID>
-	</Camera>
 	<Camera make="Panasonic" model="DC-FZ82">
 		<ID make="Panasonic" model="DC-FZ82">Panasonic DC-FZ80</ID>
 		<Crop x="0" y="0" width="-128" height="0"/>
 		<Sensor black="143" white="4095"/>
 		<Aliases>
 			<Alias>DC-FZ80</Alias>
+			<Alias>DC-FZ83</Alias>
 			<Alias>DC-FZ85</Alias>
 			<Alias>DC-FZ80D</Alias>
 			<Alias>DC-FZ82D</Alias>
@@ -11159,6 +11253,7 @@
 		<Sensor black="143" white="4095"/>
 		<Aliases>
 			<Alias>DC-FZ80</Alias>
+			<Alias>DC-FZ83</Alias>
 			<Alias>DC-FZ85</Alias>
 			<Alias>DC-FZ80D</Alias>
 			<Alias>DC-FZ82D</Alias>
@@ -11658,7 +11753,27 @@
 	<Camera make="Panasonic" model="DC-TZ300" supported="unknown-no-samples">
 		<ID make="Panasonic" model="DC-TZ300">Panasonic DC-ZS300</ID>
 	</Camera>
-	<Camera make="Panasonic" model="DC-ZS300" supported="unknown-no-samples">
+	<Camera make="Panasonic" model="DC-ZS300">
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="142" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">7790 -2736 -755</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3452 11870 1769</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-628 1647 4898</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
+	</Camera>
+	<Camera make="Panasonic" model="DC-ZS300" mode="3:2">
+		<Crop x="0" y="0" width="0" height="0"/>
+		<Sensor black="142" white="4095"/>
+		<ColorMatrices>
+			<ColorMatrix planes="3">
+				<ColorMatrixRow plane="0">7790 -2736 -755</ColorMatrixRow>
+				<ColorMatrixRow plane="1">-3452 11870 1769</ColorMatrixRow>
+				<ColorMatrixRow plane="2">-628 1647 4898</ColorMatrixRow>
+			</ColorMatrix>
+		</ColorMatrices>
 	</Camera>
 	<Camera make="PENTAX Corporation" model="PENTAX K100D">
 		<ID make="Pentax" model="K100D">Pentax K100D</ID>
